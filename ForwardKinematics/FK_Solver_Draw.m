@@ -180,8 +180,9 @@ patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColo
  patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
  patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 %draw support points
+points = sortrows(points')';
 scatter3(points(1,:),points(2,:),points(3,:),'rx')
-patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
+patch(points(1,:),points(2,:),points(3,:)+1,[1,.5,.5])
 axis equal
 camlight left
 set(gca,'projection', 'perspective')

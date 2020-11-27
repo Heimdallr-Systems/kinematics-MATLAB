@@ -229,7 +229,7 @@ Theta3 = [b(15,:);b(16,:);b(17,:);b(18,:)];
 Ts = 1/60;
 %floor(Ts/h)
 
-writerObj = VideoWriter('DynamicsDemo','MPEG-4');
+writerObj = VideoWriter('DynamicsDemoV2','MPEG-4');
 writerObj.FrameRate = 60;
 open(writerObj);
 

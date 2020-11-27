@@ -1,4 +1,4 @@
-function FK_Solver_Draw(Theta1,Theta2,Theta3,T_I_B,rBfromI,setgndplane)
+function FK_Solver_Draw(Theta1,Theta2,Theta3,T_I_B,rBfromI)
 % This program draws the robot based on given joint angles. This function
 % is used to test the forward kinematics of this robotic system.
 
@@ -14,24 +14,20 @@ function FK_Solver_Draw(Theta1,Theta2,Theta3,T_I_B,rBfromI,setgndplane)
 %  Body Quaternions q1,q2,q3,q0]
 
 jnt_var = [Theta1(1),Theta2(1),Theta3(1),...
-                 Theta1(2),Theta2(2),Theta3(2),...
-                 Theta1(3),Theta2(3),Theta3(3),...
-                 Theta1(4),Theta2(4),Theta3(4)];
+    Theta1(2),Theta2(2),Theta3(2),...
+    Theta1(3),Theta2(3),Theta3(3),...
+    Theta1(4),Theta2(4),Theta3(4)];
 
-h = clf(gcf);
 set(gcf, 'Position', [600 80 900 900] );
 
-Floor_v = [-600 600 0
-                 600 600 0
-                 -600 -600 0
-                 600 -600 0];
-             
-Floor_f = [1 2 4 3];
+h = clf(gcf);
 
-% patch('Faces', Floor_f, 'Vertices', Floor_v, 'EdgeColor', 'None',...
-%       'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
+Floor_v = [-600 600 0
+    600 600 0
+    -600 -600 0
+    600 -600 0];
+
 hold on
-%set(gcf, 'Position', [50 50 950 900])
 
 %% Relative Positions
 %rBfromI = [0;0;0]; % place inertial frame at base
@@ -64,7 +60,7 @@ T3_BR = T2_BR * rotx(jnt_var(9));
 T1_BL = TB*rotz(jnt_var(10));
 T2_BL = T1_BL * rotx(jnt_var(11));
 T3_BL = T2_BL * rotx(jnt_var(12));
-               
+
 %% Positions wrt I
 rB = rBfromI;
 
@@ -93,22 +89,20 @@ r3_BL = r2_BL + T2_BL * r_22_3_BL;
 rc_BL = r3_BL + T3_BL * r_33_c_BL;
 %% Calculate leg heights
 legs=[rc_BR,rc_BL,rc_FL,rc_FR];
-[vals,index]=sort([rc_BR(3),rc_BL(3),rc_FL(3),rc_FR(3)]);
-points(1:3,1)=legs(:,index(1));
-points(1:3,2)=legs(:,index(2));
-maxchange=10;
-pindex=3;
-if(abs(legs(3,index(1))-legs(3,index(3)))<maxchange)
-    points(1:3,pindex)=legs(:,index(3));
-    pindex=4;
-end
-if(abs(legs(3,index(1))-legs(3,index(4)))<maxchange)
-    points(1:3,pindex)=legs(:,index(4));
+index = find(legs(3,:) <= 5/1000)';
+
+if length(index) >= 3
+    points(1:3,1)=legs(:,index(1));
+    points(1:3,2)=legs(:,index(2));
+    points(1:3,3)=legs(:,index(3));
+    if length(index) == 4
+        points(1:3,4)=legs(:,index(4));
+    end
 end
 %% Draw floor
 Floor_f = [1 2 4 3];
 patch('Faces', Floor_f, 'Vertices', Floor_v, 'EdgeColor', 'None',...
-       'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
+    'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
 hold on
 %% Transform the stl coordinates based upon FK
 [Body, Body_f, n, c, stltitle] = stlread('Body.stl');
@@ -147,20 +141,24 @@ patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColo
 patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 
- patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
- patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
- patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% 
- patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
- patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
- patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% 
- patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
- patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
- patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+%
+patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+%
+patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+
 %draw support points
-scatter3(points(1,:),points(2,:),points(3,:),'rx')
-patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
+if length(index) >= 3
+    scatter3(points(1,:),points(2,:),points(3,:),'rx')
+    patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
+end
+
 axis equal
 axis tight
 camlight left
@@ -169,7 +167,7 @@ view([1;1;0.5])
 axis([-.6 .6 -.6 .6 -.2 .6])
 grid on
 hold off
-xlabel('x') 
+xlabel('x')
 ylabel('y')
 zlabel('z')
 title('Heimdallr Robot')

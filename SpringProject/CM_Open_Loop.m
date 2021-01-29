@@ -16,7 +16,7 @@ clc
 close all
 
 h = 0.0001; % time step
-t = 0:h:2; % time vector % 6 sec %14
+t = 0:h:0.0001; % time vector % 6 sec %14
 
 %%% Initial Conditions %%%
 b=zeros(36,length(t)); % state matrix

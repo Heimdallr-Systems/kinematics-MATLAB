@@ -153,14 +153,15 @@ BRLink3_v=(repmat(r3_BR,1,length(BRLink3))+T3_BR*BRLink3');
 % patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 
 %draw support points
-if length(index) >= 3
-    scatter3(points(1,:),points(2,:),points(3,:),'rx')
-    patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
-end
+% if length(index) >= 3
+%     scatter3(points(1,:),points(2,:),points(3,:),'rx')
+%     patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
+% end
 
-if drawCM == 1
+hold on
+plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3)-0.4,rcm(3)+0.4],'-r');
 plot3(rcm(1),rcm(2),rcm(3),'*r');
-end
+
 
 axis equal
 axis tight
@@ -175,4 +176,5 @@ ylabel('y')
 zlabel('z')
 title('Heimdallr Robot')
 drawnow
+hold off
 end

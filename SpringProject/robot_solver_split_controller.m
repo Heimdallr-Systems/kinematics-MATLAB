@@ -16,34 +16,34 @@ clc
 close all
 
 h = 0.0001; % time step
-t = 0:h:1; % time vector % 6 sec %14
+t = 0:h:4; % time vector % 6 sec %14
 
 %%% Initial Conditions %%%
 b=zeros(36,length(t)); % state matrix
 b(4,1) = 0;
 b(5,1) = 0;
-b(6,1) = 0.18; % body height % default 0.242 % 0.3
+b(6,1) = 0.18; % body height % default 0.18 % 0.3
 % first joint angles
 b(7,1) = pi/4;
 b(8,1) = -pi/4;
 b(9,1) = -pi/4;
 b(10,1) = pi/4;
 % second joint angles
-b(11,1) = 0; %pi/4 %0
-b(12,1) = 0;
-b(13,1) = 0;
-b(14,1) = 0;
+b(11,1) = pi/4; %pi/4 %0
+b(12,1) = -pi/4;
+b(13,1) = pi/4;
+b(14,1) = -pi/4;
 % third joint angles
-b(15,1) = pi/2; %pi/8 %pi/2
-b(16,1) = -pi/2;
-b(17,1) = pi/2;
-b(18,1) = -pi/2;
+b(15,1) = pi/3; %pi/8 %pi/2
+b(16,1) = -pi/3;
+b(17,1) = pi/3;
+b(18,1) = -pi/3;
 
 rcm = zeros(3,length(t)); % initialize rcm
 
 Fgamma= zeros(18,length(t)); % initialize forces matrix (joint space)
 
-
+legs_on_gnd = [1,1,1,1];
 %%% Desired Body Pose Trajectory %%%
 % x_d_val = [0,0,0,0,-0.02,0.02,0,0,0,0,0,0,0,0,0,0,0];
 % y_d_val = [0,0,0,0,0,0,-0.02,0.02,0,0,0,0,0,0,0,0,0];
@@ -57,9 +57,10 @@ Fgamma= zeros(18,length(t)); % initialize forces matrix (joint space)
 % phi_d_val = [0,-pi/15,pi/15,0,0,0,0,0,0,0];
 % theta_d_val =  [0,0,0,-pi/17,0,pi/17,0,0,0,0];
 % psi_d_val =  [0,0,0,0,0,0,0,-pi/17,0,pi/17];
-x_d_val = [-0.05];
-y_d_val = [0.05];
-z_d_val = [0.22];
+
+x_d_val = [-0.06];
+y_d_val = [0.06];
+z_d_val = [0.2];
 phi_d_val = [0];
 theta_d_val =  [0];
 psi_d_val =  [0];
@@ -110,8 +111,9 @@ for ii = 1:length(t)
     
     %%% Floor Constraint %%%
     [r_II_c_FR, r_II_c_FL, r_II_c_BR, r_II_c_BL] = CPos_wrt_I(Theta1,Theta2,Theta3,T_I_B,r_II_B);
-    r_II_c = [r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL];
     
+    r_II_c = [r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL];
+   
     [Jc_FR,Jc_FL,Jc_BR,Jc_BL] = contactJacobians(b(:,ii));
     
     c_vel_FR = Jc_FR*b(19:36,ii);
@@ -134,10 +136,39 @@ for ii = 1:length(t)
     Fgamma_BR = Jc_BR.'*Fc_BR;
     Fgamma_BL = Jc_BL.'*Fc_BL;
     
-        
+    
     %%% Control Law %%%
-    [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d,[1,1,1,1]);
-%     [Theta1_d,Theta2_d,Theta3_d] = Joint_Space_Solver(Theta1, Theta2, Theta3, r_II_B, r_II_B_d, T_I_B, T_I_B_d);
+   
+    %
+    %     if r_II_c_FR(3) <0.04
+    %         r_II_c_d_FR(1) = r_II_c_FR(1);
+    %         r_II_c_d_FR(2) = r_II_c_FR(2);
+    %     end
+    %     if r_II_c_FL(3) <0.04
+    %         r_II_c_d_FL(1) = r_II_c_FL(1);
+    %         r_II_c_d_FL(2) = r_II_c_FL(2);
+    %     end
+    %     if r_II_c_BR(3) <0.04
+    %         r_II_c_d_BR(1) = r_II_c_BR(1);
+    %         r_II_c_d_BR(2) = r_II_c_BR(2);
+    %     end
+    %     if r_II_c_BL(3) <0.04
+    %         r_II_c_d_BL(1) = r_II_c_BL(1);
+    %         r_II_c_d_BL(2) = r_II_c_BL(2);
+    %     end
+    %     r_II_c_d = [r_II_c_d_FR,r_II_c_d_FL,r_II_c_d_BR,r_II_c_d_BL];
+    [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d,legs_on_gnd);
+    
+    % Hard Coded example for lifting FR Leg
+     if ii > 20000
+        r_II_c_d_FR = [0.03;-0.03;0.05];
+        %         r_II_c_d_FL = [0.15;0.15;0];
+        %         r_II_c_d_BR = [-0.15;-0.15;0];
+        %         r_II_c_d_BL = [-0.15;0.15;0];
+        legs_on_gnd = [0,1,1,1];
+        [Theta1_d(1),~,Theta2_d(1),~,Theta3_d(1)] = Leg_Controller(r_II_c_d_FR, T_I_B, r_II_B, 0);
+    end
+    %     [Theta1_d,Theta2_d,Theta3_d] = Joint_Space_Solver(Theta1, Theta2, Theta3, r_II_B, r_II_B_d, T_I_B, T_I_B_d);
     Theta_d = [Theta1_d;Theta2_d;Theta3_d];
     Theta_E = Theta_d - Theta;
     
@@ -156,18 +187,18 @@ for ii = 1:length(t)
     
     %%% Resultant Applied Force %%%
     Fgamma(:,ii) = (Fgamma_FR+Fgamma_FL+Fgamma_BR+Fgamma_BL)+Fgamma_control;
-
-%     Find desired joint angles given a desired body pose
-%     note Theta_d vectors are rows not columns
-%         for jj = 1:1:length(Theta_d)
-%             if isnan(Theta_d(jj)) || (Theta_d(jj) > 3)
-%                 ii
-%                 r_II_B_d
-%                 T_I_B_d
-%                 error('Goal Not in Workspace.')
-%             end
-%         end
-
+    
+    %     Find desired joint angles given a desired body pose
+    %     note Theta_d vectors are rows not columns
+    %         for jj = 1:1:length(Theta_d)
+    %             if isnan(Theta_d(jj)) || (Theta_d(jj) > 3)
+    %                 ii
+    %                 r_II_B_d
+    %                 T_I_B_d
+    %                 error('Goal Not in Workspace.')
+    %             end
+    %         end
+    
     %%% CM Location %%%
     rcm(:,ii) = compute_rcm(b(7:18,ii),b(4:6,ii));
     
@@ -313,11 +344,11 @@ Theta3 = [b(15,:);b(16,:);b(17,:);b(18,:)];
 % ylabel('\psi (rad)')
 
 
-%% Draw Simulation
+% Draw Simulation
 Ts = 1/60;
 % floor(Ts/h)
 
-writerObj = VideoWriter('ControlsV5_NoMotors','MPEG-4');
+writerObj = VideoWriter('SplitControlV2_NoMotors','MPEG-4');
 writerObj.FrameRate = 60;
 open(writerObj);
 
@@ -331,7 +362,7 @@ M(loops) = struct('cdata',[],'colormap',[]);
 for ii=1:floor(Ts/h):length(t)
     T_I_B = rotz(phi(ii))*roty(theta(ii))*rotx(psi(ii));
     FK_Solver_Draw(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii))
-%     FK_Solver_Draw_CM(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii),1,rcm(:,ii))
+    %     FK_Solver_Draw_CM(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii),1,rcm(:,ii))
     M(ii) = getframe(gcf);
     writeVideo(writerObj,M(ii));
 end

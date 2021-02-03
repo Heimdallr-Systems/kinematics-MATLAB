@@ -1,4 +1,4 @@
-function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,rBfromI,drawCM,rcm)
+function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,rBfromI,rcm)
 % This program draws the robot based on given joint angles. This function
 % is used to test the forward kinematics of this robotic system.
 
@@ -135,31 +135,33 @@ BRLink2_v=(repmat(r2_BR,1,length(BRLink2))+T2_BR*BRLink2');
 BRLink3_v=(repmat(r3_BR,1,length(BRLink3))+T3_BR*BRLink3');
 %% draw robot
 %set(gcf, 'Position', [50 50 950 900])
-% patch('Faces', Body_f, 'Vertices', Body_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% 
-% patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% %
-% patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% %
-% patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-% patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', Body_f, 'Vertices', Body_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 
-%draw support points
-% if length(index) >= 3
-%     scatter3(points(1,:),points(2,:),points(3,:),'rx')
-%     patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
-% end
+patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+%
+patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+%
+patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+
+% draw support points
+if length(index) >= 3
+    scatter3(points(1,:),points(2,:),points(3,:),'rx')
+    patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
+end
 
 hold on
-plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3)-0.4,rcm(3)+0.4],'-r');
+plot3([rcm(1),rcm(1)-0.4,rcm(1)+0.4],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3),rcm(3)],'-r');
+plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2)-0.4,rcm(2)+0.4],[rcm(3),rcm(3),rcm(3)],'-g');
+plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3)-0.4,rcm(3)+0.4],'-b');
 plot3(rcm(1),rcm(2),rcm(3),'*r');
 
 

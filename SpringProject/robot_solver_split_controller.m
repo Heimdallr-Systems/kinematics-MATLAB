@@ -16,34 +16,34 @@ clc
 close all
 
 h = 0.0001; % time step
-t = 0:h:4; % time vector % 6 sec %14
+t = 0:h:2; % time vector % 6 sec %14
 
 %%% Initial Conditions %%%
 b=zeros(36,length(t)); % state matrix
 b(4,1) = 0;
 b(5,1) = 0;
-b(6,1) = 0.18; % body height % default 0.18 % 0.3
+b(6,1) = 0.24; % body height % default 0.18 % 0.3
 % first joint angles
 b(7,1) = pi/4;
-b(8,1) = -pi/4;
-b(9,1) = -pi/4;
+b(8,1) = -pi/1.5;
+b(9,1) = pi/1.5;
 b(10,1) = pi/4;
 % second joint angles
-b(11,1) = pi/4; %pi/4 %0
+b(11,1) = 0; %pi/4 %0
 b(12,1) = -pi/4;
 b(13,1) = pi/4;
 b(14,1) = -pi/4;
 % third joint angles
-b(15,1) = pi/3; %pi/8 %pi/2
-b(16,1) = -pi/3;
-b(17,1) = pi/3;
-b(18,1) = -pi/3;
+b(15,1) = -pi/1.5; %pi/8 %pi/2
+b(16,1) = -pi/4;
+b(17,1) = pi/4;
+b(18,1) = -pi/4;
 
 rcm = zeros(3,length(t)); % initialize rcm
 
 Fgamma= zeros(18,length(t)); % initialize forces matrix (joint space)
 
-legs_on_gnd = [1,1,1,1];
+legs_on_gnd = [0,1,1,1];
 %%% Desired Body Pose Trajectory %%%
 % x_d_val = [0,0,0,0,-0.02,0.02,0,0,0,0,0,0,0,0,0,0,0];
 % y_d_val = [0,0,0,0,0,0,-0.02,0.02,0,0,0,0,0,0,0,0,0];
@@ -58,9 +58,9 @@ legs_on_gnd = [1,1,1,1];
 % theta_d_val =  [0,0,0,-pi/17,0,pi/17,0,0,0,0];
 % psi_d_val =  [0,0,0,0,0,0,0,-pi/17,0,pi/17];
 
-x_d_val = [-0.06];
-y_d_val = [0.06];
-z_d_val = [0.2];
+x_d_val = [0];
+y_d_val = [0];
+z_d_val = [0.22];
 phi_d_val = [0];
 theta_d_val =  [0];
 psi_d_val =  [0];
@@ -160,7 +160,7 @@ for ii = 1:length(t)
     [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d,legs_on_gnd);
     
     % Hard Coded example for lifting FR Leg
-     if ii > 20000
+     if ii > 0
         r_II_c_d_FR = [0.03;-0.03;0.05];
         %         r_II_c_d_FL = [0.15;0.15;0];
         %         r_II_c_d_BR = [-0.15;-0.15;0];
@@ -222,6 +222,33 @@ Theta1 = [b(7,:);b(8,:);b(9,:);b(10,:)];
 Theta2 = [b(11,:);b(12,:);b(13,:);b(14,:)];
 Theta3 = [b(15,:);b(16,:);b(17,:);b(18,:)];
 
+Ts = 1/60;
+Theta = [Theta1;Theta2;Theta3];
+
+writerObj = VideoWriter('SplitControlV3_NoMotors_CM','MPEG-4');
+writerObj.FrameRate = 60;
+open(writerObj);
+
+ax = gca;
+ax.NextPlot = 'replaceChildren';
+%Preallocate a 40-element array M to store the movie frames.
+
+loops = 1:floor(Ts/h):length(t);
+M(loops) = struct('cdata',[],'colormap',[]);
+for ii=1:floor(Ts/h):length(t)
+    T_I_B = rotz(phi(ii))*roty(theta(ii))*rotx(psi(ii));
+    r_II_B_a = r_II_B(:,ii);
+    Theta_a = Theta(:,ii);
+    r_I_sys_cm = compute_rcm(Theta_a,r_II_B_a);
+    FK_Solver_Draw_CM(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii),r_I_sys_cm)
+    M(ii) = getframe(gcf);
+    writeVideo(writerObj,M(ii));
+end
+
+%%
+close(writerObj);
+
+%% plot
 % figure(1)
 % subplot(4,1,1)
 % plot(t,Theta1(1,1:length(t)),'-r')
@@ -342,29 +369,3 @@ Theta3 = [b(15,:);b(16,:);b(17,:);b(18,:)];
 % title('Body Orientation around Inertial x-axis')
 % xlabel('Time (sec)')
 % ylabel('\psi (rad)')
-
-
-% Draw Simulation
-Ts = 1/60;
-% floor(Ts/h)
-
-writerObj = VideoWriter('SplitControlV2_NoMotors','MPEG-4');
-writerObj.FrameRate = 60;
-open(writerObj);
-
-ax = gca;
-ax.NextPlot = 'replaceChildren';
-%Preallocate a 40-element array M to store the movie frames.
-
-loops = 1:floor(Ts/h):length(t);
-M(loops) = struct('cdata',[],'colormap',[]);
-%For each iteration of j, capture each plot of function X as an individual frame. Store the frame in M.
-for ii=1:floor(Ts/h):length(t)
-    T_I_B = rotz(phi(ii))*roty(theta(ii))*rotx(psi(ii));
-    FK_Solver_Draw(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii))
-    %     FK_Solver_Draw_CM(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii),1,rcm(:,ii))
-    M(ii) = getframe(gcf);
-    writeVideo(writerObj,M(ii));
-end
-%%
-close(writerObj);

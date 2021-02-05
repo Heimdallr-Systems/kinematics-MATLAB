@@ -20,10 +20,10 @@ clc
 close all
 
 % Contact Point Positions
-r_II_c_FR = [200;-200;0]./1000;
-r_II_c_FL = [200;200;0]./1000;
-r_II_c_BR = [-200;-200;0]./1000;
-r_II_c_BL = [-200;200;0]./1000;
+r_II_c_FR = [153.4;-400;0];
+r_II_c_FL = [153.4;400;0];
+r_II_c_BR = [-153.4;-400;0];
+r_II_c_BL = [-153.4;400;0];
 r_II_c = [r_II_c_FR,r_II_c_FL, r_II_c_BR, r_II_c_BL];
 
 % Body Rotation
@@ -37,7 +37,7 @@ BodyRot = [phi,theta,psi];
 T_I_B = rotz(phi)*roty(theta)*rotx(psi)
 
 % Body Offset from Inertial
-r_II_B = [30;20;200]./1000
+r_II_B = [30;20;250]
 
 %% IK for legs
 % Assuming we have some goal orientation and position known, IK lets us
@@ -50,7 +50,7 @@ legs_on_gnd = [r_II_c_FR(3) == 0, r_II_c_FL(3) == 0, r_II_c_BR(3) == 0, r_II_c_B
 
 % Solve for joint angles of legs (IK) assuming a desired or known offset of
 % the robot and orientation of the robot is known
-[Theta1, Theta2, Theta2_2, Theta3, Theta3_2] = IK_Solver_Legs_Inertial(r_II_c, T_I_B, r_II_B, [1,1,1,1]);
+[Theta1, Theta2, Theta2_2, Theta3, Theta3_2] = IK_Solver_Legs_Inertial(r_II_c, T_I_B, r_II_B);
 
 % display joint angles in degrees
 Theta1_Degrees = Theta1 .* 180/pi;
@@ -87,8 +87,8 @@ psi_tilt_degrees_sol = psi_sol*180/pi
 
 % confirm r_II_c's assuming z-rotation is known (FK) now that we know the
 % tilt and joint angles of the robot
-ITB = rotz(phi)*roty(theta_sol)*rotx(psi_sol);
-[r_II_c_FR_sol, r_II_c_FL_sol, r_II_c_BR_sol, r_II_c_BL_sol] = CPos_wrt_I(Theta1, Theta2_2, Theta3_2,ITB,r_II_B)
+BodyRot_sol = [phi,theta_sol,psi_sol];
+[r_II_c_FR_sol, r_II_c_FL_sol, r_II_c_BR_sol, r_II_c_BL_sol] = CPos_wrt_I(Theta1, Theta2_2, Theta3_2,BodyRot_sol,r_II_B)
 
 %% analytical solution for ITB and IIrB
 % this function assumes we know the world frame position of the contact

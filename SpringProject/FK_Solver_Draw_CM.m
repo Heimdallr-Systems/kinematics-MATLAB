@@ -1,4 +1,4 @@
-function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,rBfromI,rcm)
+function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm)
 % This program draws the robot based on given joint angles. This function
 % is used to test the forward kinematics of this robotic system.
 
@@ -30,7 +30,7 @@ Floor_v = [-600 600 0
 hold on
 
 %% Relative Positions
-%rBfromI = [0;0;0]; % place inertial frame at base
+%r_II_B = [0;0;0]; % place inertial frame at base
 % big plate: Short: 350, L: 700;
 % Relative Offsets
 
@@ -61,7 +61,7 @@ T2_BL = T1_BL * rotx(jnt_var(11));
 T3_BL = T2_BL * rotx(jnt_var(12));
 
 %% Positions wrt I
-rB = rBfromI;
+rB = r_II_B;
 
 % Positions of FR Leg
 r1_FR = rB + TB*r_BB_1_FR;

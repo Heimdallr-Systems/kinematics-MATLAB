@@ -11,29 +11,39 @@ L2 = norm(r_22_3_BL);
 L3 = norm(r_33_c_BL);
 
 if is_left_leg == 1 % left leg
-    r_II_c_L = r_II_c_d;
+    r_II_c_BL = r_II_c_d;
     
-    r_BB_c_L = T_I_B\(r_II_c_L - r_II_B);
+    r_BB_c_BL = T_I_B\(r_II_c_BL - r_II_B);
     
-    r_B1_c_L = r_BB_c_L - r_BB_1_FL;
+    r_B1_c_BL = r_BB_c_BL - r_BB_1_BL;
     
-    Theta1 = atan2(r_B1_c_L(2),r_B1_c_L(1))-pi/2;
+    Theta1_BL = atan2(r_B1_c_BL(2),r_B1_c_BL(1))-pi/2;
     
-    Theta1 = angle(exp(1j*Theta1));
+    Theta1_BL = angle(exp(1j*Theta1_BL));
     
-    r_11_c_L = rotz(Theta1)\r_B1_c_L;
+    r_11_c_BL = rotz(Theta1_BL)\r_B1_c_BL;
     
-    r_L = r_11_c_L(2)-r_11_2_FL(2);
+    r_BL = r_11_c_BL(2)-r_11_2_BL(2);
     
-    s_L = r_11_c_L(3)-r_11_2_FL(3);
+    s_BL = r_11_c_BL(3)-r_11_2_BL(3);
     
-    D_L = (r_L^2 + s_L^2 - L2^2 - L3^2)/(2*L2*L3);
+    D_BL = (r_BL^2 + s_BL^2 - L2^2 - L3^2)/(2*L2*L3);
     
-    Theta3 = atan2(sqrt(1-D_L^2),D_L);
-    Theta3_2 = atan2(-sqrt(1-D_L^2),D_L);
+    Theta3_BL = atan2(sqrt(1-D_BL^2),D_BL);
+    Theta3_BL_2 = atan2(-sqrt(1-D_BL^2),D_BL);
     
-    Theta2 = atan2(s_L,r_L) - atan2(L3*sin(Theta3_L),L2 + L3*cos(Theta3_L));
-    Theta2_2 = atan2(s_L,r_L) - atan2(L3*sin(Theta3_L_2),L2 + L3*cos(Theta3_L_2));
+    Theta2_BL = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL),L2 + L3*cos(Theta3_BL));
+    Theta2_BL_2 = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL_2),L2 + L3*cos(Theta3_BL_2));
+    if D_BL > 1
+        D_BL = 1;
+        disp('D was rounded to 1.')
+    end
+    
+    Theta1 = Theta1_BL;
+    Theta2 = Theta2_BL;
+    Theta2_2 = Theta2_BL_2;
+    Theta3 = Theta3_BL;
+    Theta3_2 = Theta3_BL_2;
 else % right leg
     r_II_c_R = r_II_c_d;
     

@@ -16,34 +16,46 @@ clc
 close all
 
 h = 0.0001; % time step
-t = 0:h:4; % time vector % 6 sec %14
+t = 0:h:0.0001; % time vector % 6 sec %14
 
-dist = 0.05; % leg step distance
+dist = 0.025; % leg step distance
 
 % logical conditional that determines if leg should lift or move forward to
 % step
-midpoint_reached = 0;
+midpoint_reached_FR = 0;
+midpoint_reached_FL = 0;
+midpoint_reached_BR = 0;
+midpoint_reached_BL = 0;
+double_invalid = 0;
+waypoint_toggle = 0;
+legs_valid_array = zeros(length(t),4);
+
+
+r_II_c_FR_d = 0;
+r_II_c_FL_d = 0;
+r_II_c_BR_d = 0;
+r_II_c_BL_d = 0;
 
 %%% Initial Conditions %%%
 b=zeros(36,length(t)); % state matrix
 b(4,1) = 0;
 b(5,1) = 0;
-b(6,1) = 0.24; % body height % default 0.18 % 0.3
+b(6,1) = 0.22; % body height % default 0.18 % 0.3
 % first joint angles
 b(7,1) = pi/4;
-b(8,1) = -pi/1.5;
-b(9,1) = pi/1.5;
-b(10,1) = pi/4;
+b(8,1) = -pi/4;
+b(9,1) = -0.1;
+b(10,1) = pi/2;
 % second joint angles
-b(11,1) = 0; %pi/4 %0
-b(12,1) = -pi/4;
-b(13,1) = pi/4;
-b(14,1) = -pi/4;
+b(11,1) = pi/6; %pi/4 %0
+b(12,1) = -pi/6;
+b(13,1) = pi/6;
+b(14,1) = -pi/5.8;
 % third joint angles
-b(15,1) = -pi/1.5; %pi/8 %pi/2
-b(16,1) = -pi/4;
-b(17,1) = pi/4;
-b(18,1) = -pi/4;
+b(15,1) = pi/4; %pi/8 %pi/2
+b(16,1) = -pi/3;
+b(17,1) = pi/3;
+b(18,1) = -35*(pi/180);
 
 rcm = zeros(3,length(t)); % initialize rcm
 
@@ -53,9 +65,9 @@ legs_on_gnd = [1,1,1,1];
 %%% Desired Body Pose Trajectory %%%
 
 % x_d_val = [0.03,0.06,0.09,0.12,0.15,0.18,0.21,0.24,0.27,0.3,0.33,0.36,0.39,0.42,0.45,0.48,0.51];
-x_d_val = [0.02;0.04;0.06;0.08];
+x_d_val = 0.02:0.03:0.4;
 y_d_val = zeros(1,length(x_d_val));
-z_d_val = 0.21*ones(1,length(x_d_val));
+z_d_val = 0.22*ones(1,length(x_d_val));
 phi_d_val = zeros(1,length(x_d_val));
 theta_d_val =  zeros(1,length(x_d_val));
 psi_d_val =  zeros(1,length(x_d_val));
@@ -79,7 +91,7 @@ for ii = 1:1:cnt
 end
 
 % Control Constants
-Kd=4;
+Kd=6;
 Kp=30;
 
 %%% Floor Definition %%%
@@ -108,131 +120,214 @@ for ii = 1:length(t)
     r_II_c = [r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL];
     
     % Check what legs are on gnd %
-    legs_on_gnd = [r_II_c_FR <= 0; r_II_c_FL <= 0; r_II_c_BR <= 0; r_II_c_BL <= 0];
-    
-    %%% Controller %%%
-    [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d,legs_on_gnd);
+    legs_on_gnd = [r_II_c_FR(3) <= 0; r_II_c_FL(3) <= 0; r_II_c_BR(3) <= 0; r_II_c_BL(3) <= 0];
     
     %%% Check if Step is Needed %%%
-    [r_BB_c_FR, r_BB_c_FL, r_BB_c_BR, r_BB_c_BL]=CPos_wrt_B(Theta1_d,Theta2_d,Theta3_d);
-    r_BB_c=[r_BB_c_FR,r_BB_c_FL,r_BB_c_BR,r_BB_c_BL];
-    legs_valid=check_workspace(r_BB_c);
+    legs_valid_array(ii,:)=check_workspace(Theta);
+    legs_valid = legs_valid_array(ii,:);
+    
+    % Find Travel Direction
+    if isempty(find(legs_on_gnd == 0))
+        if waypoint_toggle == 0
+            startPoint = r_II_B;
+            endPoint = r_II_B_d;
+            waypoint_toggle = 1;
+        elseif waypoint_toggle == 1
+            if endPoint ~= r_II_B_d
+                waypoint_toggle = 0;
+            end
+        end
+%     else
+%         if waypoint_toggle == 0
+%             startPoint = r_;
+%             endPoint = r_II_B_d_temp;
+%             waypoint_toggle = 1;
+%         elseif waypoint_toggle == 1
+%             if endPoint ~= r_II_B_d_temp
+%                 waypoint_toggle = 0;
+%             end
+%         end
+    end
     
     % Plan Step
     if (legs_valid(1) == 0) || (legs_on_gnd(1) == 0)
-        legs_on_gnd(1) = 0;
+        legs_valid(1) = 0;
         % if the leg has lifted, move to goal position
-        if midpoint_reached == 1
-            r_II_c_FR_d=step_planner_intelligent(r_II_B_d(:,ii-1),r_II_B_d(:,ii),r_II_c_FR,dist);
+        if midpoint_reached_FR == 1
+            r_II_c_FR_d=step_planner_intelligent(startPoint,endPoint,r_II_c_FR,dist,0);
             error = norm(r_II_c_FR_d - r_II_c_FR);
             % if the leg is close to goal position and touching the ground,
             % then end
-            if (error <= 0.01) && (r_II_c_FR(3) <= 0)
-                midpoint_reached = 0;
+            if (error <= 0.06) && (r_II_c_FR(3) <= 0)
+                midpoint_reached_FR = 0;
             end
-        % if the leg is still on the ground and needs to be lifted, lift
-        elseif midpoint_reached == 0
-            r_II_c_FR_d= [r_II_c_FR(1);r_II_c_FR(2);r_II_c_FR(3)+0.03];
-            midpoint_reached = 2;
-        % if the leg is off the ground, continue lifting
-        elseif midpoint_reached == 2
-            error = norm(r_II_c_FR_d - r_II_c_FR);
+            % if the leg is still on the ground and needs to be lifted, lift
+        elseif midpoint_reached_FR == 0
+            r_II_c_FR_d=step_planner_intelligent(startPoint,endPoint,r_II_c_FR,dist,1);
+            midpoint_reached_FR = 2;
+            % if the leg is off the ground, continue lifting
+        elseif midpoint_reached_FR == 2
+            error = r_II_c_FR_d(3) - r_II_c_FR(3);
             % if the leg is done lifting, move
-            if error <= 0.01
-                midpoint_reached = 1;
+            if error <= 0.03
+                midpoint_reached_FR = 1;
             end
         end
     end
     
     if (legs_valid(2) == 0) || (legs_on_gnd(2) == 0)
-        legs_on_gnd(2) = 0;
+        legs_valid(2) = 0;
         % if the leg has lifted, move to goal position
-        if midpoint_reached == 1
-            r_II_c_FL_d=step_planner_intelligent(r_II_B_d(:,ii-1),r_II_B_d(:,ii),r_II_c_FL,dist);
+        if midpoint_reached_FL == 1
+            r_II_c_FL_d=step_planner_intelligent(startPoint,endPoint,r_II_c_FL,dist,0);
             error = norm(r_II_c_FL_d - r_II_c_FL);
             % if the leg is close to goal position and touching the ground,
             % then end
-            if (error <= 0.01) && (r_II_c_FL(3) <= 0)
-                midpoint_reached = 0;
+            if (error <= 0.06) && (r_II_c_FL(3) <= 0)
+                midpoint_reached_FL = 0;
             end
-        % if the leg is still on the ground and needs to be lifted, lift
-        elseif midpoint_reached == 0
-            r_II_c_FL_d= [r_II_c_FL(1);r_II_c_FL(2);r_II_c_FL(3)+0.03];
-            midpoint_reached = 2;
-        % if the leg is off the ground, continue lifting
-        elseif midpoint_reached == 2
-            error = norm(r_II_c_FL_d - r_II_c_FL);
+            % if the leg is still on the ground and needs to be lifted, lift
+        elseif midpoint_reached_FL == 0
+            r_II_c_FL_d=step_planner_intelligent(startPoint,endPoint,r_II_c_FL,dist,1);
+            midpoint_reached_FL = 2;
+            % if the leg is off the ground, continue lifting
+        elseif midpoint_reached_FL == 2
+            error = r_II_c_FL_d(3) - r_II_c_FL(3);
             % if the leg is done lifting, move
-            if error <= 0.01
-                midpoint_reached = 1;
+            if error <= 0.03
+                midpoint_reached_FL = 1;
             end
         end
     end
     
     if (legs_valid(3) == 0) || (legs_on_gnd(3) == 0)
-        legs_on_gnd(3) = 0;
-         % if the leg has lifted, move to goal position
-        if midpoint_reached == 1
-            r_II_c_BR_d=step_planner_intelligent(r_II_B_d(:,ii-1),r_II_B_d(:,ii),r_II_c_BR,dist);
-            error = norm(r_II_c_BR_d - r_II_c_BR);
-            % if the leg is close to goal position and touching the ground,
-            % then end
-            if (error <= 0.01) && (r_II_c_BR(3) <= 0)
-                midpoint_reached = 0;
-            end
-        % if the leg is still on the ground and needs to be lifted, lift
-        elseif midpoint_reached == 0
-            r_II_c_BR_d= [r_II_c_BR(1);r_II_c_BR(2);r_II_c_BR(3)+0.03];
-            midpoint_reached = 2;
-        % if the leg is off the ground, continue lifting
-        elseif midpoint_reached == 2
-            error = norm(r_II_c_BR_d - r_II_c_BR);
-            % if the leg is done lifting, move
-            if error <= 0.01
-                midpoint_reached = 1;
-            end
-        end
-    end
-    
-    if (legs_valid(4) == 0)) || (legs_on_gnd(4) == 0)
-        legs_on_gnd(4) = 0;
+        legs_valid(3) = 0;
         % if the leg has lifted, move to goal position
-        if midpoint_reached == 1
-            r_II_c_BL_d=step_planner_intelligent(r_II_B_d(:,ii-1),r_II_B_d(:,ii),r_II_c_BL,dist);
-            error = norm(r_II_c_BL_d - r_II_c_BL);
+        if midpoint_reached_BR == 1
+            r_II_c_BR_d=step_planner_intelligent(startPoint,endPoint,r_II_c_BR,dist,0);
+            error = norm(r_II_c_BR_d - r_II_c_BR);
             % if the leg is close to goal position and touching the ground,
             % then end
-            if (error <= 0.01) && (r_II_c_BL(3) <= 0)
-                midpoint_reached = 0;
+            if (error <= 0.06) && (r_II_c_BR(3) <= 0)
+                midpoint_reached_BR = 0;
             end
-        % if the leg is still on the ground and needs to be lifted, lift
-        elseif midpoint_reached == 0
-            r_II_c_BL_d= [r_II_c_BL(1);r_II_c_BL(2);r_II_c_BL(3)+0.03];
-            midpoint_reached = 2;
-        % if the leg is off the ground, continue lifting
-        elseif midpoint_reached == 2
-            error = norm(r_II_c_BL_d - r_II_c_BL);
+            % if the leg is still on the ground and needs to be lifted, lift
+        elseif midpoint_reached_BR == 0
+            r_II_c_BR_d=step_planner_intelligent(startPoint,endPoint,r_II_c_BR,dist,1);
+            midpoint_reached_BR = 2;
+            % if the leg is off the ground, continue lifting
+        elseif midpoint_reached_BR == 2
+            error = r_II_c_BR_d(3) - r_II_c_BR(3);
             % if the leg is done lifting, move
-            if error <= 0.01
-                midpoint_reached = 1;
+            if error <= 0.03
+                midpoint_reached_BR = 1;
             end
         end
     end
     
-    num_legs_on_gnd = length(find(legs_on_gnd == 1));
-    if num_legs_on_gnd == 4
+    
+    if (legs_valid(4) == 0) || (legs_on_gnd(4) == 0)
+        legs_valid(4) = 0;
+        % if the leg has lifted, move to goal position
+        if midpoint_reached_BL == 1
+            r_II_c_BL_d=step_planner_intelligent(startPoint,endPoint,r_II_c_BL,dist,0);
+            
+            error = norm(r_II_c_BL_d - r_II_c_BL);
+            % if the leg is close to goal position and touching the ground,
+            % then end
+            if (error <= 0.06) && (r_II_c_BL(3) <= 0)
+                midpoint_reached_BL = 0;
+            end
+            % if the leg is still on the ground and needs to be lifted, lift
+        elseif midpoint_reached_BL == 0
+            r_II_c_BL_d=step_planner_intelligent(startPoint,endPoint,r_II_c_BL,dist,1);
+            midpoint_reached_BL = 2;
+            % if the leg is off the ground, continue lifting
+        elseif midpoint_reached_BL == 2
+            error = r_II_c_BL_d(3) - r_II_c_BL(3);
+            % if the leg is done lifting, move
+            if error <= 0.03
+                midpoint_reached_BL = 1;
+            end
+        end
+    end
+    
+    num_legs_valid = length(find(legs_valid == 1));
+    if num_legs_valid == 4
         % normal body pose control
-        [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d,legs_on_gnd);
+        [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d,legs_valid);
         Theta_d = [Theta1_d;Theta2_d;Theta3_d];
         Theta_E = Theta_d - Theta;
-    elseif num_legs_on_gnd == 3
-        % leg step and rockback control        
+    elseif num_legs_valid == 3
+        % leg step and rockback control
         % insert rock-back
         
+        % make triangle
+        if legs_valid(1) == 0
+            vertex1 = [r_II_c_FL(1);r_II_c_FL(2)];
+            vertex2 = [r_II_c_BR(1);r_II_c_BR(2)];
+            vertex3 = [r_II_c_BL(1);r_II_c_BL(2)];
+        elseif legs_valid(2) == 0
+            vertex1 = [r_II_c_FR(1);r_II_c_FR(2)];
+            vertex2 = [r_II_c_BR(1);r_II_c_BR(2)];
+            vertex3 = [r_II_c_BL(1);r_II_c_BL(2)];
+        elseif legs_valid(3) == 0
+            vertex1 = [r_II_c_FR(1);r_II_c_FR(2)];
+            vertex2 = [r_II_c_FL(1);r_II_c_FL(2)];
+            vertex3 = [r_II_c_BL(1);r_II_c_BL(2)];
+        elseif legs_valid(4) == 0
+            vertex1 = [r_II_c_FR(1);r_II_c_FR(2)];
+            vertex2 = [r_II_c_FL(1);r_II_c_FL(2)];
+            vertex3 = [r_II_c_BR(1);r_II_c_BR(2)];
+        end
+        
         % body pose controller
-        [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d,legs_on_gnd);
+        
+        if length(find(legs_valid == 0)) > 1
+            disp('hi')
+            if double_invalid == 0
+                double_invalid = 1;
+                r_II_B_d_temp = r_II_B;
+            end
+        else
+            double_invalid = 0;
+            pgon = polyshape([vertex1(1), vertex2(1), vertex3(1)],[vertex1(2), vertex2(2), vertex3(2)]);
+            [x,y] = centroid(pgon);
+            r_II_B_d_temp = [x;y;r_II_B_d(3)];
+        end
+        
+        [Theta1_d,~,Theta2_d,~,Theta3_d] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_d,r_II_B_d_temp,legs_valid);
+        
         % leg step controller
-        [Theta1_d(1),~,Theta2_d(1),~,Theta3_d(1)] = Leg_Controller(r_II_c_d_FR, T_I_B, r_II_B, 0);
+        if legs_valid(1) == 0
+            legs_on_gnd(1) = 0;
+            if double_invalid == 1
+                [Theta1_d(1),~,Theta2_d(1),~,Theta3_d(1)] = Leg_Controller([r_II_c_FR(1);r_II_c_FR(2);0], T_I_B, r_II_B, 0);
+            else
+                [Theta1_d(1),~,Theta2_d(1),~,Theta3_d(1)] = Leg_Controller(r_II_c_FR_d, T_I_B, r_II_B, 0);
+            end
+        elseif legs_valid(2) == 0
+            legs_on_gnd(2) = 0;
+             if double_invalid == 1
+                [Theta1_d(2),~,Theta2_d(2),~,Theta3_d(2)] = Leg_Controller([r_II_c_FL(1);r_II_c_FL(2);0], T_I_B, r_II_B, 1);
+             else
+                [Theta1_d(2),~,Theta2_d(2),~,Theta3_d(2)] = Leg_Controller(r_II_c_FL_d, T_I_B, r_II_B, 1);
+             end
+        elseif legs_valid(3) == 0
+            legs_on_gnd(3) = 0;
+             if double_invalid == 1
+                 [Theta1_d(3),~,Theta2_d(3),~,Theta3_d(3)] = Leg_Controller([r_II_c_BR(1);r_II_c_BR(2);0], T_I_B, r_II_B, 0);
+             else
+                [Theta1_d(3),~,Theta2_d(3),~,Theta3_d(3)] = Leg_Controller(r_II_c_BR_d, T_I_B, r_II_B, 0);
+             end
+        elseif legs_valid(4) == 0
+            legs_on_gnd(4) = 0;
+             if double_invalid == 1
+                [Theta1_d(4),~,Theta2_d(4),~,Theta3_d(4)] = Leg_Controller([r_II_c_BL(1);r_II_c_BL(2);0], T_I_B, r_II_B, 1);
+             else
+                [Theta1_d(4),~,Theta2_d(4),~,Theta3_d(4)] = Leg_Controller(r_II_c_BL_d, T_I_B, r_II_B, 1);
+             end
+        end
         Theta_d = [Theta1_d;Theta2_d;Theta3_d];
         Theta_E = Theta_d - Theta;
     else
@@ -253,10 +348,10 @@ for ii = 1:length(t)
     dotr_II_c_BR = c_vel_BR(4:6,1);
     dotr_II_c_BL = c_vel_BL(4:6,1);
     
-    Fc_FR = [0;0;0;b_fric_floor*dotr_II_c_FR(1);b_fric_floor*dotr_II_c_FR(2);Kp_floor*(r_II_c_FR(3)) + Kd_floor*(dotr_II_c_FR(3))]*heaviside(-r_II_c_FR(3))*legs_on_gnd(1);
-    Fc_FL = [0;0;0;b_fric_floor*dotr_II_c_FL(1);b_fric_floor*dotr_II_c_FL(2);Kp_floor*(r_II_c_FL(3)) + Kd_floor*(dotr_II_c_FL(3))]*heaviside(-r_II_c_FL(3))*legs_on_gnd(2);
-    Fc_BR = [0;0;0;b_fric_floor*dotr_II_c_BR(1);b_fric_floor*dotr_II_c_BR(2);Kp_floor*(r_II_c_BR(3)) + Kd_floor*(dotr_II_c_BR(3))]*heaviside(-r_II_c_BR(3))*legs_on_gnd(3);
-    Fc_BL = [0;0;0;b_fric_floor*dotr_II_c_BL(1);b_fric_floor*dotr_II_c_BL(2);Kp_floor*(r_II_c_BL(3)) + Kd_floor*(dotr_II_c_BL(3))]*heaviside(-r_II_c_BL(3))*legs_on_gnd(4);
+    Fc_FR = [0;0;0;b_fric_floor*dotr_II_c_FR(1);b_fric_floor*dotr_II_c_FR(2);Kp_floor*(r_II_c_FR(3)) + Kd_floor*(dotr_II_c_FR(3))]*heaviside(-r_II_c_FR(3))*legs_valid(1);
+    Fc_FL = [0;0;0;b_fric_floor*dotr_II_c_FL(1);b_fric_floor*dotr_II_c_FL(2);Kp_floor*(r_II_c_FL(3)) + Kd_floor*(dotr_II_c_FL(3))]*heaviside(-r_II_c_FL(3))*legs_valid(2);
+    Fc_BR = [0;0;0;b_fric_floor*dotr_II_c_BR(1);b_fric_floor*dotr_II_c_BR(2);Kp_floor*(r_II_c_BR(3)) + Kd_floor*(dotr_II_c_BR(3))]*heaviside(-r_II_c_BR(3))*legs_valid(3);
+    Fc_BL = [0;0;0;b_fric_floor*dotr_II_c_BL(1);b_fric_floor*dotr_II_c_BL(2);Kp_floor*(r_II_c_BL(3)) + Kd_floor*(dotr_II_c_BL(3))]*heaviside(-r_II_c_BL(3))*legs_valid(4);
     
     Fgamma_FR = Jc_FR.'*Fc_FR;
     Fgamma_FL = Jc_FL.'*Fc_FL;
@@ -270,10 +365,10 @@ for ii = 1:length(t)
     
     % Saturate Motor Torque
     for jj = 7:1:18
-        if Fgamma_control(jj,1) > 1.47
-            Fgamma_control(jj,1) = 1.47;
-        elseif Fgamma_control(jj,1) < -1.47
-            Fgamma_control(jj,1) = -1.47;
+        if Fgamma_control(jj,1) > 5
+            Fgamma_control(jj,1) = 5;
+        elseif Fgamma_control(jj,1) < -5
+            Fgamma_control(jj,1) = -5;
         end
     end
     
@@ -281,7 +376,7 @@ for ii = 1:length(t)
     Fgamma(:,ii) = (Fgamma_FR+Fgamma_FL+Fgamma_BR+Fgamma_BL)+Fgamma_control;
     
     %%% CM Location %%%
-    rcm(:,ii) = compute_rcm(b(7:18,ii),b(4:6,ii));
+    rcm(:,ii) = compute_rcm(b(7:18,ii),b(4:6,ii),T_I_B);
     
     %%% Numerically Integrate %%%
     k1=robot_states(b(:,ii),Fgamma(:,ii));
@@ -289,6 +384,9 @@ for ii = 1:length(t)
     k3=robot_states(b(:,ii)+k2*h/2,Fgamma(:,ii));
     k4=robot_states(b(:,ii)+k3*h,Fgamma(:,ii));
     b(:,ii+1)=b(:,ii)+h*(k1/6+k2/3+k3/3+k4/6);
+    
+    legs_valid_array(ii,:)=check_workspace(Theta);
+    legs_valid = legs_valid_array(ii,:);
 end
 
 %% Draw animation
@@ -303,30 +401,29 @@ Theta1 = [b(7,:);b(8,:);b(9,:);b(10,:)];
 Theta2 = [b(11,:);b(12,:);b(13,:);b(14,:)];
 Theta3 = [b(15,:);b(16,:);b(17,:);b(18,:)];
 
-Ts = 1/60;
+Ts = 1/45;
 Theta = [Theta1;Theta2;Theta3];
 
-writerObj = VideoWriter('SplitControlV3_NoMotors_CM','MPEG-4');
-writerObj.FrameRate = 60;
+writerObj = VideoWriter('SplitControlV9_WalkPlz','MPEG-4');
+writerObj.FrameRate = 45;
 open(writerObj);
 
 ax = gca;
 ax.NextPlot = 'replaceChildren';
 %Preallocate a 40-element array M to store the movie frames.
 
-loops = 1:floor(Ts/h):length(t);
+loops = 1:floor(Ts/h):ii;
 M(loops) = struct('cdata',[],'colormap',[]);
-for ii=1:floor(Ts/h):length(t)
-    T_I_B = rotz(phi(ii))*roty(theta(ii))*rotx(psi(ii));
-    r_II_B_a = r_II_B(:,ii);
-    Theta_a = Theta(:,ii);
-    r_I_sys_cm = compute_rcm(Theta_a,r_II_B_a);
-    FK_Solver_Draw_CM(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii),r_I_sys_cm)
-    M(ii) = getframe(gcf);
-    writeVideo(writerObj,M(ii));
+for kk=1:floor(Ts/h):ii
+    T_I_B = rotz(phi(kk))*roty(theta(kk))*rotx(psi(kk));
+    r_II_B_a = r_II_B(:,kk);
+    Theta_a = Theta(:,kk);
+    r_I_sys_cm = compute_rcm(Theta_a,r_II_B_a,T_I_B);
+    FK_Solver_Draw_CM(Theta1(:,kk),Theta2(:,kk),Theta3(:,kk),T_I_B,r_II_B(:,kk),r_I_sys_cm, legs_valid_array(kk,:))
+    M(kk) = getframe(gcf);
+    writeVideo(writerObj,M(kk));
 end
 
-%%
 close(writerObj);
 
 %% plot

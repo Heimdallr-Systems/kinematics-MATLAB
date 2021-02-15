@@ -63,7 +63,7 @@ w_BB_I = [dotphi;dottheta;dotpsi];
 MB = [JBB,skew(GAMMABB)*T_I_B.';T_I_B*skew(GAMMABB).',mB*eye(3)];
 HB = GeoJB.'*MB*GeoJB; % System Mass Matric
 GB = (GeoJB.'*[skew(GAMMABB)*T_I_B.'*[0;0;g];mB*[0;0;g]]); % Generalize Gravitational Forces
-dB = GeoJB.'*MB*dotGeoJB*dotgamma + GeoJB.'*[cross(w_BB_I, JBB*w_BB_I);T_I_B*cross(w_BB_I,cross(w_BB_I,GAMMABB))]; % vector of coriolis and centripital terms
+%dB = GeoJB.'*MB*dotGeoJB*dotgamma + GeoJB.'*[cross(w_BB_I, JBB*w_BB_I);T_I_B*cross(w_BB_I,cross(w_BB_I,GAMMABB))]; % vector of coriolis and centripital terms
                     
 
 % Link 1 FR
@@ -74,7 +74,7 @@ I1_tilde_FR = zeros(3,18);
 M1_FR = [J11_FR,skew(GAMMA11_FR)*T_I_1_FR.';T_I_1_FR*skew(GAMMA11_FR).',m1_FR*eye(3)];
 H1_FR = GeoJ1_FR.'*M1_FR*GeoJ1_FR;
 G1_FR = (GeoJ1_FR.'*[skew(GAMMA11_FR)*T_I_1_FR.'*[0;0;g];m1_FR*[0;0;g]]);
-d1_FR = GeoJ1_FR.'*M1_FR*dotGeoJ1_FR*dotgamma + GeoJ1_FR.'*[cross(w_11_I_FR, J11_FR*w_11_I_FR);T_I_1_FR*cross(w_11_I_FR,cross(w_11_I_FR,GAMMA11_FR))];
+%d1_FR = GeoJ1_FR.'*M1_FR*dotGeoJ1_FR*dotgamma + GeoJ1_FR.'*[cross(w_11_I_FR, J11_FR*w_11_I_FR);T_I_1_FR*cross(w_11_I_FR,cross(w_11_I_FR,GAMMA11_FR))];
 
 % Link 2 FR
 I2_hat_FR = zeros(3,18);
@@ -84,7 +84,7 @@ I2_tilde_FR = zeros(3,18);
 M2_FR = [J22_FR,skew(GAMMA22_FR)*T_I_2_FR.';T_I_2_FR*skew(GAMMA22_FR).',m2_FR*eye(3)];
 H2_FR = GeoJ2_FR.'*M2_FR*GeoJ2_FR;
 G2_FR = (GeoJ2_FR.'*[skew(GAMMA22_FR)*T_I_2_FR.'*[0;0;g];m2_FR*[0;0;g]]);
-d2_FR = GeoJ2_FR.'*M2_FR*dotGeoJ2_FR*dotgamma + GeoJ2_FR.'*[cross(w_22_I_FR, J22_FR*w_22_I_FR);T_I_2_FR*cross(w_22_I_FR,cross(w_22_I_FR,GAMMA22_FR))];
+%d2_FR = GeoJ2_FR.'*M2_FR*dotGeoJ2_FR*dotgamma + GeoJ2_FR.'*[cross(w_22_I_FR, J22_FR*w_22_I_FR);T_I_2_FR*cross(w_22_I_FR,cross(w_22_I_FR,GAMMA22_FR))];
 
 % Link 3 FR
 I3_hat_FR = zeros(3,18);
@@ -94,7 +94,7 @@ I3_tilde_FR = zeros(3,18);
 M3_FR = [J33_FR,skew(GAMMA33_FR)*T_I_3_FR.';T_I_3_FR*skew(GAMMA33_FR).',m3_FR*eye(3)];
 H3_FR = GeoJ3_FR.'*M3_FR*GeoJ3_FR;
 G3_FR = (GeoJ3_FR.'*[skew(GAMMA33_FR)*T_I_3_FR.'*[0;0;g];m3_FR*[0;0;g]]);
-d3_FR = GeoJ3_FR.'*M3_FR*dotGeoJ3_FR*dotgamma + GeoJ3_FR.'*[cross(w_33_I_FR, J33_FR*w_33_I_FR);T_I_3_FR*cross(w_33_I_FR,cross(w_33_I_FR,GAMMA33_FR))];
+%d3_FR = GeoJ3_FR.'*M3_FR*dotGeoJ3_FR*dotgamma + GeoJ3_FR.'*[cross(w_33_I_FR, J33_FR*w_33_I_FR);T_I_3_FR*cross(w_33_I_FR,cross(w_33_I_FR,GAMMA33_FR))];
 
 
 % Link 1 FL
@@ -105,7 +105,7 @@ I1_tilde_FL = zeros(3,18);
 M1_FL = [J11_FL,skew(GAMMA11_FL)*T_I_1_FL.';T_I_1_FL*skew(GAMMA11_FL).',m1_FL*eye(3)];
 H1_FL = GeoJ1_FL.'*M1_FL*GeoJ1_FL;
 G1_FL = (GeoJ1_FL.'*[skew(GAMMA11_FL)*T_I_1_FL.'*[0;0;g];m1_FL*[0;0;g]]);
-d1_FL = GeoJ1_FL.'*M1_FL*dotGeoJ1_FL*dotgamma + GeoJ1_FL.'*[cross(w_11_I_FL, J11_FL*w_11_I_FL);T_I_1_FL*cross(w_11_I_FL,cross(w_11_I_FL,GAMMA11_FL))];
+%d1_FL = GeoJ1_FL.'*M1_FL*dotGeoJ1_FL*dotgamma + GeoJ1_FL.'*[cross(w_11_I_FL, J11_FL*w_11_I_FL);T_I_1_FL*cross(w_11_I_FL,cross(w_11_I_FL,GAMMA11_FL))];
 
 % Link 2 FL
 I2_hat_FL = zeros(3,18);
@@ -115,7 +115,7 @@ I2_tilde_FL = zeros(3,18);
 M2_FL = [J22_FL,skew(GAMMA22_FL)*T_I_2_FL.';T_I_2_FL*skew(GAMMA22_FL).',m2_FL*eye(3)];
 H2_FL = GeoJ2_FL.'*M2_FL*GeoJ2_FL;
 G2_FL = (GeoJ2_FL.'*[skew(GAMMA22_FL)*T_I_2_FL.'*[0;0;g];m2_FL*[0;0;g]]);
-d2_FL = GeoJ2_FL.'*M2_FL*dotGeoJ2_FL*dotgamma + GeoJ2_FL.'*[cross(w_22_I_FL, J22_FL*w_22_I_FL);T_I_2_FL*cross(w_22_I_FL,cross(w_22_I_FL,GAMMA22_FL))];
+%d2_FL = GeoJ2_FL.'*M2_FL*dotGeoJ2_FL*dotgamma + GeoJ2_FL.'*[cross(w_22_I_FL, J22_FL*w_22_I_FL);T_I_2_FL*cross(w_22_I_FL,cross(w_22_I_FL,GAMMA22_FL))];
 
 % Link 3 FL
 I3_hat_FL = zeros(3,18);
@@ -125,7 +125,7 @@ I3_tilde_FL = zeros(3,18);
 M3_FL = [J33_FL,skew(GAMMA33_FL)*T_I_3_FL.';T_I_3_FL*skew(GAMMA33_FL).',m3_FL*eye(3)];
 H3_FL = GeoJ3_FL.'*M3_FL*GeoJ3_FL;
 G3_FL = (GeoJ3_FL.'*[skew(GAMMA33_FL)*T_I_3_FL.'*[0;0;g];m3_FL*[0;0;g]]);
-d3_FL = GeoJ3_FL.'*M3_FL*dotGeoJ3_FL*dotgamma + GeoJ3_FL.'*[cross(w_33_I_FL, J33_FL*w_33_I_FL);T_I_3_FL*cross(w_33_I_FL,cross(w_33_I_FL,GAMMA33_FL))];
+%d3_FL = GeoJ3_FL.'*M3_FL*dotGeoJ3_FL*dotgamma + GeoJ3_FL.'*[cross(w_33_I_FL, J33_FL*w_33_I_FL);T_I_3_FL*cross(w_33_I_FL,cross(w_33_I_FL,GAMMA33_FL))];
 
 
 % Link 1 BR
@@ -136,7 +136,7 @@ I1_tilde_BR = zeros(3,18);
 M1_BR = [J11_BR,skew(GAMMA11_BR)*T_I_1_BR.';T_I_1_BR*skew(GAMMA11_BR).',m1_BR*eye(3)];
 H1_BR = GeoJ1_BR.'*M1_BR*GeoJ1_BR;
 G1_BR = (GeoJ1_BR.'*[skew(GAMMA11_BR)*T_I_1_BR.'*[0;0;g];m1_BR*[0;0;g]]);
-d1_BR = GeoJ1_BR.'*M1_BR*dotGeoJ1_BR*dotgamma + GeoJ1_BR.'*[cross(w_11_I_BR, J11_BR*w_11_I_BR);T_I_1_BR*cross(w_11_I_BR,cross(w_11_I_BR,GAMMA11_BR))];
+%d1_BR = GeoJ1_BR.'*M1_BR*dotGeoJ1_BR*dotgamma + GeoJ1_BR.'*[cross(w_11_I_BR, J11_BR*w_11_I_BR);T_I_1_BR*cross(w_11_I_BR,cross(w_11_I_BR,GAMMA11_BR))];
 
 % Link 2 BR
 I2_hat_BR = zeros(3,18);
@@ -146,7 +146,7 @@ I2_tilde_BR = zeros(3,18);
 M2_BR = [J22_BR,skew(GAMMA22_BR)*T_I_2_BR.';T_I_2_BR*skew(GAMMA22_BR).',m2_BR*eye(3)];
 H2_BR = GeoJ2_BR.'*M2_BR*GeoJ2_BR;
 G2_BR = (GeoJ2_BR.'*[skew(GAMMA22_BR)*T_I_2_BR.'*[0;0;g];m2_BR*[0;0;g]]);
-d2_BR = GeoJ2_BR.'*M2_BR*dotGeoJ2_BR*dotgamma + GeoJ2_BR.'*[cross(w_22_I_BR, J22_BR*w_22_I_BR);T_I_2_BR*cross(w_22_I_BR,cross(w_22_I_BR,GAMMA22_BR))];
+%d2_BR = GeoJ2_BR.'*M2_BR*dotGeoJ2_BR*dotgamma + GeoJ2_BR.'*[cross(w_22_I_BR, J22_BR*w_22_I_BR);T_I_2_BR*cross(w_22_I_BR,cross(w_22_I_BR,GAMMA22_BR))];
 
 % Link 3 BR
 I3_hat_BR = zeros(3,18);
@@ -156,7 +156,7 @@ I3_tilde_BR = zeros(3,18);
 M3_BR = [J33_BR,skew(GAMMA33_BR)*T_I_3_BR.';T_I_3_BR*skew(GAMMA33_BR).',m3_BR*eye(3)];
 H3_BR = GeoJ3_BR.'*M3_BR*GeoJ3_BR;
 G3_BR = (GeoJ3_BR.'*[skew(GAMMA33_BR)*T_I_3_BR.'*[0;0;g];m3_BR*[0;0;g]]);
-d3_BR = GeoJ3_BR.'*M3_BR*dotGeoJ3_BR*dotgamma + GeoJ3_BR.'*[cross(w_33_I_BR, J33_BR*w_33_I_BR);T_I_3_BR*cross(w_33_I_BR,cross(w_33_I_BR,GAMMA33_BR))];
+%d3_BR = GeoJ3_BR.'*M3_BR*dotGeoJ3_BR*dotgamma + GeoJ3_BR.'*[cross(w_33_I_BR, J33_BR*w_33_I_BR);T_I_3_BR*cross(w_33_I_BR,cross(w_33_I_BR,GAMMA33_BR))];
 
 
 % Link 1 BL
@@ -167,7 +167,7 @@ I1_tilde_BL = zeros(3,18);
 M1_BL = [J11_BL,skew(GAMMA11_BL)*T_I_1_BL.';T_I_1_BL*skew(GAMMA11_BL).',m1_BL*eye(3)];
 H1_BL = GeoJ1_BL.'*M1_BL*GeoJ1_BL;
 G1_BL = (GeoJ1_BL.'*[skew(GAMMA11_BL)*T_I_1_BL.'*[0;0;g];m1_BL*[0;0;g]]);
-d1_BL = GeoJ1_BL.'*M1_BL*dotGeoJ1_BL*dotgamma + GeoJ1_BL.'*[cross(w_11_I_BL, J11_BL*w_11_I_BL);T_I_1_BL*cross(w_11_I_BL,cross(w_11_I_BL,GAMMA11_BL))];
+%d1_BL = GeoJ1_BL.'*M1_BL*dotGeoJ1_BL*dotgamma + GeoJ1_BL.'*[cross(w_11_I_BL, J11_BL*w_11_I_BL);T_I_1_BL*cross(w_11_I_BL,cross(w_11_I_BL,GAMMA11_BL))];
 
 % Link 2 BL
 I2_hat_BL = zeros(3,18);
@@ -177,7 +177,7 @@ I2_tilde_BL = zeros(3,18);
 M2_BL = [J22_BL,skew(GAMMA22_BL)*T_I_2_BL.';T_I_2_BL*skew(GAMMA22_BL).',m2_BL*eye(3)];
 H2_BL = GeoJ2_BL.'*M2_BL*GeoJ2_BL;
 G2_BL = (GeoJ2_BL.'*[skew(GAMMA22_BL)*T_I_2_BL.'*[0;0;g];m2_BL*[0;0;g]]);
-d2_BL = GeoJ2_BL.'*M2_BL*dotGeoJ2_BL*dotgamma + GeoJ2_BL.'*[cross(w_22_I_BL, J22_BL*w_22_I_BL);T_I_2_BL*cross(w_22_I_BL,cross(w_22_I_BL,GAMMA22_BL))];
+%d2_BL = GeoJ2_BL.'*M2_BL*dotGeoJ2_BL*dotgamma + GeoJ2_BL.'*[cross(w_22_I_BL, J22_BL*w_22_I_BL);T_I_2_BL*cross(w_22_I_BL,cross(w_22_I_BL,GAMMA22_BL))];
 
 % Link 3 BL
 I3_hat_BL = zeros(3,18);
@@ -187,12 +187,13 @@ I3_tilde_BL = zeros(3,18);
 M3_BL = [J33_BL,skew(GAMMA33_BL)*T_I_3_BL.';T_I_3_BL*skew(GAMMA33_BL).',m3_BL*eye(3)];
 H3_BL = GeoJ3_BL.'*M3_BL*GeoJ3_BL;
 G3_BL = (GeoJ3_BL.'*[skew(GAMMA33_BL)*T_I_3_BL.'*[0;0;g];m3_BL*[0;0;g]]);
-d3_BL = GeoJ3_BL.'*M3_BL*dotGeoJ3_BL*dotgamma + GeoJ3_BL.'*[cross(w_33_I_BL, J33_BL*w_33_I_BL);T_I_3_BL*cross(w_33_I_BL,cross(w_33_I_BL,GAMMA33_BL))];
+%d3_BL = GeoJ3_BL.'*M3_BL*dotGeoJ3_BL*dotgamma + GeoJ3_BL.'*[cross(w_33_I_BL, J33_BL*w_33_I_BL);T_I_3_BL*cross(w_33_I_BL,cross(w_33_I_BL,GAMMA33_BL))];
 
 H = HB+H1_FR+H1_FL+H1_BR+H1_BL+H2_FR+H2_FL+H2_BR+H2_BL+H3_FR+H3_FL+H3_BR+H3_BL;
 G = (GB+G1_FR+G1_FL+G1_BR+G1_BL+G2_FR+G2_FL+G2_BR+G2_BL+G3_FR+G3_FL+G3_BR+G3_BL);
-d = dB+d1_FR+d1_FL+d1_BR+d1_BL+d2_FR+d2_FL+d2_BR+d2_BL+d3_FR+d3_FL+d3_BR+d3_BL;
+%d = dB+d1_FR+d1_FL+d1_BR+d1_BL+d2_FR+d2_FL+d2_BR+d2_BL+d3_FR+d3_FL+d3_BR+d3_BL;
 
-ddotgamma = H\(Fgamma-d+G);
+%ddotgamma = H\(Fgamma-d+G);
+ddotgamma = H\(Fgamma+G);
 dotstate(19:36,1) = ddotgamma; 
 end

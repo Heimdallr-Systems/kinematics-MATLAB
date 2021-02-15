@@ -1,4 +1,4 @@
-function [r_II_c] = step_planner_intelligent(r_II_b_last, r_II_b,r_II_c_start,leg_index, step_dist,floor_map,step_tolerance)
+function [r_II_c] = step_planner_intelligent(r_II_b_last, r_II_b,r_II_c_start, step_dist, is_midstep)
 % This function returns r_II_c for all 4 joint positions, given a direction
 % of travel, starting location and step distance.
 % Rewritten to take into account the point cloud of the floor for placing
@@ -17,16 +17,28 @@ function [r_II_c] = step_planner_intelligent(r_II_b_last, r_II_b,r_II_c_start,le
 
 % CONSTANTS
 % point cloud resolution, points/mm
-c_pc_res=.1;
+% c_pc_res=.1;
 
 
-travel_dir=r_II_b-r_II_b_last;
+travel_dir_0=r_II_b-r_II_b_last;
 % convert travel_dir to a unit vector if it is not already.
-travel_dir=travel_dir/norm(travel_dir);
 
-r_II_c=r_II_c_start+travel_dir.*step_dist;
-r_BB_c_target = r_II_c(:,leg_index)-r_II_b;
+if travel_dir_0 == [0;0;0]
+    travel_dir_0 = r_II_b-r_II_c_start;
+end
+
+travel_dir=travel_dir_0/norm(travel_dir_0);
+
+if is_midstep == 1
+    r_II_c = r_II_c_start+travel_dir.*step_dist./2;
+    r_II_c(3) = r_II_c(3)+0.08;
+else
+    r_II_c = r_II_c_start+travel_dir.*step_dist./2;
+    r_II_c(3) = 0;
+end
+
+% r_BB_c_target = r_II_c(:,leg_index)-r_II_b;
 
 % determine center coordinates
-ideal_leg_pos=round(r_BB_c_target*c_pc_res);
+% ideal_leg_pos=round(r_BB_c_target*c_pc_res);
 end

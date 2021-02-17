@@ -78,9 +78,7 @@ z_d = [];
 phi_d = [];
 theta_d = [];
 psi_d = [];
-
 cnt = length(x_d_val);
-
 for ii = 1:1:cnt
     x_d = cat(2,x_d,x_d_val(ii).*ones(1,ceil(length(t)/cnt)));
     y_d = cat(2,y_d,y_d_val(ii).*ones(1,ceil(length(t)/cnt)));

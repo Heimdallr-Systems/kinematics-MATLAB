@@ -5,10 +5,10 @@ state(19:36) = zeros(1,18);
 [GeoJc_FR,GeoJc_FL,GeoJc_BR,GeoJc_BL] = contactJacobians(state);
 
 % Find SVD
-[U_FR,SIG_FR,V_FR] = svd(GeoJc_FR);
-[U_FL,SIG_FL,V_FL] = svd(GeoJc_FL);
-[U_BR,SIG_BR,V_BR] = svd(GeoJc_BR);
-[U_BL,SIG_BL,V_BL] = svd(GeoJc_BL);
+[~,SIG_FR,~] = svd(GeoJc_FR);
+[~,SIG_FL,~] = svd(GeoJc_FL);
+[~,SIG_BR,~] = svd(GeoJc_BR);
+[~,SIG_BL,~] = svd(GeoJc_BL);
 
 sig_size = size(SIG_FR);
 sig_size = sig_size(1);

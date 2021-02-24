@@ -1,4 +1,4 @@
-function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm,legs_valid)
+function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm,legs_valid,view_angle, view_type)
 % This program draws the robot based on given joint angles. This function
 % is used to test the forward kinematics of this robotic system.
 
@@ -198,8 +198,18 @@ axis equal
 axis tight
 camlight left
 set(gca,'projection', 'perspective')
+if view_angle == 'iso'
 view([1;1;0.5])
-axis([-.6 .6 -.6 .6 -.2 .6])
+elseif view_angle == 'top'
+view([-5 2 5])
+end
+
+if view_type == 'fixed'
+axis([-.6 1.4 -.6 0.6 -.2 .6])
+
+elseif view_type == 'follw'
+    axis([r_II_B(1)-0.6 r_II_B(1)+0.6 r_II_B(2)-0.6 r_II_B(2)+0.6 r_II_B(3)-0.45 r_II_B(3)+0.4])
+end
 grid on
 hold off
 xlabel('x')

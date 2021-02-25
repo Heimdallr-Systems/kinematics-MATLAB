@@ -20,14 +20,12 @@ jnt_var = [Theta1(1),Theta2(1),Theta3(1),...
 
 set(gcf, 'Position', [600 80 900 900] );
 
-h = cla(gca);
+ax = cla(gca);
 
 Floor_v = [-600 600 0
     600 600 0
     -600 -600 0
     600 -600 0];
-
-hold on
 
 %% Relative Positions
 %rBfromI = [0;0;0]; % place inertial frame at base
@@ -102,9 +100,11 @@ end
 Floor_f = [1 2 4 3];
 patch('Faces', Floor_f, 'Vertices', Floor_v, 'EdgeColor', 'None',...
     'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
-hold on
-%% Transform the stl coordinates based upon FK
+%% hold on
+ax.NextPlot = 'add';
 load model.mat
+%% Transform the stl coordinates based upon FK
+
 Body_v = (repmat(rB,1,length(Body)) + TB*Body');
 FLLink1_v=(repmat(r1_FL,1,length(FLLink1))+T1_FL*FLLink1');
 FLLink2_v=(repmat(r2_FL,1,length(FLLink2))+T2_FL*FLLink2');
@@ -146,16 +146,38 @@ if length(index) >= 3
     patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
 end
 
-axis equal
-camlight left
-set(gca,'projection', 'perspective')
+
+%% Configure figure appearance
+% Set the aspect ratio of the axes to be 1:1:1 (equal)
+ax.DataAspectRatio = [1,1,1];
+
+% Create a simple light in the scene. Currently roughly equivlent to
+% `camlight left`
+% This function cannot be reduced further.
+light(ax, 'Position', [5.8407e+03 644.5298 6.1216e+03])
+
+% Set the projection to perspective
+ax.Projection = 'perspective';
+% Set the viewing angle. Currently roughly equivlent to view([1;1;0.5]);
+
+ax.View = [135, 19];  % format is [azimuth, elevation]
+
 view([1;1;0.5])
-axis([-.6 .6 -.6 .6 -.2 .6])
-grid on
-hold off
-xlabel('x')
-ylabel('y')
-zlabel('z')
-title('Heimdallr Robot')
-drawnow
+%%equivlent to axis([-0.6, 0.6, -.6, .6, -.2, .6])
+ax.XLim = [-0.6, 0.6];
+ax.YLim = [-.6, .6];
+ax.ZLim = [-.2, .6];
+
+% Turn on the grid
+ax.XGrid = 'on';
+ax.YGrid = 'on';
+ax.ZGrid = 'on';
+% Stop holding
+ax.NextPlot = 'replace';
+% Equivlent to setting labels and titles with XLabel, YLabel, ZLabel, and Title
+ax.XLabel.String = 'x';
+ax.YLabel.String = 'y';
+ax.ZLabel.String = 'z';
+ax.Title.String = 'Heimdallr Robot';
+% drawnow
 end

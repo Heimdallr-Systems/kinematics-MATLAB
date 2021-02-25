@@ -158,8 +158,6 @@ if length(index) >= 3
     patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
 end
 
-
-
 axis equal
 axis tight
 camlight left

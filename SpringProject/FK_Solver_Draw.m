@@ -159,7 +159,6 @@ if length(index) >= 3
 end
 
 axis equal
-axis tight
 camlight left
 set(gca,'projection', 'perspective')
 view([1;1;0.5])

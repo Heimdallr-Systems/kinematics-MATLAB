@@ -100,8 +100,7 @@ end
 Floor_f = [1 2 4 3];
 patch('Faces', Floor_f, 'Vertices', Floor_v, 'EdgeColor', 'None',...
     'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
-%% hold on
-ax.NextPlot = 'add';
+%% Load STL data from mat file. Fallback to using STLRead
 if isfile('robotModel.mat')
     load('robotModel.mat');
 else
@@ -120,7 +119,9 @@ else
     [BLLink3, BLLink3_f, ~, ~, ~] = stlread('Link_3_BL.stl');
     
     save('robotModel.mat', 'Body', 'Body_f', 'FLLink1','FLLink1', 'FLLink1_f' ,'FLLink2', 'FLLink2_f' ,'FLLink3', 'FLLink3_f' ,'FRLink1', 'FRLink1_f' ,'FRLink2', 'FRLink2_f' ,'FRLink3', 'FRLink3_f' ,'BRLink1', 'BRLink1_f' ,'BRLink2', 'BRLink2_f' ,'BRLink3', 'BRLink3_f' ,'BLLink1', 'BLLink1_f' ,'BLLink2', 'BLLink2_f' ,'BLLink3', 'BLLink3_f');
-end%% Transform the stl coordinates based upon FK
+end
+
+%% Transform the stl coordinates based upon FK
 
 Body_v = (repmat(rB,1,length(Body)) + TB*Body');
 FLLink1_v=(repmat(r1_FL,1,length(FLLink1))+T1_FL*FLLink1');
@@ -189,12 +190,11 @@ ax.ZLim = [-.2, .6];
 ax.XGrid = 'on';
 ax.YGrid = 'on';
 ax.ZGrid = 'on';
-% Stop holding
-ax.NextPlot = 'replace';
+
 % Equivlent to setting labels and titles with XLabel, YLabel, ZLabel, and Title
 ax.XLabel.String = 'x';
 ax.YLabel.String = 'y';
 ax.ZLabel.String = 'z';
 ax.Title.String = 'Heimdallr Robot';
-% drawnow
+drawnow
 end

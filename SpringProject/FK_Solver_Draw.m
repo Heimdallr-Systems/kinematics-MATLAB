@@ -20,7 +20,7 @@ jnt_var = [Theta1(1),Theta2(1),Theta3(1),...
 
 set(gcf, 'Position', [600 80 900 900] );
 
-h = clf(gcf);
+h = cla(gcf);
 
 Floor_v = [-600 600 0
     600 600 0

@@ -102,8 +102,25 @@ patch('Faces', Floor_f, 'Vertices', Floor_v, 'EdgeColor', 'None',...
     'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
 %% hold on
 ax.NextPlot = 'add';
-load model.mat
-%% Transform the stl coordinates based upon FK
+if isfile('robotModel.mat')
+    load('robotModel.mat');
+else
+    [Body, Body_f, ~, ~, ~] = stlread('Body.stl');
+    [FLLink1, FLLink1_f, ~, ~, ~] = stlread('Link_1_FL.stl');
+    [FLLink2, FLLink2_f, ~, ~, ~] = stlread('Link_2_FL.stl');
+    [FLLink3, FLLink3_f, ~, ~, ~] = stlread('Link_3_FL.stl');
+    [FRLink1, FRLink1_f, ~, ~, ~] = stlread('Link_1_FR.stl');
+    [FRLink2, FRLink2_f, ~, ~, ~] = stlread('Link_2_FR.stl');
+    [FRLink3, FRLink3_f, ~, ~, ~] = stlread('Link_3_FR.stl');
+    [BRLink1, BRLink1_f, ~, ~, ~] = stlread('Link_1_BR.stl');
+    [BRLink2, BRLink2_f, ~, ~, ~] = stlread('Link_2_BR.stl');
+    [BRLink3, BRLink3_f, ~, ~, ~] = stlread('Link_3_BR.stl');
+    [BLLink1, BLLink1_f, ~, ~, ~] = stlread('Link_1_BL.stl');
+    [BLLink2, BLLink2_f, ~, ~, ~] = stlread('Link_2_BL.stl');
+    [BLLink3, BLLink3_f, ~, ~, ~] = stlread('Link_3_BL.stl');
+    
+    save('robotModel.mat', 'Body', 'Body_f', 'FLLink1','FLLink1', 'FLLink1_f' ,'FLLink2', 'FLLink2_f' ,'FLLink3', 'FLLink3_f' ,'FRLink1', 'FRLink1_f' ,'FRLink2', 'FRLink2_f' ,'FRLink3', 'FRLink3_f' ,'BRLink1', 'BRLink1_f' ,'BRLink2', 'BRLink2_f' ,'BRLink3', 'BRLink3_f' ,'BLLink1', 'BLLink1_f' ,'BLLink2', 'BLLink2_f' ,'BLLink3', 'BLLink3_f');
+end%% Transform the stl coordinates based upon FK
 
 Body_v = (repmat(rB,1,length(Body)) + TB*Body');
 FLLink1_v=(repmat(r1_FL,1,length(FLLink1))+T1_FL*FLLink1');

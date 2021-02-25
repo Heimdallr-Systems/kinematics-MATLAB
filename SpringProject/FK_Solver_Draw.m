@@ -20,7 +20,8 @@ jnt_var = [Theta1(1),Theta2(1),Theta3(1),...
 
 set(gcf, 'Position', [600 80 900 900] );
 
-ax = cla(gca);
+clf(gcf);
+ax = cla;
 
 Floor_v = [-600 600 0
     600 600 0
@@ -169,10 +170,13 @@ end
 % Set the aspect ratio of the axes to be 1:1:1 (equal)
 ax.DataAspectRatio = [1,1,1];
 
+% FIXME: Get this working
 % Create a simple light in the scene. Currently roughly equivlent to
 % `camlight left`
 % This function cannot be reduced further.
-light(ax, 'Position', [5.8407e+03 644.5298 6.1216e+03])
+% light(ax, 'Position', [5.8407e+03 644.5298 6.1216e+03])
+
+camlight left
 
 % Set the projection to perspective
 ax.Projection = 'perspective';

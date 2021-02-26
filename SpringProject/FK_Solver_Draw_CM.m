@@ -30,14 +30,13 @@ jnt_var = [Theta1(1),Theta2(1),Theta3(1),...
 
 set(gcf, 'Position', [600 80 900 900] );
 
-h = clf(gcf);
+clf(gcf);
+ax = gca;
 
 Floor_v = [-600 600 0
     600 600 0
     -600 -600 0
     600 -600 0];
-
-hold on
 
 %% Relative Positions
 %r_II_B = [0;0;0]; % place inertial frame at base
@@ -151,46 +150,44 @@ BRLink3_v=(repmat(r3_BR,1,length(BRLink3))+T3_BR*BRLink3');
 patch('Faces', Body_f, 'Vertices', Body_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 
 if legs_valid(2)
-patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-    
+    patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
 end
 
 if legs_valid(1)
-patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-    
+    patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
 end
 
 if legs_valid(4)
-patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]); 
+    patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
     
 end
 
 if legs_valid(3)
-patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
     
 end
 
@@ -200,7 +197,6 @@ if length(index) >= 3
     patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
 end
 
-hold on
 %% If not 9 arguments, don't draw the center of mass
 if nargin==9
     plot3([rcm(1),rcm(1)-0.4,rcm(1)+0.4],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3),rcm(3)],'-r');
@@ -210,28 +206,36 @@ if nargin==9
 end
 
 
-axis equal
-axis tight
+%% Configure figure appearance
+% Set the aspect ratio of the axes to be 1:1:1 (equal)
+ax.DataAspectRatio = [1,1,1];
+
+
 camlight left
-set(gca,'projection', 'perspective')
-if view_angle == 'iso'
-view([1;1;0.5])
-elseif view_angle == 'top'
-view([-5 2 5])
+
+ax.Projection = 'perspective';
+if strcmp(view_angle, 'iso')
+    ax.View = [135, 19];  % format is [azimuth, elevation]
+elseif strcmp(view_angle, 'top')
+    ax.View = [ -112, 45];
+
 end
 
-if view_type == 'fixed'
-axis([-.6 1.4 -.6 0.6 -.2 .6])
-
-elseif view_type == 'follw'
+if strcmp(view_type, 'fixed')
+    axis([-.6 1.4 -.6 0.6 -.2 .6])
+elseif strcmp(view_type, 'follw')
     axis([r_II_B(1)-0.6 r_II_B(1)+0.6 r_II_B(2)-0.6 r_II_B(2)+0.6 r_II_B(3)-0.45 r_II_B(3)+0.4])
 end
-grid on
+ax.XGrid = 'on';
+ax.YGrid = 'on';
+ax.ZGrid = 'on';
+
+% hold off
+% Equivlent to setting labels and titles with XLabel, YLabel, ZLabel, and Title
+ax.XLabel.String = 'x';
+ax.YLabel.String = 'y';
+ax.ZLabel.String = 'z';
+ax.Title.String = 'Heimdallr Robot';
 hold off
-xlabel('x')
-ylabel('y')
-zlabel('z')
-title('Heimdallr Robot')
 drawnow
-hold off
 end

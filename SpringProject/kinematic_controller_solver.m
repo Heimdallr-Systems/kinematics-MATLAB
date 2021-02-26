@@ -81,10 +81,10 @@ calc_manip = 1; % initialize toggle for determining if manipulability needs to b
 legs_valid = [1,1,1,1];
 
 %%% Desired Body Pose Trajectory %%%
-x_d = 1*ones(1,length(t));
-y_d = 1.*ones(1,length(x_d));
+x_d = 0.*ones(1,length(t));
+y_d = 0.*ones(1,length(x_d));
 z_d = 0.245*ones(1,length(x_d));
-phi_d = zeros(1,length(x_d));
+phi_d = pi/10.*ones(1,length(x_d));
 theta_d =  zeros(1,length(x_d));
 psi_d =  zeros(1,length(x_d));
 

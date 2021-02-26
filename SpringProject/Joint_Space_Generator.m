@@ -32,7 +32,7 @@ legs_on_gnd = [r_II_c_FR(3) == 0, r_II_c_FL(3) == 0, r_II_c_BR(3) == 0, r_II_c_B
 [Theta1_0, ~, Theta2_0, ~, Theta3_0] = IK_Solver_Legs_Inertial(r_II_c, T_I_B_0, r_II_B_0);
 
 % draw robot to confirm (FK)
-% FK_Solver_Draw(Theta1_0, Theta2_0, Theta3_0, T_I_B_0, r_II_B_0);
+% FK_Solver_Draw_CM(Theta1_0, Theta2_0, Theta3_0, T_I_B_0, r_II_B_0);
 
 %% Find joint angles for a desired body position
 Theta1_0 = [0;0;0;0];
@@ -42,7 +42,7 @@ r_II_B_0 = [0;0;250];
 r_II_B_d = [0;0;100];
 T_I_B_d = rotz(0)*roty(0)*rotx(0);
 [Theta1_d,Theta2_d,Theta3_d] = Joint_Space_Solver(Theta1_0, Theta2_0, Theta3_0, r_II_B_0, r_II_B_d, T_I_B_0, T_I_B_d, legs_on_gnd);
-%FK_Solver_Draw(Theta1_d, Theta2_d, Theta3_d, T_I_B_d, r_II_B_d);
+%FK_Solver_Draw_CM(Theta1_d, Theta2_d, Theta3_d, T_I_B_d, r_II_B_d);
 
 %% Dance!
 % % Generate body trajectory
@@ -66,7 +66,7 @@ for ii = 1:1:length(phase)
     %r_II_B_d = [0;0;250];
     T_I_B_d = rotz(0.4*sin(phase_2(ii)))*roty(0.2*sin(phase_2(ii)))*rotx(0.2*sin(phase_2(ii)));
     [Theta1_d,Theta2_d,Theta3_d] = Joint_Space_Solver(Theta1_0, Theta2_0, Theta3_0, r_II_B_0, r_II_B_d, T_I_B_0, T_I_B_d, legs_on_gnd);
-    FK_Solver_Draw(Theta1_d, Theta2_d, Theta3_d, T_I_B_d, r_II_B_d);
+    FK_Solver_Draw_CM(Theta1_d, Theta2_d, Theta3_d, T_I_B_d, r_II_B_d);
     r_II_B_0 = r_II_B_d;
     Theta1_0 = Theta1_d;
     Theta2_0 = Theta2_d;

@@ -47,7 +47,7 @@ legs_on_gnd = [r_II_c_FR(3) == 0, r_II_c_FL(3) == 0, r_II_c_BR(3) == 0, r_II_c_B
 Theta1 = [0;0;0;pi/4];
 Theta2_2 = [0;0;0;0];
 Theta3_2 = [0;0;0;pi/2];
-FK_Solver_Draw(Theta1, Theta2_2, Theta3_2, T_I_B, r_II_B);
+FK_Solver_Draw_CM(Theta1, Theta2_2, Theta3_2, T_I_B, r_II_B);
 
 state(1) = phi;
 state(2) = theta;

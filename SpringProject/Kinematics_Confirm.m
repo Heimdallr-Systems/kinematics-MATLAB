@@ -60,7 +60,7 @@ Theta3_Degrees = Theta3 .* 180/pi;
 Theta3_2_Degrees = Theta3_2 .* 180/pi;
 
 % draw robot to confirm (FK)
-FK_Solver_Draw(Theta1, Theta2_2, Theta3_2, T_I_B, r_II_B);
+FK_Solver_Draw_CM(Theta1, Theta2_2, Theta3_2, T_I_B, r_II_B);
 
 % solve for positions of contact points relative to B (FK) now that we know
 % the joint angles

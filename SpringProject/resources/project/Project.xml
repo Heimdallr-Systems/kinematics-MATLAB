@@ -48,13 +48,6 @@
                 </Category>
             </Info>
         </File>
-        <File Location="FK_Solver_Draw_CM.m">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
-                </Category>
-            </Info>
-        </File>
         <File Location="rotx.m">
             <Info>
                 <Category UUID="FileClassCategory">

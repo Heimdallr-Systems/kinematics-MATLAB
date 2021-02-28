@@ -257,13 +257,6 @@
         <File Location="Link_2_BR.STL">
             <Info/>
         </File>
-        <File Location="IK_Solver_Legs_Inertial_mex.mexw64">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="derived"/>
-                </Category>
-            </Info>
-        </File>
         <File Location="robot_solver_split_controller.m">
             <Info>
                 <Category UUID="FileClassCategory">

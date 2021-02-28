@@ -13,6 +13,18 @@ function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm,legs_valid,view
 %  BR Leg Joint Angles 1-3, BL Leg Joint Angles 1-3
 %  Body Quaternions q1,q2,q3,q0]
 
+%% Compatability check for functions that used the old FK_Solver_Draw function.
+if (nargin ~= 5) && (nargin ~= 9)
+    % Incorrect number of arguments used. 
+    error('MATLAB:narginchk:notEnoughInputs', "FK_Solver_Draw() only supports using 5 or 9 arguments")
+elseif nargin == 5
+    % Legacy version with only 5 arguments
+    legs_valid = [1,1,1,1];
+    view_angle = 'iso';
+    view_type = 'fixed';
+end
+
+
 jnt_var = [Theta1(1),Theta2(1),Theta3(1),...
     Theta1(2),Theta2(2),Theta3(2),...
     Theta1(3),Theta2(3),Theta3(3),...
@@ -188,11 +200,13 @@ if length(index) >= 3
 end
 
 hold on
+% Only plot center of mass if calling with 9 arguments. 
+if (nargin == 9)
 plot3([rcm(1),rcm(1)-0.4,rcm(1)+0.4],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3),rcm(3)],'-r');
 plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2)-0.4,rcm(2)+0.4],[rcm(3),rcm(3),rcm(3)],'-g');
 plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3)-0.4,rcm(3)+0.4],'-b');
 plot3(rcm(1),rcm(2),rcm(3),'*r');
-
+end
 
 axis equal
 axis tight

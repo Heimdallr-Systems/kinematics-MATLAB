@@ -15,7 +15,7 @@ function FK_Solver_Draw(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm,legs_valid,view_an
 
 %% Compatability check for functions that used the old FK_Solver_Draw function.
 if (nargin ~= 5) && (nargin ~= 9)
-    % Incorrect number of arguments used. 
+    % Incorrect number of arguments used.
     error('MATLAB:narginchk:notEnoughInputs', "FK_Solver_Draw() only supports using 5 or 9 arguments")
 elseif nargin == 5
     % Legacy version with only 5 arguments
@@ -32,7 +32,7 @@ jnt_var = [Theta1(1),Theta2(1),Theta3(1),...
 
 set(gcf, 'Position', [600 80 900 900] );
 
-h = clf(gcf);
+clf(gcf);
 
 Floor_v = [-600 600 0
     600 600 0
@@ -114,7 +114,7 @@ end
 Floor_f = [1 2 4 3];
 patch('Faces', Floor_f, 'Vertices', Floor_v, 'EdgeColor', 'None',...
     'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
-hold on
+
 %% Transform the stl coordinates based upon FK
 [Body, Body_f, ~, ~, ~] = stlread('Body.stl');
 [FLLink1, FLLink1_f, ~, ~, ~] = stlread('Link_1_FL.stl');
@@ -150,46 +150,46 @@ BRLink3_v=(repmat(r3_BR,1,length(BRLink3))+T3_BR*BRLink3');
 patch('Faces', Body_f, 'Vertices', Body_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 
 if legs_valid(2)
-patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FLLink2_f, 'Vertices', FLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FLLink3_f, 'Vertices', FLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
     
 end
 
 if legs_valid(1)
-patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FRLink2_f, 'Vertices', FRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', FRLink3_f, 'Vertices', FRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
     
 end
 
 if legs_valid(4)
-patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]); 
+    patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BLLink2_f, 'Vertices', BLLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BLLink3_f, 'Vertices', BLLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
     
 end
 
 if legs_valid(3)
-patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
-patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
+    patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [0.792157 0.819608 0.933333]);
 else
-patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
-patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BRLink2_f, 'Vertices', BRLink2_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
+    patch('Faces', BRLink3_f, 'Vertices', BRLink3_v', 'EdgeColor', 'None', 'FaceColor', [1 0 0]);
     
 end
 
@@ -199,12 +199,12 @@ if length(index) >= 3
     patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
 end
 
-% Only plot center of mass if calling with 9 arguments. 
+% Only plot center of mass if calling with 9 arguments.
 if (nargin == 9)
-plot3([rcm(1),rcm(1)-0.4,rcm(1)+0.4],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3),rcm(3)],'-r');
-plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2)-0.4,rcm(2)+0.4],[rcm(3),rcm(3),rcm(3)],'-g');
-plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3)-0.4,rcm(3)+0.4],'-b');
-plot3(rcm(1),rcm(2),rcm(3),'*r');
+    plot3([rcm(1),rcm(1)-0.4,rcm(1)+0.4],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3),rcm(3)],'-r');
+    plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2)-0.4,rcm(2)+0.4],[rcm(3),rcm(3),rcm(3)],'-g');
+    plot3([rcm(1),rcm(1),rcm(1)],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3)-0.4,rcm(3)+0.4],'-b');
+    plot3(rcm(1),rcm(2),rcm(3),'*r');
 end
 
 axis equal
@@ -230,5 +230,4 @@ ylabel('y')
 zlabel('z')
 title('Heimdallr Robot')
 drawnow
-hold off
 end

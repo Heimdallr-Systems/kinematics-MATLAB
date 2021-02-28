@@ -1,4 +1,4 @@
-function FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm,legs_valid,view_angle, view_type)
+function FK_Solver_Draw(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm,legs_valid,view_angle, view_type)
 % This program draws the robot based on given joint angles. This function
 % is used to test the forward kinematics of this robotic system.
 
@@ -116,19 +116,19 @@ patch('Faces', Floor_f, 'Vertices', Floor_v, 'EdgeColor', 'None',...
     'FaceColor', [0 0 0.8], 'FaceAlpha', 0.5);
 hold on
 %% Transform the stl coordinates based upon FK
-[Body, Body_f, n, c, stltitle] = stlread('Body.stl');
-[FLLink1, FLLink1_f, n, c, stltitle] = stlread('Link_1_FL.stl');
-[FLLink2, FLLink2_f, n, c, stltitle] = stlread('Link_2_FL.stl');
-[FLLink3, FLLink3_f, n, c, stltitle] = stlread('Link_3_FL.stl');
-[FRLink1, FRLink1_f, n, c, stltitle] = stlread('Link_1_FR.stl');
-[FRLink2, FRLink2_f, n, c, stltitle] = stlread('Link_2_FR.stl');
-[FRLink3, FRLink3_f, n, c, stltitle] = stlread('Link_3_FR.stl');
-[BRLink1, BRLink1_f, n, c, stltitle] = stlread('Link_1_BR.stl');
-[BRLink2, BRLink2_f, n, c, stltitle] = stlread('Link_2_BR.stl');
-[BRLink3, BRLink3_f, n, c, stltitle] = stlread('Link_3_BR.stl');
-[BLLink1, BLLink1_f, n, c, stltitle] = stlread('Link_1_BL.stl');
-[BLLink2, BLLink2_f, n, c, stltitle] = stlread('Link_2_BL.stl');
-[BLLink3, BLLink3_f, n, c, stltitle] = stlread('Link_3_BL.stl');
+[Body, Body_f, ~, ~, ~] = stlread('Body.stl');
+[FLLink1, FLLink1_f, ~, ~, ~] = stlread('Link_1_FL.stl');
+[FLLink2, FLLink2_f, ~, ~, ~] = stlread('Link_2_FL.stl');
+[FLLink3, FLLink3_f, ~, ~, ~] = stlread('Link_3_FL.stl');
+[FRLink1, FRLink1_f, ~, ~, ~] = stlread('Link_1_FR.stl');
+[FRLink2, FRLink2_f, ~, ~, ~] = stlread('Link_2_FR.stl');
+[FRLink3, FRLink3_f, ~, ~, ~] = stlread('Link_3_FR.stl');
+[BRLink1, BRLink1_f, ~, ~, ~] = stlread('Link_1_BR.stl');
+[BRLink2, BRLink2_f, ~, ~, ~] = stlread('Link_2_BR.stl');
+[BRLink3, BRLink3_f, ~, ~, ~] = stlread('Link_3_BR.stl');
+[BLLink1, BLLink1_f, ~, ~, ~] = stlread('Link_1_BL.stl');
+[BLLink2, BLLink2_f, ~, ~, ~] = stlread('Link_2_BL.stl');
+[BLLink3, BLLink3_f, ~, ~, ~] = stlread('Link_3_BL.stl');
 Body_v = (repmat(rB,1,length(Body)) + TB*Body');
 FLLink1_v=(repmat(r1_FL,1,length(FLLink1))+T1_FL*FLLink1');
 FLLink2_v=(repmat(r2_FL,1,length(FLLink2))+T2_FL*FLLink2');
@@ -199,7 +199,6 @@ if length(index) >= 3
     patch(points(1,:),points(2,:),points(3,:),[1,.5,.5])
 end
 
-hold on
 % Only plot center of mass if calling with 9 arguments. 
 if (nargin == 9)
 plot3([rcm(1),rcm(1)-0.4,rcm(1)+0.4],[rcm(2),rcm(2),rcm(2)],[rcm(3),rcm(3),rcm(3)],'-r');

@@ -181,13 +181,6 @@
         <File Location="SplitControlV7_WalkPlz.mp4">
             <Info/>
         </File>
-        <File Location="Symbolic_Jacobian_Solver_Trajectory.m">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
-                </Category>
-            </Info>
-        </File>
         <File Location="IK_Solver_BodyRot_BodyPos.m">
             <Info>
                 <Category UUID="FileClassCategory">
@@ -214,13 +207,6 @@
         </File>
         <File Location="SplitControlV3_NoMotors.mp4">
             <Info/>
-        </File>
-        <File Location="Symbolic_CM_Solver.m">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
-                </Category>
-            </Info>
         </File>
         <File Location="Link_2_BL.STL">
             <Info/>

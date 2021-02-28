@@ -10,10 +10,10 @@ gamma = [Theta1_FR;Theta1_FL;Theta1_BR;Theta1_BL;...
                   Theta2_FR;Theta2_FL;Theta2_BR;Theta2_BL;...
                   Theta3_FR;Theta3_FL;Theta3_BR;Theta3_BL];
 
-RobotConstants;
-m1 = m1_FR;
-m2 = m2_FR;
-m3 = m3_FR;
+constants = RobotConstants();
+m1 = constants.m1_FR;
+m2 = constants.m2_FR;
+m3 = constants.m3_FR;
 
 % Orientation of FR leg
 T_B_1_FR = rotz(Theta1_FR);
@@ -36,28 +36,28 @@ T_1_2_BL = T_B_1_BL * rotx(Theta2_BL);
 T_2_3_BL = T_1_2_BL * rotx(Theta3_BL);
 
 % Link 1 CM
-rcm_B_1_FR = r_BB_1_FR + T_B_1_FR*rcm_1_1_FR;
-rcm_B_1_FL = r_BB_1_FL + T_B_1_FL*rcm_1_1_FL;
-rcm_B_1_BR = r_BB_1_BR + T_B_1_BR*rcm_1_1_BR;
-rcm_B_1_BL = r_BB_1_BL + T_B_1_BL*rcm_1_1_BL;
+rcm_B_1_FR = constants.r_BB_1_FR + T_B_1_FR*constants.rcm_1_1_FR;
+rcm_B_1_FL = constants.r_BB_1_FL + T_B_1_FL*constants.rcm_1_1_FL;
+rcm_B_1_BR = constants.r_BB_1_BR + T_B_1_BR*constants.rcm_1_1_BR;
+rcm_B_1_BL = constants.r_BB_1_BL + T_B_1_BL*constants.rcm_1_1_BL;
 
 % Link 2 CM
-rcm_B_2_FR = r_BB_1_FR + T_B_1_FR*r_11_2_FR + T_B_1_FR*T_1_2_FR*rcm_2_2_FR;
-rcm_B_2_FL = r_BB_1_FL + T_B_1_FL*r_11_2_FL + T_B_1_FL*T_1_2_FL*rcm_2_2_FL;
-rcm_B_2_BR = r_BB_1_BR + T_B_1_BR*r_11_2_BR + T_B_1_BR*T_1_2_BR*rcm_2_2_BR;
-rcm_B_2_BL = r_BB_1_BL + T_B_1_BL*r_11_2_BL + T_B_1_BL*T_1_2_BL*rcm_2_2_BL;
+rcm_B_2_FR = constants.r_BB_1_FR + T_B_1_FR*constants.r_11_2_FR + T_B_1_FR*T_1_2_FR*constants.rcm_2_2_FR;
+rcm_B_2_FL = constants.r_BB_1_FL + T_B_1_FL*constants.r_11_2_FL + T_B_1_FL*T_1_2_FL*constants.rcm_2_2_FL;
+rcm_B_2_BR = constants.r_BB_1_BR + T_B_1_BR*constants.r_11_2_BR + T_B_1_BR*T_1_2_BR*constants.rcm_2_2_BR;
+rcm_B_2_BL = constants.r_BB_1_BL + T_B_1_BL*constants.r_11_2_BL + T_B_1_BL*T_1_2_BL*constants.rcm_2_2_BL;
 
 % Link 3 CM
-rcm_B_3_FR = r_BB_1_FR + T_B_1_FR*r_11_2_FR + T_B_1_FR*T_1_2_FR*r_22_3_FR + T_B_1_FR*T_1_2_FR*T_2_3_FR*rcm_3_3_FR;
-rcm_B_3_FL = r_BB_1_FL + T_B_1_FL*r_11_2_FL + T_B_1_FL*T_1_2_FL*r_22_3_FL + T_B_1_FL*T_1_2_FL*T_2_3_FL*rcm_3_3_FL;
-rcm_B_3_BR = r_BB_1_BR + T_B_1_BR*r_11_2_BR + T_B_1_BR*T_1_2_BR*r_22_3_BR + T_B_1_BR*T_1_2_BR*T_2_3_BR*rcm_3_3_BR;
-rcm_B_3_BL = r_BB_1_BL + T_B_1_BL*r_11_2_BL + T_B_1_BL*T_1_2_BL*r_22_3_BL + T_B_1_BL*T_1_2_BL*T_2_3_BL*rcm_3_3_BL;
+rcm_B_3_FR = constants.r_BB_1_FR + T_B_1_FR*constants.r_11_2_FR + T_B_1_FR*T_1_2_FR*constants.r_22_3_FR + T_B_1_FR*T_1_2_FR*T_2_3_FR*constants.rcm_3_3_FR;
+rcm_B_3_FL = constants.r_BB_1_FL + T_B_1_FL*constants.r_11_2_FL + T_B_1_FL*T_1_2_FL*constants.r_22_3_FL + T_B_1_FL*T_1_2_FL*T_2_3_FL*constants.rcm_3_3_FL;
+rcm_B_3_BR = constants.r_BB_1_BR + T_B_1_BR*constants.r_11_2_BR + T_B_1_BR*T_1_2_BR*constants.r_22_3_BR + T_B_1_BR*T_1_2_BR*T_2_3_BR*constants.rcm_3_3_BR;
+rcm_B_3_BL = constants.r_BB_1_BL + T_B_1_BL*constants.r_11_2_BL + T_B_1_BL*T_1_2_BL*constants.r_22_3_BL + T_B_1_BL*T_1_2_BL*T_2_3_BL*constants.rcm_3_3_BL;
 
 % CM
-r_B_sys_cm = simplify((mB*rcm_B_B + m1*(rcm_B_1_FR+rcm_B_1_FL+rcm_B_1_BR+rcm_B_1_BL)...
+r_B_sys_cm = simplify((constants.mB*constants.rcm_B_B + m1*(rcm_B_1_FR+rcm_B_1_FL+rcm_B_1_BR+rcm_B_1_BL)...
                                                      + m2*(rcm_B_2_FR+rcm_B_2_FL+rcm_B_2_BR+rcm_B_2_BL)...
                                                      + m3*(rcm_B_3_FR+rcm_B_3_FL+rcm_B_3_BR+rcm_B_3_BL))...
-                                                     ./(mB + 4*m1 + 4*m2 + 4*m3))
+                                                     ./(constants.mB + 4*m1 + 4*m2 + 4*m3))
                                                  
 dr_B_sys_cm = jacobian(r_B_sys_cm,gamma)
 

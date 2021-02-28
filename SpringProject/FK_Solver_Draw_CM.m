@@ -34,7 +34,7 @@ hold on
 % big plate: Short: 350, L: 700;
 % Relative Offsets
 
-RobotConstants;
+constants = RobotConstants();
 %% Orientations wrt I
 
 % Orientation of Body
@@ -64,28 +64,28 @@ T3_BL = T2_BL * rotx(jnt_var(12));
 rB = r_II_B;
 
 % Positions of FR Leg
-r1_FR = rB + TB*r_BB_1_FR;
-r2_FR = r1_FR + T1_FR * r_11_2_FR;
-r3_FR = r2_FR + T2_FR * r_22_3_FR;
-rc_FR = r3_FR + T3_FR * r_33_c_FR;
+r1_FR = rB + TB*constants.r_BB_1_FR;
+r2_FR = r1_FR + T1_FR * constants.r_11_2_FR;
+r3_FR = r2_FR + T2_FR * constants.r_22_3_FR;
+rc_FR = r3_FR + T3_FR * constants.r_33_c_FR;
 
 % Positions of FL Leg
-r1_FL = rB + TB*r_BB_1_FL;
-r2_FL = r1_FL + T1_FL * r_11_2_FL;
-r3_FL = r2_FL + T2_FL * r_22_3_FL;
-rc_FL = r3_FL + T3_FL * r_33_c_FL;
+r1_FL = rB + TB*constants.r_BB_1_FL;
+r2_FL = r1_FL + T1_FL * constants.r_11_2_FL;
+r3_FL = r2_FL + T2_FL * constants.r_22_3_FL;
+rc_FL = r3_FL + T3_FL * constants.r_33_c_FL;
 
 % Position of BR Leg
-r1_BR = rB + TB*r_BB_1_BR;
-r2_BR = r1_BR + T1_BR * r_11_2_BR;
-r3_BR = r2_BR + T2_BR * r_22_3_BR;
-rc_BR = r3_BR + T3_BR * r_33_c_BR;
+r1_BR = rB + TB*constants.r_BB_1_BR;
+r2_BR = r1_BR + T1_BR * constants.r_11_2_BR;
+r3_BR = r2_BR + T2_BR * constants.r_22_3_BR;
+rc_BR = r3_BR + T3_BR * constants.r_33_c_BR;
 
 % Position of BL Leg
-r1_BL = rB + TB*r_BB_1_BL;
-r2_BL = r1_BL + T1_BL * r_11_2_BL;
-r3_BL = r2_BL + T2_BL * r_22_3_BL;
-rc_BL = r3_BL + T3_BL * r_33_c_BL;
+r1_BL = rB + TB*constants.r_BB_1_BL;
+r2_BL = r1_BL + T1_BL * constants.r_11_2_BL;
+r3_BL = r2_BL + T2_BL * constants.r_22_3_BL;
+rc_BL = r3_BL + T3_BL * constants.r_33_c_BL;
 %% Calculate leg heights
 legs=[rc_BR,rc_BL,rc_FL,rc_FR];
 index = find(legs(3,:) <= 5/1000)';

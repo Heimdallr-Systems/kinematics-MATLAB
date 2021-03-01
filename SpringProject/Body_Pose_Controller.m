@@ -1,4 +1,4 @@
-function [Theta1, Theta1_2, Theta2, Theta2_2, Theta2_3, Theta2_4, Theta3, Theta3_2, Theta3_3, Theta3_4, r_II_B_d] = Body_Pose_Controller(r_II_c, T_I_B, r_II_B_d, r_II_B_0, legs_on_gnd)
+function [Theta1, Theta2, Theta3, r_II_B_d] = Body_Pose_Controller(r_II_c, T_I_B, r_II_B_d, r_II_B_0, legs_on_gnd)
 % This function is used to solve for IK solutions of the robot's legs when
 % measurements in terms of the inertial frame are known. Use this function
 % when solving for tilt under the flat plane assumption.
@@ -159,19 +159,19 @@ while (loop_toggle == 0)
             Theta3_FL_2 = atan2(-sqrt(1-D_FL^2),D_FL);
             
             Theta2_FL = atan2(s_FL,r_FL) - atan2(L3*sin(Theta3_FL),L2 + L3*cos(Theta3_FL));
-            Theta2_FL_2 = atan2(s_FL,r_FL) - atan2(L3*sin(Theta3_FL_2),L2 + L3*cos(Theta3_FL_2)); 
+            Theta2_FL_2 = atan2(s_FL,r_FL) - atan2(L3*sin(Theta3_FL_2),L2 + L3*cos(Theta3_FL_2));
         end
-
-            Theta1(2,1) = Theta1_FL;
-            Theta1_2(2,1) = Theta1_FL_2;
-            Theta2(2,1) = Theta2_FL;
-            Theta2_2(2,1) = Theta2_FL_2;
-            Theta2_3(2,1) = Theta2_FL_3;
-            Theta2_4(2,1) = Theta2_FL_4;
-            Theta3(2,1) = Theta3_FL;
-            Theta3_2(2,1) = Theta3_FL_2;
-            Theta3_3(2,1) = Theta3_FL_3;
-            Theta3_4(2,1) = Theta3_FL_4;
+        
+        Theta1(2,1) = Theta1_FL;
+        Theta1_2(2,1) = Theta1_FL_2;
+        Theta2(2,1) = Theta2_FL;
+        Theta2_2(2,1) = Theta2_FL_2;
+        Theta2_3(2,1) = Theta2_FL_3;
+        Theta2_4(2,1) = Theta2_FL_4;
+        Theta3(2,1) = Theta3_FL;
+        Theta3_2(2,1) = Theta3_FL_2;
+        Theta3_3(2,1) = Theta3_FL_3;
+        Theta3_4(2,1) = Theta3_FL_4;
     end
     %% BR LEG
     if legs_on_gnd(3) == 1
@@ -298,21 +298,38 @@ while (loop_toggle == 0)
         else
             Theta3_BL = atan2(sqrt(1-D_BL^2),D_BL);
             Theta3_BL_2 = atan2(-sqrt(1-D_BL^2),D_BL);
-
+            
             Theta2_BL = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL),L2 + L3*cos(Theta3_BL));
             Theta2_BL_2 = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL_2),L2 + L3*cos(Theta3_BL_2));
         end
-            Theta1(4,1) = Theta1_BL;
-            Theta1_2(4,1) = Theta1_BL_2;
-            Theta2(4,1) = Theta2_BL;
-            Theta2_2(4,1) = Theta2_BL_2;
-            Theta2_3(4,1) = Theta2_BL_3;
-            Theta2_4(4,1) = Theta2_BL_4;
-            Theta3(4,1) = Theta3_BL;
-            Theta3_2(4,1) = Theta3_BL_2;
-            Theta3_3(4,1) = Theta3_BL_3;
-            Theta3_4(4,1) = Theta3_BL_4;
+        Theta1(4,1) = Theta1_BL;
+        Theta1_2(4,1) = Theta1_BL_2;
+        Theta2(4,1) = Theta2_BL;
+        Theta2_2(4,1) = Theta2_BL_2;
+        Theta2_3(4,1) = Theta2_BL_3;
+        Theta2_4(4,1) = Theta2_BL_4;
+        Theta3(4,1) = Theta3_BL;
+        Theta3_2(4,1) = Theta3_BL_2;
+        Theta3_3(4,1) = Theta3_BL_3;
+        Theta3_4(4,1) = Theta3_BL_4;
         
     end
 end
+% if theta1 wraps around into robot
+T1_cond(1) = (Theta1(1) <= -pi/2) || (Theta1(1) >= pi); % FR
+T1_cond(2) = (Theta1(2) <= -pi) || (Theta1(2) >= pi/2); %FL
+T1_cond(3) = (Theta1(3) <= -pi) || (Theta1(3) >= pi/2); % BR
+T1_cond(4) = (Theta1(4) <= -pi/2) || (Theta1(4) >= pi); % BL
+
+for hh = 1:1:4
+    if T1_cond(hh)
+        Theta1(hh,1) = Theta1_2(hh);
+        Theta2(hh,1) = Theta2_4(hh);
+        Theta3(hh,1) = Theta3_4(hh);
+    else
+        Theta2(hh,1) = Theta2_2(hh);
+        Theta3(hh,1) = Theta3_2(hh);
+    end
+end
+
 end

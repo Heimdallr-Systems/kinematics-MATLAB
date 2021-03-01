@@ -15,7 +15,7 @@ travel_dir = (r_II_c_d-r_II_c_0)/norm((r_II_c_d-r_II_c_0));
 loop_toggle = 0;
 ii = 0;
 while loop_toggle == 0
-     ii = ii+1;
+    ii = ii+1;
     if ii == 1000
         error('Limit Reached');
     end
@@ -47,7 +47,15 @@ while loop_toggle == 0
         D_FR_2 = (r_FR_2^2 + s_FR_2^2 - L2^2 - L3^2)/(2*L2*L3);
         
         % see if second solution possible
-        try
+        if D_FR_2 > 0.999
+            Theta1_FR_2 = 0;
+            
+            Theta3_FR_3 = 0;
+            Theta3_FR_4 = 0;
+            
+            Theta2_FR_3 = 0;
+            Theta2_FR_4 = 0;
+        else
             Theta3_FR_Temp_2 = atan2(sqrt(1-D_FR_2^2),D_FR_2);
             Theta3_FR_2_Temp_2 = atan2(-sqrt(1-D_FR_2^2),D_FR_2);
             
@@ -56,18 +64,13 @@ while loop_toggle == 0
             
             Theta2_FR_3 = -(atan2(s_FR_2,r_FR_2) - atan2(L3*sin(Theta3_FR_Temp_2),L2 + L3*cos(Theta3_FR_Temp_2)));
             Theta2_FR_4 = -(atan2(s_FR_2,r_FR_2) - atan2(L3*sin(Theta3_FR_2_Temp_2),L2 + L3*cos(Theta3_FR_2_Temp_2)));
-            
-        catch
-            Theta1_FR_2 = 0;
-            
-            Theta3_FR_3 = 0;
-            Theta3_FR_4 = 0;
-            
-            Theta2_FR_3 = 0;
-            Theta2_FR_4 = 0;
         end
         
-        try
+        if D_FR > 0.999
+            loop_toggle = 0;
+            r_II_c_d = r_II_c_d - travel_dir.*0.01;
+            r_II_c_d(3) = r_II_c_0(3);
+        else
             Theta3_FR_Temp = atan2(sqrt(1-D_FR^2),D_FR);
             Theta3_FR_2_Temp = atan2(-sqrt(1-D_FR^2),D_FR);
             
@@ -76,22 +79,17 @@ while loop_toggle == 0
             
             Theta2_FR = -(atan2(s_FR,r_FR) - atan2(L3*sin(Theta3_FR_Temp),L2 + L3*cos(Theta3_FR_Temp)));
             Theta2_FR_2 = -(atan2(s_FR,r_FR) - atan2(L3*sin(Theta3_FR_2_Temp),L2 + L3*cos(Theta3_FR_2_Temp)));
-
-            Theta1 = Theta1_FR;
-            Theta1_2 = Theta1_FR_2;
-            Theta2 = Theta2_FR;
-            Theta2_2 = Theta2_FR_2;
-            Theta2_3 = Theta2_FR_3;
-            Theta2_4 = Theta2_FR_4;
-            Theta3 = Theta3_FR;
-            Theta3_2 = Theta3_FR_2;
-            Theta3_3 = Theta3_FR_3;
-            Theta3_4 = Theta3_FR_4;
-        catch
-            loop_toggle = 0;
-            r_II_c_d = r_II_c_d - travel_dir.*0.01;
-            r_II_c_d(3) = r_II_c_0(3);
         end
+        Theta1 = Theta1_FR;
+        Theta1_2 = Theta1_FR_2;
+        Theta2 = Theta2_FR;
+        Theta2_2 = Theta2_FR_2;
+        Theta2_3 = Theta2_FR_3;
+        Theta2_4 = Theta2_FR_4;
+        Theta3 = Theta3_FR;
+        Theta3_2 = Theta3_FR_2;
+        Theta3_3 = Theta3_FR_3;
+        Theta3_4 = Theta3_FR_4;
     end
     %% FL LEG
     if leg_index == 2
@@ -120,13 +118,7 @@ while loop_toggle == 0
         
         D_FL_2 = (r_FL_2^2 + s_FL_2^2 - L2^2 - L3^2)/(2*L2*L3);
         
-        try
-            Theta3_FL_3 = atan2(sqrt(1-D_FL_2^2),D_FL_2);
-            Theta3_FL_4 = atan2(-sqrt(1-D_FL_2^2),D_FL_2);
-            
-            Theta2_FL_3 = atan2(s_FL_2,r_FL_2) - atan2(L3*sin(Theta3_FL_3),L2 + L3*cos(Theta3_FL_3));
-            Theta2_FL_4 = atan2(s_FL_2,r_FL_2) - atan2(L3*sin(Theta3_FL_4),L2 + L3*cos(Theta3_FL_4));
-        catch
+        if D_FL_2 > 0.999
             Theta1_FL_2 = 0;
             
             Theta3_FL_3 = 0;
@@ -134,30 +126,35 @@ while loop_toggle == 0
             
             Theta2_FL_3 = 0;
             Theta2_FL_4 = 0;
+        else
+            Theta3_FL_3 = atan2(sqrt(1-D_FL_2^2),D_FL_2);
+            Theta3_FL_4 = atan2(-sqrt(1-D_FL_2^2),D_FL_2);
+            
+            Theta2_FL_3 = atan2(s_FL_2,r_FL_2) - atan2(L3*sin(Theta3_FL_3),L2 + L3*cos(Theta3_FL_3));
+            Theta2_FL_4 = atan2(s_FL_2,r_FL_2) - atan2(L3*sin(Theta3_FL_4),L2 + L3*cos(Theta3_FL_4));
         end
         
-        try
+        if D_FL > 0.999
+            loop_toggle = 0;
+            r_II_c_d = r_II_c_d - travel_dir.*0.01;
+            r_II_c_d(3) = r_II_c_0(3);
+        else
             Theta3_FL = atan2(sqrt(1-D_FL^2),D_FL);
             Theta3_FL_2 = atan2(-sqrt(1-D_FL^2),D_FL);
             
             Theta2_FL = atan2(s_FL,r_FL) - atan2(L3*sin(Theta3_FL),L2 + L3*cos(Theta3_FL));
             Theta2_FL_2 = atan2(s_FL,r_FL) - atan2(L3*sin(Theta3_FL_2),L2 + L3*cos(Theta3_FL_2));
-            
-            Theta1 = Theta1_FL;
-            Theta1_2 = Theta1_FL_2;
-            Theta2 = Theta2_FL;
-            Theta2_2 = Theta2_FL_2;
-            Theta2_3 = Theta2_FL_3;
-            Theta2_4 = Theta2_FL_4;
-            Theta3 = Theta3_FL;
-            Theta3_2 = Theta3_FL_2;
-            Theta3_3 = Theta3_FL_3;
-            Theta3_4 = Theta3_FL_4;
-        catch
-            loop_toggle = 0;
-            r_II_c_d = r_II_c_d - travel_dir.*0.01;
-            r_II_c_d(3) = r_II_c_0(3);
         end
+        Theta1 = Theta1_FL;
+        Theta1_2 = Theta1_FL_2;
+        Theta2 = Theta2_FL;
+        Theta2_2 = Theta2_FL_2;
+        Theta2_3 = Theta2_FL_3;
+        Theta2_4 = Theta2_FL_4;
+        Theta3 = Theta3_FL;
+        Theta3_2 = Theta3_FL_2;
+        Theta3_3 = Theta3_FL_3;
+        Theta3_4 = Theta3_FL_4;
     end
     %% BR LEG
     if leg_index == 3
@@ -188,7 +185,15 @@ while loop_toggle == 0
         
         D_BR_2 = (r_BR_2^2 + s_BR_2^2 - L2^2 - L3^2)/(2*L2*L3);
         
-        try
+        if D_BR_2 > 0.999
+            Theta1_BR_2 = 0;
+            
+            Theta3_BR_3 = 0;
+            Theta3_BR_4 = 0;
+            
+            Theta2_BR_3 = 0;
+            Theta2_BR_4 = 0;
+        else
             Theta3_BR_Temp_2 = atan2(sqrt(1-D_BR_2^2),D_BR_2);
             Theta3_BR_2_Temp_2 = atan2(-sqrt(1-D_BR_2^2),D_BR_2);
             
@@ -197,17 +202,13 @@ while loop_toggle == 0
             
             Theta2_BR_3 = -(atan2(s_BR_2,r_BR_2) - atan2(L3*sin(Theta3_BR_Temp_2),L2 + L3*cos(Theta3_BR_Temp_2)));
             Theta2_BR_4 = -(atan2(s_BR_2,r_BR_2) - atan2(L3*sin(Theta3_BR_2_Temp_2),L2 + L3*cos(Theta3_BR_2_Temp_2)));
-        catch
-            Theta1_BR_2 = 0;
-            
-            Theta3_BR_3 = 0;
-            Theta3_BR_4 = 0;
-            
-            Theta2_BR_3 = 0;
-            Theta2_BR_4 = 0;
         end
         
-        try
+        if D_BR > 0.999
+            loop_toggle = 0;
+            r_II_c_d = r_II_c_d - travel_dir.*0.01;
+            r_II_c_d(3) = r_II_c_0(3);
+        else
             Theta3_BR_Temp = atan2(sqrt(1-D_BR^2),D_BR);
             Theta3_BR_2_Temp = atan2(-sqrt(1-D_BR^2),D_BR);
             
@@ -216,22 +217,17 @@ while loop_toggle == 0
             
             Theta2_BR = -(atan2(s_BR,r_BR) - atan2(L3*sin(Theta3_BR_Temp),L2 + L3*cos(Theta3_BR_Temp)));
             Theta2_BR_2 = -(atan2(s_BR,r_BR) - atan2(L3*sin(Theta3_BR_2_Temp),L2 + L3*cos(Theta3_BR_2_Temp)));
-            
-            Theta1 = Theta1_BR;
-            Theta1_2 = Theta1_BR_2;
-            Theta2 = Theta2_BR;
-            Theta2_2 = Theta2_BR_2;
-            Theta2_3 = Theta2_BR_3;
-            Theta2_4 = Theta2_BR_4;
-            Theta3 = Theta3_BR;
-            Theta3_2 = Theta3_BR_2;
-            Theta3_3 = Theta3_BR_3;
-            Theta3_4 = Theta3_BR_4;
-        catch
-            loop_toggle = 0;
-            r_II_c_d = r_II_c_d - travel_dir.*0.01;
-            r_II_c_d(3) = r_II_c_0(3);
         end
+        Theta1 = Theta1_BR;
+        Theta1_2 = Theta1_BR_2;
+        Theta2 = Theta2_BR;
+        Theta2_2 = Theta2_BR_2;
+        Theta2_3 = Theta2_BR_3;
+        Theta2_4 = Theta2_BR_4;
+        Theta3 = Theta3_BR;
+        Theta3_2 = Theta3_BR_2;
+        Theta3_3 = Theta3_BR_3;
+        Theta3_4 = Theta3_BR_4;
     end
     %% BL LEG
     if leg_index == 4
@@ -260,13 +256,7 @@ while loop_toggle == 0
         
         D_BL_2 = (r_BL_2^2 + s_BL_2^2 - L2^2 - L3^2)/(2*L2*L3);
         
-        try 
-            Theta3_BL_3 = atan2(sqrt(1-D_BL_2^2),D_BL_2);
-            Theta3_BL_4 = atan2(-sqrt(1-D_BL_2^2),D_BL_2);
-            
-            Theta2_BL_3 = atan2(s_BL_2,r_BL_2) - atan2(L3*sin(Theta3_BL_3),L2 + L3*cos(Theta3_BL_3));
-            Theta2_BL_4 = atan2(s_BL_2,r_BL_2) - atan2(L3*sin(Theta3_BL_4),L2 + L3*cos(Theta3_BL_4));
-        catch
+        if D_BL_2 > 0.999
             Theta1_BL_2 = 0;
             
             Theta3_BL_3 = 0;
@@ -274,30 +264,36 @@ while loop_toggle == 0
             
             Theta2_BL_3 = 0;
             Theta2_BL_4 = 0;
+        else
+            Theta3_BL_3 = atan2(sqrt(1-D_BL_2^2),D_BL_2);
+            Theta3_BL_4 = atan2(-sqrt(1-D_BL_2^2),D_BL_2);
+            
+            Theta2_BL_3 = atan2(s_BL_2,r_BL_2) - atan2(L3*sin(Theta3_BL_3),L2 + L3*cos(Theta3_BL_3));
+            Theta2_BL_4 = atan2(s_BL_2,r_BL_2) - atan2(L3*sin(Theta3_BL_4),L2 + L3*cos(Theta3_BL_4));
         end
         
-        try
-            Theta3_BL = atan2(sqrt(1-D_BL^2),D_BL);
-            Theta3_BL_2 = atan2(-sqrt(1-D_BL^2),D_BL);
-
-            Theta2_BL = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL),L2 + L3*cos(Theta3_BL));
-            Theta2_BL_2 = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL_2),L2 + L3*cos(Theta3_BL_2));
-
-            Theta1 = Theta1_BL;
-            Theta1_2 = Theta1_BL_2;
-            Theta2 = Theta2_BL;
-            Theta2_2 = Theta2_BL_2;
-            Theta2_3 = Theta2_BL_3;
-            Theta2_4 = Theta2_BL_4;
-            Theta3 = Theta3_BL;
-            Theta3_2 = Theta3_BL_2;
-            Theta3_3 = Theta3_BL_3;
-            Theta3_4 = Theta3_BL_4;
-        catch
+        if D_BL > 0.999
             loop_toggle = 0;
             r_II_c_d = r_II_c_d - travel_dir.*0.01;
             r_II_c_d(3) = r_II_c_0(3);
+        else
+            Theta3_BL = atan2(sqrt(1-D_BL^2),D_BL);
+            Theta3_BL_2 = atan2(-sqrt(1-D_BL^2),D_BL);
+            
+            Theta2_BL = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL),L2 + L3*cos(Theta3_BL));
+            Theta2_BL_2 = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL_2),L2 + L3*cos(Theta3_BL_2));
         end
+        
+        Theta1 = Theta1_BL;
+        Theta1_2 = Theta1_BL_2;
+        Theta2 = Theta2_BL;
+        Theta2_2 = Theta2_BL_2;
+        Theta2_3 = Theta2_BL_3;
+        Theta2_4 = Theta2_BL_4;
+        Theta3 = Theta3_BL;
+        Theta3_2 = Theta3_BL_2;
+        Theta3_3 = Theta3_BL_3;
+        Theta3_4 = Theta3_BL_4;
     end
 end
 end

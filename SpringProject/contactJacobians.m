@@ -1,7 +1,12 @@
 function [GeoJc_FR,GeoJc_FL,GeoJc_BR,GeoJc_BL] = contactJacobians(state)
-dotgamma(:,1) = state(19:36);
+dotgamma = state(19:36)';
 
 constants = RobotConstants();
+
+% Initialize variables
+GeoJB = zeros(6,18);
+dotGeoJB = zeros(6, 18);
+
 
 % Relative Orientations (T_(reference)_(new))
 T_I_B = rotz(state(1))*roty(state(2))*rotx(state(3));
@@ -33,18 +38,24 @@ psi = state(3);
 dottheta = state(20);
 dotpsi = state(21);
 
-GeoJB = [-sin(theta), 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                    cos(theta)*sin(psi),  cos(psi), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                    cos(psi)*cos(theta), -sin(psi), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-dotGeoJB = [-dottheta*cos(theta), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                         dotpsi*cos(psi)*cos(theta) - dottheta*sin(psi)*sin(theta), -dotpsi*sin(psi), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                         -dotpsi*cos(theta)*sin(psi) - dottheta*cos(psi)*sin(theta), -dotpsi*cos(psi), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+% Set Geometric Jacobian
+GeoJB(1,1) = -sin(theta);
+GeoJB(1,3) = 1;
+GeoJB(2, 1) = cos(theta) * sin(psi);
+GeoJB(2, 2) = cos(psi);
+GeoJB(3, 1) = cos(psi) * cos(theta);
+GeoJB(3, 2) = -sin(psi);
+GeoJB(4,4) = 1;
+GeoJB(5,5) = 1;
+GeoJB(6,6) = 1;
+
+% Set time derivitive of Geometric Jacobian
+dotGeoJB(1,1) = -dottheta*cos(theta);
+dotGeoJB(2,1) = dotpsi*cos(psi)*cos(theta) - dottheta*sin(psi)*sin(theta);
+dotGeoJB(2,2) = -dotpsi*sin(psi);
+dotGeoJB(3,1) =  -dotpsi*cos(theta)*sin(psi) - dottheta*cos(psi)*sin(theta);
+dotGeoJB(3,2) = -dotpsi*cos(psi);
+
 
 I1_hat_FR = zeros(3,18);
 I1_hat_FR(3,7) = 1; % z-axis, Theta1_FR

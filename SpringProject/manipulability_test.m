@@ -42,6 +42,7 @@ legs_on_gnd = [r_II_c_FR(3) == 0, r_II_c_FL(3) == 0, r_II_c_BR(3) == 0, r_II_c_B
 % draw robot to confirm (FK)
 
 
+state = zeros(1,36);
 
 %%
 Theta1 = [0;0;0;pi/4];

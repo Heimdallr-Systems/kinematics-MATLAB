@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project MetadataType="monolithic">
+    <Categories Location="Root">
+        <Category Location="FileClassCategory">
+            <Label Location="other">
+                <Info Name="Other" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="artifact">
+                <Info Name="Artifact" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="none">
+                <Info Name="None" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="design">
+                <Info Name="Design" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="derived">
+                <Info Name="Derived" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="test">
+                <Info Name="Test" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="convenience">
+                <Info Name="Convenience" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Info DataType="None" Name="Classification" ReadOnly="1" SingleValued="1"/>
+        </Category>
+    </Categories>
+    <Files Location="Root">
+        <File Location="Body_Pose_Controller.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="rotz.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="stlread.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="rotx.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Joint_Space_Generator.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Kinematic_SplitControlV6.mp4">
+            <Info/>
+        </File>
+        <File Location="RobotConstants_OLD.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Joint_Space_Solver_with_Legs.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV11_Walk.mp4">
+            <Info/>
+        </File>
+        <File Location="SplitControlV6_WalkPlz.mp4">
+            <Info/>
+        </File>
+        <File Location="Link_2_FR.STL">
+            <Info/>
+        </File>
+        <File Location="Link_1_FR.STL">
+            <Info/>
+        </File>
+        <File Location="test_script.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="IK_Solver_Legs.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="rcm_control_test_script.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="find_pgon_goal.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="ControlsV3_NoMotors.mp4">
+            <Info/>
+        </File>
+        <File Location="Link_3_FR.STL">
+            <Info/>
+        </File>
+        <File Location="robot_solver_split_controller_V2.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV5_WalkPlz.mp4">
+            <Info/>
+        </File>
+        <File Location="SplitControlV3_NoMotors_CM.mp4">
+            <Info/>
+        </File>
+        <File Location="Kinematic_SplitControlV5.mp4">
+            <Info/>
+        </File>
+        <File Location="ControlsV5_NoMotors.mp4">
+            <Info/>
+        </File>
+        <File Location="FK_Solver_Draw.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Kinematics_Confirm.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV8_WalkPlz.mp4">
+            <Info/>
+        </File>
+        <File Location="Body.STL">
+            <Info/>
+        </File>
+        <File Location="CPos_wrt_B.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV7_WalkPlz.mp4">
+            <Info/>
+        </File>
+        <File Location="IK_Solver_BodyRot_BodyPos.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV9_WalkPlz.mp4">
+            <Info/>
+        </File>
+        <File Location="robot_controller_v3.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="kinematic_controller_solver_test.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV3_NoMotors.mp4">
+            <Info/>
+        </File>
+        <File Location="Link_2_BL.STL">
+            <Info/>
+        </File>
+        <File Location="SplitControlV2_NoMotors.mp4">
+            <Info/>
+        </File>
+        <File Location="robot_solver_NoMotors.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="kinematic_controller_solver.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV1_NoMotors.mp4">
+            <Info/>
+        </File>
+        <File Location="Joint_Space_Solver.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Link_2_FL.STL">
+            <Info/>
+        </File>
+        <File Location="check_workspace.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Link_1_FL.STL">
+            <Info/>
+        </File>
+        <File Location="Link_3_BR.STL">
+            <Info/>
+        </File>
+        <File Location="roty.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Link_2_BR.STL">
+            <Info/>
+        </File>
+        <File Location="robot_solver_split_controller.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Link_1_BR.STL">
+            <Info/>
+        </File>
+        <File Location="contactJacobians.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="geoJacobian.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Link_3_FL.STL">
+            <Info/>
+        </File>
+        <File Location="recursiveKin.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV10.mp4">
+            <Info/>
+        </File>
+        <File Location="CM_Controller.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="CMV4_OpenLoop_cm.mp4">
+            <Info/>
+        </File>
+        <File Location="RobotConstants_NEW.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="CPos_wrt_I.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="skew.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Leg_Controller.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="ControlsV4_NoMotors.mp4">
+            <Info/>
+        </File>
+        <File Location="step_planner_intelligent.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Kinematic_SplitControlV1.mp4">
+            <Info/>
+        </File>
+        <File Location="CMV4_OpenLoop.mp4">
+            <Info/>
+        </File>
+        <File Location="Kinematic_SplitControlV3.mp4">
+            <Info/>
+        </File>
+        <File Location="manipulability.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="IK_Solver_Tilt.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Kinematic_SplitControlV2.mp4">
+            <Info/>
+        </File>
+        <File Location="compute_rcm.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="RobotConstants.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Kinematic_SplitControlV4.mp4">
+            <Info/>
+        </File>
+        <File Location="Link_3_BL.STL">
+            <Info/>
+        </File>
+        <File Location="IK_Solver_Legs_Inertial.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="CM_Open_Loop.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Link_1_BL.STL">
+            <Info/>
+        </File>
+        <File Location="manipulability_test.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="robot_states.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+    </Files>
+    <ProjectPath Location="Root">
+        <Reference Location="1055fe1e-a20c-45a6-9f7f-1b2d3fca28e3">
+            <Info Ref="" Type="Relative"/>
+        </Reference>
+    </ProjectPath>
+    <Info Location="ProjectData">
+        <Info Name="SpringProject"/>
+    </Info>
+    <ProjectData Location="Root"/>
+    <Extensions Location="Root"/>
+    <EntryPoints Location="Root"/>
+</project>

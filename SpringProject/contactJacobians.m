@@ -1,5 +1,5 @@
 function [GeoJc_FR,GeoJc_FL,GeoJc_BR,GeoJc_BL] = contactJacobians(state)
-dotgamma(:,1) = state(19:36);
+dotgamma = state(19:36).';
 
 RobotConstants;
 

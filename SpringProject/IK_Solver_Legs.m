@@ -122,4 +122,6 @@ Theta2_BL_2 = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL_2),L2 + L3*cos(Theta3_BL
 
 Theta2 = [Theta2_FR, Theta2_FL, Theta2_BR, Theta2_BL]; % solution 1
 Theta2_2 = [Theta2_FR_2, Theta2_FL_2, Theta2_BR_2, Theta2_BL_2]; % solution 2
+
+
 end

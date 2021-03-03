@@ -20,16 +20,16 @@ clc
 close all
 
 % Contact Point Positions
-r_II_c_FR = [200;-200;0]./1000;
-r_II_c_FL = [200;200;0]./1000;
-r_II_c_BR = [-200;-200;0]./1000;
-r_II_c_BL = [-200;200;0]./1000;
+r_II_c_FR = [250;-250;0]./1000;
+r_II_c_FL = [250;250;0]./1000;
+r_II_c_BR = [-250;-250;0]./1000;
+r_II_c_BL = [-250;250;0]./1000;
 r_II_c = [r_II_c_FR,r_II_c_FL, r_II_c_BR, r_II_c_BL];
 
 % Body Rotation
-phi_degrees = 10;  % (z-rotation)
-theta_degrees = 10;  % (y-rotation)
-psi_degrees = 10;  % (x-rotation)
+phi_degrees = 0;  % (z-rotation)
+theta_degrees = 0;  % (y-rotation)
+psi_degrees = 0;  % (x-rotation)
 phi = phi_degrees*(pi/180);
 theta = theta_degrees*(pi/180);
 psi = psi_degrees*(pi/180);
@@ -37,7 +37,7 @@ BodyRot = [phi,theta,psi];
 T_I_B = rotz(phi)*roty(theta)*rotx(psi)
 
 % Body Offset from Inertial
-r_II_B = [30;20;200]./1000
+r_II_B = [0;0;200]./1000
 
 %% IK for legs
 % Assuming we have some goal orientation and position known, IK lets us

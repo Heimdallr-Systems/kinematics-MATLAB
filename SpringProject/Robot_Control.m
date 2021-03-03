@@ -1,7 +1,12 @@
-function Theta_d = Robot_Control(r_II_B_d, Euler_d, gamma_m)
+function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_out,floor_toggle_out,legs_valid_out] = Robot_Control(r_II_B_d, Euler_d, gamma_m, init_toggle)
 %Controls Robot's walking algorithm
 %   input: r_II_B_d, Euler_d, gamma_m
-%   output: Theta_d
+%   output: Theta_d (1-3), phi_d_temp & r_II_b_d_temp (orientation for plotting),
+%   floor_toggle & legs_valid (for computing forces)
+%   NOTE: For the real system, phi_d_temp & r_II_b_d_temp,
+%   floor_toggle & legs_valid can be thrown
+%   away. For kinematic system, floor_toggle is not needed. For dynamic
+%   system phi_d_temp % r_II_B_d_temp is not needed
 %   r_II_B_d = [x_d;y_d;z_d];
 %   Euler_d = [phi,theta,psi];
 %   gamma_m = [Euler,r_II_B,Theta1,Theta2,Theta3];
@@ -35,31 +40,9 @@ Theta1_d_midpt_BL = pi/4;
 Theta2_d_midpt_BL = pi/4;
 Theta3_d_midpt_BL = -3*pi/4;
 
-% Constants for "resetting" legs
-% FR
-Theta1_d_reset_FR = pi/4;
-Theta2_d_reset_FR = pi/6;
-Theta3_d_reset_FR = pi/3;
-
-% FL
-Theta1_d_reset_FL = -pi/4;
-Theta2_d_reset_FL = -pi/6;
-Theta3_d_reset_FL = -pi/3;
-
-% BR
-Theta1_d_reset_BR = -pi/4;
-Theta2_d_reset_BR = pi/6;
-Theta3_d_reset_BR = pi/3;
-
-% BL
-Theta1_d_reset_BL = pi/4;
-Theta2_d_reset_BL = -pi/6;
-Theta3_d_reset_BL = -pi/3;
-
 max_body_dist = 0.1; % initialize max bound for moving without steps
 
 % persistent vars
-persistent hi;
 persistent waypoint_toggle; % intialize toggle for determining direction of travel
 persistent turn_toggle; % init toggle for determining direction of turning
 persistent step_state; % intialize toggle for determining which phase of step leg is in
@@ -90,9 +73,11 @@ persistent Theta1_d_midpt Theta2_d_midpt Theta3_d_midpt;
 persistent Theta1_d_reset Theta2_d_reset Theta3_d_reset;
 persistent r_II_c_current;
 persistent r_II_c_dstep;
+persistent Theta1_d;
+persistent Theta2_d;
+persistent Theta3_d;
 
-if isempty(hi)
-    hi = 1;
+if init_toggle
     waypoint_toggle = 0; % intialize toggle for determining direction of travel
     turn_toggle = 0; % init toggle for determining direction of turning
     step_state = 0; % intialize toggle for determining which phase of step leg is in
@@ -111,12 +96,24 @@ end
 phi = gamma_m(1);
 theta = gamma_m(2);
 psi = gamma_m(3);
-r_II_B = [gamma_m(4);gamma_mb(5);gamma_m(6)];
+r_II_B = [gamma_m(4);gamma_m(5);gamma_m(6)];
 Theta1 = [gamma_m(7);gamma_m(8);gamma_m(9);gamma_m(10)];
 Theta2 = [gamma_m(11);gamma_m(12);gamma_m(13);gamma_m(14)];
 Theta3 = [gamma_m(15);gamma_m(16);gamma_m(17);gamma_m(18)];
 T_I_B = rotz(phi)*roty(theta)*rotx(psi);
-state = b(1:18);
+state = gamma_m(1:18);
+% Constants for "resetting" legs
+% FR
+r_BB_c_reset_FR = [.25;-.25;-r_II_B(3)];
+
+% FL
+r_BB_c_reset_FL = [.25;.25;-r_II_B(3)];
+
+% BR
+r_BB_c_reset_BR = [-.25;-.25;-r_II_B(3)];
+
+% BL
+r_BB_c_reset_BL = [-.25;.25;-r_II_B(3)];
 
 % desired
 phi_d = Euler_d(1);
@@ -170,11 +167,11 @@ end
 
 if turn_toggle == 0
     startPhi = phi;
-    endPhi = phi_d(ii);
+    endPhi = phi_d;
     turn_toggle = 1;
     r_II_B_0 = r_II_B;
 elseif turn_toggle == 1
-    if endPhi ~= phi_d(ii)
+    if endPhi ~= phi_d
         turn_toggle = 0;
     end
 end
@@ -187,14 +184,14 @@ elseif is_turning == 0
 end
 
 if turn_needed == 1
-    if abs(phi_d(ii) - phi) < pi/10
+    if abs(phi_d - phi) < pi/10
         if (turn_state == 0) && (leg_reset_needed == 0)
             is_turning = 1;
-            phi_d_temp = phi_d(ii);
+            phi_d_temp = phi_d;
             leg_reset_needed = 0;
             turn_state = 1;
         elseif turn_state == 1
-            phi_error = abs(phi_d(ii) - phi);
+            phi_error = abs(phi_d - phi);
             if phi_error < 0.05
                 turn_state = 0;
                 startPhi = phi;
@@ -203,11 +200,11 @@ if turn_needed == 1
             end
         end
     else
-        turn_dir = sign(phi_d(ii) - phi);
+        turn_dir = sign(phi_d - phi);
         if (turn_state == 0) && (leg_reset_needed == 0)
             is_turning = 1;
             phi_d_temp = phi + turn_dir*pi/10;
-            T_I_B_d_temp = rotz(phi_d_temp)*roty(theta_d(ii))*rotx(psi_d(ii));
+            T_I_B_d_temp = rotz(phi_d_temp)*roty(theta_d)*rotx(psi_d);
             turn_state = 1 ;
         elseif turn_state == 1
             is_turning = 1;
@@ -238,14 +235,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
                     step_state = 3;
-                    Theta1_d_reset = Theta1_d_reset_FR;
-                    Theta2_d_reset = Theta2_d_reset_FR;
-                    Theta3_d_reset = Theta3_d_reset_FR;
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, 1);
                 end
             elseif step_state == 3 % stepping towards goal now
-                Theta1_d_reset = Theta1_d_reset_FR;
-                Theta2_d_reset = Theta2_d_reset_FR;
-                Theta3_d_reset = Theta3_d_reset_FR;
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, 1);
                 if r_II_c_FR(3) <= 0
                     step_state = 0;
                     legs_valid(1) = 1;
@@ -272,14 +265,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2 % reached midpoint
                     step_state = 3;
-                    Theta1_d_reset = Theta1_d_reset_FL;
-                    Theta2_d_reset = Theta2_d_reset_FL;
-                    Theta3_d_reset = Theta3_d_reset_FL;
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, 2);
                 end
             elseif step_state == 3 % stepping towards goal now
-                Theta1_d_reset = Theta1_d_reset_FL;
-                Theta2_d_reset = Theta2_d_reset_FL;
-                Theta3_d_reset = Theta3_d_reset_FL;
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, 2);
                 if r_II_c_FL(3) <= 0
                     step_state = 0;
                     legs_valid(2) = 1;
@@ -307,14 +296,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
                     step_state = 3;
-                    Theta1_d_reset = Theta1_d_reset_BR;
-                    Theta2_d_reset = Theta2_d_reset_BR;
-                    Theta3_d_reset = Theta3_d_reset_BR;
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, 3);
                 end
             elseif step_state == 3 % stepping towards goal now
-                Theta1_d_reset = Theta1_d_reset_BR;
-                Theta2_d_reset = Theta2_d_reset_BR;
-                Theta3_d_reset = Theta3_d_reset_BR;
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, 3);
                 if r_II_c_BR(3) <= 0
                     legs_valid(3) = 1;
                     step_state = 0;
@@ -342,14 +327,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
                     step_state = 3;
-                    Theta1_d_reset = Theta1_d_reset_BL;
-                    Theta2_d_reset = Theta2_d_reset_BL;
-                    Theta3_d_reset = Theta3_d_reset_BL;
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, 4);
                 end
             elseif step_state == 3 % stepping towards goal now
-                Theta1_d_reset = Theta1_d_reset_BL;
-                Theta2_d_reset = Theta2_d_reset_BL;
-                Theta3_d_reset = Theta3_d_reset_BL;
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, 4);
                 if r_II_c_BL(3) <= 0
                     step_state = 0;
                     legs_valid(4) = 1;
@@ -558,12 +539,20 @@ elseif reached_rest_centroid == 1
             end
         end
     else
-        r_II_B_d_temp = r_II_B;
+        r_II_B_d_temp = [r_II_B(1),r_II_B(2),r_II_B_d(3)].';
         [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
     end
 end
+floor_toggle_out = floor_toggle;
+legs_valid_out = legs_valid;
+%Theta_d = [Theta1_d,Theta2_d,Theta3_d]; % output
+% Euler_d = [phi_d_temp;theta_d;psi_d];
+phi_d_temp_out = phi_d_temp;
+r_II_B_d_temp_out = r_II_B_d_temp;
+Theta1_d_out = Theta1_d;
 
+Theta2_d_out = Theta2_d;
 
-Theta_d = [Theta1_d,Theta2_d,Theta3_d]; % output
+Theta3_d_out = Theta3_d;
 end
 

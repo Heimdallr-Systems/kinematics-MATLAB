@@ -1,18 +1,18 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="2277304965" file="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.prj" location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" name="manipulability" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="1334345034" file="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.prj" location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" name="manipulability" preferred-package-location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" preferred-package-type="package.type.zip.flat" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
-      <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
+      <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
       <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
       <param.SpecifiedBuildFolder />
       <param.SearchPaths />
-      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
-      <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
-      <param.IntegrityChecks>true</param.IntegrityChecks>
+      <param.ResponsivenessChecks />
+      <param.ExtrinsicCalls />
+      <param.IntegrityChecks />
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
-      <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
+      <param.GlobalDataSyncMethod />
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Disabled</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
@@ -26,7 +26,7 @@
       <param.GenerateComments>true</param.GenerateComments>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.ReservedNameArray />
-      <param.EnableDebugging>false</param.EnableDebugging>
+      <param.EnableDebugging />
       <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.LaunchReport>false</param.LaunchReport>
@@ -45,12 +45,12 @@
       <param.CustomSource />
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
-      <param.mex.GenCodeOnly>false</param.mex.GenCodeOnly>
+      <param.mex.GenCodeOnly />
       <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>false</param.EnableRuntimeRecursion>
       <param.PreserveVariableNames>option.PreserveVariableNames.None</param.PreserveVariableNames>
-      <param.EchoExpressions>true</param.EchoExpressions>
+      <param.EchoExpressions />
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
       <param.InlineStackLimit>1000000</param.InlineStackLimit>
@@ -61,11 +61,11 @@
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
-      <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
+      <param.ConstantInputs />
       <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
       <param.EnableJIT>false</param.EnableJIT>
-      <param.EnableJITSilentBailOut>false</param.EnableJITSilentBailOut>
-      <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
+      <param.EnableJITSilentBailOut />
+      <param.CheckForIssuesJIT />
       <param.EnableGitSupport>false</param.EnableGitSupport>
       <param.EnableAutoCommit>false</param.EnableAutoCommit>
       <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
@@ -162,12 +162,12 @@
       <param.CommentStyle>option.CommentStyle.Auto</param.CommentStyle>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.MATLABFcnDesc>true</param.MATLABFcnDesc>
-      <param.ConvertIfToSwitch>false</param.ConvertIfToSwitch>
+      <param.ConvertIfToSwitch>true</param.ConvertIfToSwitch>
       <param.PreserveExternInFcnDecls>true</param.PreserveExternInFcnDecls>
       <param.EnableSignedLeftShifts>false</param.EnableSignedLeftShifts>
       <param.EnableSignedRightShifts>false</param.EnableSignedRightShifts>
       <param.ParenthesesLevel>option.ParenthesesLevel.Maximum</param.ParenthesesLevel>
-      <param.MaxIdLength>1024</param.MaxIdLength>
+      <param.MaxIdLength>31</param.MaxIdLength>
       <param.HeaderGuardStyle>option.HeaderGuardStyle.UseIncludeGuard</param.HeaderGuardStyle>
       <param.DataTypeReplacement>option.DataTypeReplacement.CBuiltIn</param.DataTypeReplacement>
       <param.EnableCustomReplacementTypes>false</param.EnableCustomReplacementTypes>
@@ -199,7 +199,7 @@
       <param.ReservedNameArray />
       <param.RuntimeChecks>false</param.RuntimeChecks>
       <param.Verbose>false</param.Verbose>
-      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
+      <param.ReportPotentialDifferences>true</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.GenerateCodeMetricsReport>true</param.GenerateCodeMetricsReport>
       <param.GenerateCodeReplacementReport>true</param.GenerateCodeReplacementReport>
@@ -224,7 +224,7 @@
       <param.CustomSource />
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
-      <param.TargetLangStandard>C++03 (ISO)</param.TargetLangStandard>
+      <param.TargetLangStandard>C99 (ISO)</param.TargetLangStandard>
       <param.CodeReplacementLibrary>GNU C99 extensions</param.CodeReplacementLibrary>
       <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
       <param.SameHardware>true</param.SameHardware>
@@ -232,7 +232,7 @@
       <param.BuildConfiguration>Faster Runs</param.BuildConfiguration>
       <param.CustomToolchainOptions />
       <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
-      <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware&gt;&lt;hardware version="1.0"&gt;&lt;name&gt;NVIDIA Jetson&lt;/name&gt;&lt;customValues/&gt;&lt;/hardware&gt;&lt;/configuredHardware&gt;&lt;/ctdata&gt;</param.target.Data>
+      <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware&gt;&lt;hardware version="1.0"&gt;&lt;name&gt;NVIDIA Jetson&lt;/name&gt;&lt;customValues/&gt;&lt;/hardware&gt;&lt;hardware version="1.0"&gt;&lt;name&gt;STM32 Nucleo F767ZI&lt;/name&gt;&lt;customValues/&gt;&lt;/hardware&gt;&lt;/configuredHardware&gt;&lt;/ctdata&gt;</param.target.Data>
       <param.target.ActiveType>option.target.TargetType.Target</param.target.ActiveType>
       <param.target.ActiveTarget>NVIDIA Jetson</param.target.ActiveTarget>
       <param.HardwareVendor.Production>ARM Compatible</param.HardwareVendor.Production>
@@ -287,8 +287,8 @@
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>false</param.EnableRuntimeRecursion>
       <param.RunInitializeFcn>true</param.RunInitializeFcn>
-      <param.IncludeInitializeFcn>true</param.IncludeInitializeFcn>
-      <param.IncludeTerminateFcn>true</param.IncludeTerminateFcn>
+      <param.IncludeInitializeFcn>false</param.IncludeInitializeFcn>
+      <param.IncludeTerminateFcn>false</param.IncludeTerminateFcn>
       <param.GenerateExampleMain>option.GenerateExampleMain.GenerateCodeOnly</param.GenerateExampleMain>
       <param.PreserveVariableNames>option.PreserveVariableNames.None</param.PreserveVariableNames>
       <param.GenerateMakefile>true</param.GenerateMakefile>
@@ -348,7 +348,6 @@
         <param.CommentStyle />
         <param.MATLABSourceComments />
         <param.MATLABFcnDesc />
-        <param.ConvertIfToSwitch />
         <param.PreserveExternInFcnDecls />
         <param.MaxIdLength />
         <param.HeaderGuardStyle />
@@ -381,7 +380,6 @@
         <param.ReservedNameArray />
         <param.RuntimeChecks />
         <param.Verbose />
-        <param.ReportPotentialDifferences />
         <param.GenerateReport />
         <param.LaunchReport />
         <param.ReportInfoVarName />
@@ -428,8 +426,6 @@
         <param.ColumnLimit />
         <param.CompileTimeRecursionLimit />
         <param.RunInitializeFcn />
-        <param.IncludeInitializeFcn />
-        <param.IncludeTerminateFcn />
         <param.GenerateExampleMain />
         <param.PreserveVariableNames />
         <param.GenerateMakefile />
@@ -829,7 +825,7 @@
     <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
     <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
-    <param.AnnotationChecksum>3909928703</param.AnnotationChecksum>
+    <param.AnnotationChecksum>2974760720</param.AnnotationChecksum>
     <var.LegacyTarget />
     <var.MirrorOnOpen>false</var.MirrorOnOpen>
     <param.FixedPointEnabled>false</param.FixedPointEnabled>
@@ -838,12 +834,12 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\manipulability</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>2353531631</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>2067010103</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\manipulability</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>2073559445</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>manipulability_test</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;1636877979&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;1975416052&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
@@ -881,8 +877,8 @@
     <var.isDeepLearningForMatlabCoderEnabled>true</var.isDeepLearningForMatlabCoderEnabled>
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
     <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
+    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
@@ -891,7 +887,7 @@
     <param.cudnn.CalibrationResultFile />
     <param.arm-compute.ArmComputeVersion>option.arm-compute.version.19_05</param.arm-compute.ArmComputeVersion>
     <param.arm-compute.ArmArchitecture>option.arm-compute.architecture.unspecified</param.arm-compute.ArmArchitecture>
-    <param.TargetLang>option.TargetLang.CPP</param.TargetLang>
+    <param.TargetLang>option.TargetLang.C</param.TargetLang>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
     <param.UsePreconditions>false</param.UsePreconditions>
     <param.FeatureFlags />
@@ -995,8 +991,6 @@
       <var.isDeepLearningForMatlabCoderEnabled />
       <param.deeplearning.TargetLib />
       <var.cfiTargetLibSuppression />
-      <var.hasMatlabDeepLearningSupportPackage />
-      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
@@ -1005,6 +999,7 @@
       <param.cudnn.CalibrationResultFile />
       <param.arm-compute.ArmComputeVersion />
       <param.arm-compute.ArmArchitecture />
+      <param.TargetLang />
       <param.EnableAutoExtrinsicCalls />
       <param.UsePreconditions />
       <param.FeatureFlags />
@@ -1053,7 +1048,7 @@
     </unset>
     <fileset.entrypoints>
       <file custom-data-expanded="false" value="${PROJECT_ROOT}\manipulability.m">
-        <Marker>1614637680815</Marker>
+        <Marker>1614667849145</Marker>
       </file>
     </fileset.entrypoints>
     <fileset.testbench>

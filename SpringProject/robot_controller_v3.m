@@ -133,7 +133,7 @@ state = zeros(1,36);
 % Numerically Integrate for Position of Manipulator
 
 for ii = 1:length(t)
-   %% Named Vectors of State Values %%
+    %% Named Vectors of State Values %%
     r_II_B(:,1) = [b(4,ii);b(5,ii);b(6,ii)];
     Theta1(:,1) = [b(7,ii);b(8,ii);b(9,ii);b(10,ii)];
     Theta2(:,1) = [b(11,ii);b(12,ii);b(13,ii);b(14,ii)];
@@ -223,31 +223,12 @@ for ii = 1:length(t)
         turn_needed = 0;
     end
     
-    
     if turn_needed == 1
-        
         if abs(phi_d(ii) - phi) < pi/10
             if (turn_state == 0) && (leg_reset_needed == 0)
                 is_turning = 1;
                 phi_d_temp = phi_d(ii);
                 leg_reset_needed = 0;
-%                 % move with normal body pose controller
-%                 [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d,r_II_B_d,r_II_B,floor_toggle);
-%                 % if theta1 wraps around into robot
-%                 T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-%                 T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-%                 T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-%                 T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-%                 for hh = 1:1:4
-%                     if T1_cond(hh)
-%                         Theta1_d(hh,1) = Theta1_2_d(hh);
-%                         Theta2_d(hh,1) = Theta2_4_d(hh);
-%                         Theta3_d(hh,1) = Theta3_4_d(hh);
-%                     else
-%                         Theta2_d(hh,1) = Theta2_2_d(hh);
-%                         Theta3_d(hh,1) = Theta3_2_d(hh);
-%                     end
-%                 end
                 turn_state = 1;
             elseif turn_state == 1
                 phi_error = abs(phi_d(ii) - phi);
@@ -264,25 +245,6 @@ for ii = 1:length(t)
                 is_turning = 1;
                 phi_d_temp = phi + turn_dir*pi/10;
                 T_I_B_d_temp = rotz(phi_d_temp)*roty(theta_d(ii))*rotx(psi_d(ii));
-                
-%                 % move with normal body pose controller
-%                 [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d,r_II_B,floor_toggle);
-%                 % if theta1 wraps around into robot
-%                 T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-%                 T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-%                 T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-%                 T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-%                 for hh = 1:1:4
-%                     if T1_cond(hh)
-%                         Theta1_d(hh,1) = Theta1_2_d(hh);
-%                         Theta2_d(hh,1) = Theta2_4_d(hh);
-%                         Theta3_d(hh,1) = Theta3_4_d(hh);
-%                     else
-%                         Theta2_d(hh,1) = Theta2_2_d(hh);
-%                         Theta3_d(hh,1) = Theta3_2_d(hh);
-%                     end
-%                 end
-                
                 turn_state = 1 ;
             elseif turn_state == 1
                 is_turning = 1;
@@ -292,19 +254,17 @@ for ii = 1:length(t)
                     startPhi = phi;
                     leg_reset_needed = 1;   % reset legs
                 end
-            end            
+            end
         end
         %% Turn Stepping Section
         if leg_reset_needed == 1
-            
-           % step to reset legs
+            % step to reset legs
             if leg_index == 1
                 legs_valid(1) = 0;
                 if reached_centroid == 0
                     [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                     r_II_B_d_temp = [x;y;r_II_B_d(3)];
                 end
-                
                 if step_state == 0 % hasn't started stepping yet
                     Theta1_d_midpt = Theta1_d_midpt_FR;
                     Theta2_d_midpt = Theta2_d_midpt_FR;
@@ -314,7 +274,7 @@ for ii = 1:length(t)
                 elseif step_state == 1 % moving towards midpoint
                     step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                     if step_error < 0.2% reached midpoint
-                        step_state = 3;      
+                        step_state = 3;
                         Theta1_d_reset = Theta1_d_reset_FR;
                         Theta2_d_reset = Theta2_d_reset_FR;
                         Theta3_d_reset = Theta3_d_reset_FR;
@@ -333,16 +293,12 @@ for ii = 1:length(t)
                         legs_stepped = legs_stepped + 1;
                     end
                 end
-                %if error reached
-               
             elseif leg_index == 2
                 legs_valid(2) = 0;
-                
                 if reached_centroid == 0
                     [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                     r_II_B_d_temp = [x;y;r_II_B_d(3)];
                 end
-                
                 if step_state == 0 % hasn't started stepping yet
                     Theta1_d_midpt = Theta1_d_midpt_FL;
                     Theta2_d_midpt = Theta2_d_midpt_FL;
@@ -372,7 +328,6 @@ for ii = 1:length(t)
                         legs_stepped = legs_stepped + 1;
                     end
                 end
-                
             elseif leg_index == 3
                 legs_valid(3) = 0;
                 if reached_centroid == 0
@@ -408,15 +363,12 @@ for ii = 1:length(t)
                         legs_stepped = legs_stepped + 1;
                     end
                 end
-                
             elseif leg_index == 4
                 legs_valid(4) = 0;
-                
                 if reached_centroid == 0
                     [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                     r_II_B_d_temp = [x;y;r_II_B_d(3)];
                 end
-                
                 if step_state == 0 % hasn't started stepping yet
                     Theta1_d_midpt = Theta1_d_midpt_BL;
                     Theta2_d_midpt = Theta2_d_midpt_BL;
@@ -445,8 +397,8 @@ for ii = 1:length(t)
                         %if error reached
                         legs_stepped = legs_stepped + 1;
                     end
-                end 
-            end 
+                end
+            end
             if legs_stepped == 4
                 legs_stepped = 0;
                 leg_reset_needed = 0;
@@ -456,7 +408,6 @@ for ii = 1:length(t)
                 end
             end
         end
-        
         
         %% walking forward section
         %if ((d_B_dis_FR > max_body_dist) || (d_B_dis_FL > max_body_dist) || (d_B_dis_BR > max_body_dist) || (d_B_dis_BL > max_body_dist)) || (step_state ~= 0)
@@ -474,18 +425,14 @@ for ii = 1:length(t)
                     waypoint_toggle = 0;
                 end
             end
-            
-            
             %% leg stepping algorithm
             % FR leg needs to step
             if leg_index == 1
                 legs_valid(1) = 0;
-                
                 if reached_centroid == 0
                     [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                     r_II_B_d_temp = [x;y;r_II_B_d(3)];
                 end
-                
                 if step_state == 0 % hasn't started stepping yet
                     Theta1_d_midpt = Theta1_d_midpt_FR;
                     Theta2_d_midpt = Theta2_d_midpt_FR;
@@ -512,12 +459,10 @@ for ii = 1:length(t)
                 end
             elseif leg_index == 2
                 legs_valid(2) = 0;
-                
                 if reached_centroid == 0
                     [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                     r_II_B_d_temp = [x;y;r_II_B_d(3)];
                 end
-                
                 if step_state == 0 % hasn't started stepping yet
                     Theta1_d_midpt = Theta1_d_midpt_FL;
                     Theta2_d_midpt = Theta2_d_midpt_FL;
@@ -532,7 +477,6 @@ for ii = 1:length(t)
                         r_II_c_current = r_II_c_FL_0;
                     end
                 elseif step_state == 2 % stepping towards goal now
-                    %                 step_error = norm(r_II_c_FL - r_II_c_dstep);
                     if r_II_c_FL(3) <= 0
                         step_state = 0;
                         legs_valid(2) = 1;
@@ -562,7 +506,6 @@ for ii = 1:length(t)
                         r_II_c_current = r_II_c_BR_0;
                     end
                 elseif step_state == 2 % stepping towards goal now
-                    %                 step_error = norm(r_II_c_BR - r_II_c_dstep);
                     if r_II_c_BR(3) <= 0
                         legs_valid(3) = 1;
                         step_state = 0;
@@ -574,12 +517,10 @@ for ii = 1:length(t)
                 end
             elseif leg_index == 4
                 legs_valid(4) = 0;
-                
                 if reached_centroid == 0
                     [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                     r_II_B_d_temp = [x;y;r_II_B_d(3)];
                 end
-                
                 if step_state == 0 % hasn't started stepping yet
                     Theta1_d_midpt = Theta1_d_midpt_BL;
                     Theta2_d_midpt = Theta2_d_midpt_BL;
@@ -594,7 +535,6 @@ for ii = 1:length(t)
                         r_II_c_current = r_II_c_BL_0;
                     end
                 elseif step_state == 2 % stepping towards goal now
-                    %                 step_error = norm(r_II_c_BL - r_II_c_dstep);
                     if r_II_c_BL(3) <= 0
                         step_state = 0;
                         legs_valid(4) = 1;
@@ -605,28 +545,9 @@ for ii = 1:length(t)
                     end
                 end
             end
-            
-            
-            
         else
             % move with normal body pose controller
-            [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d,r_II_B_d,r_II_B,floor_toggle);
-            % if theta1 wraps around into robot
-            T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-            T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-            T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-            T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-            
-            for hh = 1:1:4
-                if T1_cond(hh)
-                    Theta1_d(hh,1) = Theta1_2_d(hh);
-                    Theta2_d(hh,1) = Theta2_4_d(hh);
-                    Theta3_d(hh,1) = Theta3_4_d(hh);
-                else
-                    Theta2_d(hh,1) = Theta2_2_d(hh);
-                    Theta3_d(hh,1) = Theta3_2_d(hh);
-                end
-            end
+            [Theta1_d,Theta2_d,Theta3_d, r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d,r_II_B_d,r_II_B,floor_toggle);
         end
     end
     
@@ -635,50 +556,11 @@ for ii = 1:length(t)
         pgon = polyshape([r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1), r_II_c_BR(1)],[r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2), r_II_c_BR(2)]);
         [x,y] = centroid(pgon);
         r_II_B_d_temp = [x;y;r_II_B_d(3)];
-        [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,[1,1,1,1]);
-        
-        
-        % if theta1 wraps around into robot
-        T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-        T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-        T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-        T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-        
-        for hh = 1:1:4
-            if T1_cond(hh)
-                Theta1_d(hh,1) = Theta1_2_d(hh);
-                Theta2_d(hh,1) = Theta2_4_d(hh);
-                Theta3_d(hh,1) = Theta3_4_d(hh);
-            else
-                Theta2_d(hh,1) = Theta2_2_d(hh);
-                Theta3_d(hh,1) = Theta3_2_d(hh);
-            end
-        end
-        
-        
+        [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,[1,1,1,1]);
         reached_rest_centroid = 2;
     elseif reached_rest_centroid == 2 % moving towards resting, or inbetween-step body pose
         body_error = norm(r_II_B - r_II_B_d_temp);
-        
-        [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
-                
-                % if theta1 wraps around into robot
-                T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-                T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-                T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-                T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-                
-                for hh = 1:1:4
-                    if T1_cond(hh)
-                        Theta1_d(hh,1) = Theta1_2_d(hh);
-                        Theta2_d(hh,1) = Theta2_4_d(hh);
-                        Theta3_d(hh,1) = Theta3_4_d(hh);
-                    else
-                        Theta2_d(hh,1) = Theta2_2_d(hh);
-                        Theta3_d(hh,1) = Theta3_2_d(hh);
-                    end
-                end
-                
+        [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
         if body_error < 0.01
             reached_rest_centroid = 1;
         end
@@ -687,27 +569,7 @@ for ii = 1:length(t)
         % rockback before step
         if ~isempty(find(legs_valid == 0))
             if reached_centroid == 0 % hasn't started moving towards centroid yet
-                [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
-                
-                
-                % if theta1 wraps around into robot
-                T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-                T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-                T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-                T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-                
-                for hh = 1:1:4
-                    if T1_cond(hh)
-                        Theta1_d(hh,1) = Theta1_2_d(hh);
-                        Theta2_d(hh,1) = Theta2_4_d(hh);
-                        Theta3_d(hh,1) = Theta3_4_d(hh);
-                    else
-                        Theta2_d(hh,1) = Theta2_2_d(hh);
-                        Theta3_d(hh,1) = Theta3_2_d(hh);
-                    end
-                end
-                
-                
+                [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
                 reached_centroid = 2;
             elseif reached_centroid == 2 % moving towards centroid
                 body_error = norm(r_II_B - r_II_B_d_temp);
@@ -716,28 +578,7 @@ for ii = 1:length(t)
                 end
             elseif reached_centroid == 1 % step
                 % step leg
-                [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
-                
-                
-                % if theta1 wraps around into robot
-                % if theta1 wraps around into robot
-                T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-                T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-                T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-                T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-                
-                for hh = 1:1:4
-                    if T1_cond(hh)
-                        Theta1_d(hh,1) = Theta1_2_d(hh);
-                        Theta2_d(hh,1) = Theta2_4_d(hh);
-                        Theta3_d(hh,1) = Theta3_4_d(hh);
-                    else
-                        Theta2_d(hh,1) = Theta2_2_d(hh);
-                        Theta3_d(hh,1) = Theta3_2_d(hh);
-                    end
-                end
-                
-                
+                [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
                 if (step_state == 1) && (reached_centroid == 1)
                     floor_toggle(leg_index) = 0;
                     Theta1_d(leg_index) = Theta1_d_midpt;
@@ -749,27 +590,8 @@ for ii = 1:length(t)
                     else
                         is_left_leg = 0;
                     end
-                    [Theta1_d(leg_index), Theta1_2_d(leg_index), Theta2_1_d(leg_index), Theta2_2_d(leg_index), Theta2_3_d(leg_index), Theta2_4_d(leg_index), Theta3_1_d(leg_index), Theta3_2_d(leg_index),Theta3_3_d(leg_index),Theta3_4_d(leg_index),r_II_c_dstep] = Leg_Controller(r_II_c_dstep, r_II_c_current, T_I_B, r_II_B, leg_index);
-                    
-                    
-                    % if theta1 wraps around into robot
-                    T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-                    T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-                    T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-                    T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-                    
-                    for hh = 1:1:4
-                        if T1_cond(hh)
-                            Theta1_d(hh,1) = Theta1_2_d(hh);
-                            Theta2_d(hh,1) = Theta2_4_d(hh);
-                            Theta3_d(hh,1) = Theta3_4_d(hh);
-                        else
-                            Theta2_d(hh,1) = Theta2_2_d(hh);
-                            Theta3_d(hh,1) = Theta3_2_d(hh);
-                        end
-                    end
-                    
-                elseif step_state == 3    
+                    [Theta1_d(leg_index), Theta2_d(leg_index), Theta3_d(leg_index),r_II_c_dstep] = Leg_Controller(r_II_c_dstep, r_II_c_current, T_I_B, r_II_B, leg_index);
+                elseif step_state == 3
                     Theta1_d(leg_index) = Theta1_d_reset;
                     Theta2_d(leg_index) = Theta2_d_reset;
                     Theta3_d(leg_index) = Theta3_d_reset;
@@ -781,29 +603,9 @@ for ii = 1:length(t)
             end
         else
             r_II_B_d_temp = r_II_B;
-            [Theta1_d,Theta1_2_d,Theta2_1_d,Theta2_2_d,Theta2_3_d,Theta2_4_d,Theta3_1_d,Theta3_2_d,Theta3_3_d,Theta3_4_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
-                
-                    
-                    % if theta1 wraps around into robot
-                    T1_cond(1) = (Theta1_d(1) <= -pi/2) || (Theta1_d(1) >= pi); % FR
-                    T1_cond(2) = (Theta1_d(2) <= -pi) || (Theta1_d(2) >= pi/2); %FL
-                    T1_cond(3) = (Theta1_d(3) <= -pi) || (Theta1_d(3) >= pi/2); % BR
-                    T1_cond(4) = (Theta1_d(4) <= -pi/2) || (Theta1_d(4) >= pi); % BL
-                    
-                    for hh = 1:1:4
-                        if T1_cond(hh)
-                            Theta1_d(hh,1) = Theta1_2_d(hh);
-                            Theta2_d(hh,1) = Theta2_4_d(hh);
-                            Theta3_d(hh,1) = Theta3_4_d(hh);
-                        else
-                            Theta2_d(hh,1) = Theta2_2_d(hh);
-                            Theta3_d(hh,1) = Theta3_2_d(hh);
-                        end
-                    end
+            [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
         end
     end
-    
-    % step not needed
     
     
     

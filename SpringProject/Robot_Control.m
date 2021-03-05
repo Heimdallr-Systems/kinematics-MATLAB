@@ -92,6 +92,9 @@ if init_toggle
     leg_reset_needed = 0;
 end
 
+%% Initialize state be the correct size
+state = zeros(36,1);
+
 % current
 phi = gamma_m(1);
 theta = gamma_m(2);
@@ -101,7 +104,7 @@ Theta1 = [gamma_m(7);gamma_m(8);gamma_m(9);gamma_m(10)];
 Theta2 = [gamma_m(11);gamma_m(12);gamma_m(13);gamma_m(14)];
 Theta3 = [gamma_m(15);gamma_m(16);gamma_m(17);gamma_m(18)];
 T_I_B = rotz(phi)*roty(theta)*rotx(psi);
-state = gamma_m(1:18);
+state(1:18) = gamma_m(1:18);
 % Constants for "resetting" legs
 % FR
 r_BB_c_reset_FR = [.25;-.25;-r_II_B(3)];

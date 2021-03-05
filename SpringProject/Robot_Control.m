@@ -496,8 +496,7 @@ end
 
 %% centroid moving/balance section, and commanding step (assigning thetad's)
 if reached_rest_centroid == 0 % needs to move back to resting 4-legged position to find new leg to move
-    pgon = polyshape([r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1), r_II_c_BR(1)],[r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2), r_II_c_BR(2)]);
-    [x,y] = centroid(pgon);
+    [x,y] = centroid_codeGen([r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1), r_II_c_BR(1)],[r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2), r_II_c_BR(2)]);
     r_II_B_d_temp = [x;y;r_II_B_d(3)];
     [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,[1,1,1,1]);
     reached_rest_centroid = 2;

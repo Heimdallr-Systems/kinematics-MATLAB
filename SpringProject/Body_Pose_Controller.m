@@ -323,7 +323,7 @@ Theta3_2(4,1) = Theta3_BL_2;
 Theta3_3(4,1) = Theta3_BL_3;
 Theta3_4(4,1) = Theta3_BL_4;
 
-
+T1_cond = zeros(1,4);
 % if theta1 wraps around into robot
 T1_cond(1) = (Theta1(1) <= -pi/2) || (Theta1(1) >= pi); % FR
 T1_cond(2) = (Theta1(2) <= -pi) || (Theta1(2) >= pi/2); %FL

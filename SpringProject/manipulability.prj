@@ -839,8 +839,8 @@
     <var.cfi.preBuildChecksum>2073559445</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>manipulability_test</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;3363808471&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;3490147109&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -877,8 +877,8 @@
     <var.isDeepLearningForMatlabCoderEnabled>true</var.isDeepLearningForMatlabCoderEnabled>
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
     <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
+    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
@@ -991,6 +991,8 @@
       <var.isDeepLearningForMatlabCoderEnabled />
       <param.deeplearning.TargetLib />
       <var.cfiTargetLibSuppression />
+      <var.hasMatlabDeepLearningSupportPackage />
+      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />

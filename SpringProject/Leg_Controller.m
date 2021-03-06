@@ -11,6 +11,18 @@ constants = RobotConstants();
 L2 = norm(constants.r_22_3_BL);
 L3 = norm(constants.r_33_c_BL);
 
+%% Init these so that coder does not throw a hissy fit
+% FIXME: This could actually cause problems. Check with Nick
+Theta1 = 0;
+Theta1_2 = 0;
+Theta2_2 = 0;
+Theta3_2 = 0;
+Theta2_4 = 0;
+Theta3_4 = 0;
+
+
+%%
+
 travel_dir = (r_II_c_d-r_II_c_0)/norm((r_II_c_d-r_II_c_0));
 loop_toggle = 0;
 ii = 0;
@@ -24,16 +36,16 @@ while loop_toggle == 0
     %% FR LEG
     if leg_index == 1
         r_II_c_FR = r_II_c_d;
-        constants.r_BB_c_FR = T_I_B\(r_II_c_FR - r_II_B);
-        constants.r_B1_c_FR = constants.r_BB_c_FR - constants.r_BB_1_FR;
+        r_BB_c_FR = T_I_B\(r_II_c_FR - r_II_B);
+        r_B1_c_FR = r_BB_c_FR - constants.r_BB_1_FR;
         
-        Theta1 = atan2(constants.r_B1_c_FR(2),constants.r_B1_c_FR(1))+pi/2;
+        Theta1 = atan2(r_B1_c_FR(2),r_B1_c_FR(1))+pi/2;
         Theta1 = angle(exp(1j*Theta1));
         
         Theta1_2 = Theta1 + pi;
         
-        r_1prime1_c_FR = rotz(pi)\(rotz(Theta1)\constants.r_B1_c_FR);
-        r_1prime1_c_FR_2 = rotz(pi)\(rotz(Theta1_2)\constants.r_B1_c_FR);
+        r_1prime1_c_FR = rotz(pi)\(rotz(Theta1)\r_B1_c_FR);
+        r_1prime1_c_FR_2 = rotz(pi)\(rotz(Theta1_2)\r_B1_c_FR);
         
         r_1prime1_2_FR = rotz(pi)\constants.r_11_2_FR;
         
@@ -85,25 +97,25 @@ while loop_toggle == 0
     %% FL LEG
     if leg_index == 2
         r_II_c_FL = r_II_c_d;
-        constants.r_BB_c_FL = T_I_B\(r_II_c_FL - r_II_B);
-        constants.r_B1_c_FL = constants.r_BB_c_FL - constants.r_BB_1_FL;
+        r_BB_c_FL = T_I_B\(r_II_c_FL - r_II_B);
+        r_B1_c_FL = r_BB_c_FL - constants.r_BB_1_FL;
         
-        Theta1 = atan2(constants.r_B1_c_FL(2),constants.r_B1_c_FL(1))-pi/2;
+        Theta1 = atan2(r_B1_c_FL(2),r_B1_c_FL(1))-pi/2;
         Theta1 = angle(exp(1j*Theta1));
         
         Theta1_2 = Theta1 + pi;
         
-        constants.r_11_c_FL = rotz(Theta1)\constants.r_B1_c_FL;
+        r_11_c_FL = rotz(Theta1)\r_B1_c_FL;
         
-        constants.r_11_c_FL_2 = rotz(Theta1_2)\constants.r_B1_c_FL;
+        r_11_c_FL_2 = rotz(Theta1_2)\r_B1_c_FL;
         
-        r_FL = constants.r_11_c_FL(2)-constants.r_11_2_FL(2);
+        r_FL = r_11_c_FL(2)-constants.r_11_2_FL(2);
         
-        r_FL_2 = constants.r_11_c_FL_2(2)-constants.r_11_2_FL(2);
+        r_FL_2 = r_11_c_FL_2(2)-constants.r_11_2_FL(2);
         
-        s_FL = constants.r_11_c_FL(3)-constants.r_11_2_FL(3);
+        s_FL = r_11_c_FL(3)-constants.r_11_2_FL(3);
         
-        s_FL_2 = constants.r_11_c_FL_2(3)-constants.r_11_2_FL(3);
+        s_FL_2 = r_11_c_FL_2(3)-constants.r_11_2_FL(3);
         
         D_FL = (r_FL^2 + s_FL^2 - L2^2 - L3^2)/(2*L2*L3);
         
@@ -141,17 +153,17 @@ while loop_toggle == 0
     %% BR LEG
     if leg_index == 3
         r_II_c_BR = r_II_c_d;
-        constants.r_BB_c_BR = T_I_B\(r_II_c_BR - r_II_B);
-        constants.r_B1_c_BR = constants.r_BB_c_BR - constants.r_BB_1_BR;
+        r_BB_c_BR = T_I_B\(r_II_c_BR - r_II_B);
+        r_B1_c_BR = r_BB_c_BR - constants.r_BB_1_BR;
         
-        Theta1 = atan2(constants.r_B1_c_BR(2),constants.r_B1_c_BR(1))+pi/2;
+        Theta1 = atan2(r_B1_c_BR(2),r_B1_c_BR(1))+pi/2;
         Theta1 = angle(exp(1j*Theta1));
         
         Theta1_2 = Theta1 + pi;
         
-        r_1prime1_c_BR  = rotz(pi)\(rotz(Theta1)\constants.r_B1_c_BR);
+        r_1prime1_c_BR  = rotz(pi)\(rotz(Theta1)\r_B1_c_BR);
         
-        r_1prime1_c_BR_2  = rotz(pi)\(rotz(Theta1_2)\constants.r_B1_c_BR);
+        r_1prime1_c_BR_2  = rotz(pi)\(rotz(Theta1_2)\r_B1_c_BR);
         
         r_1prime1_2_BR = rotz(pi)\constants.r_11_2_BR;
         
@@ -205,25 +217,25 @@ while loop_toggle == 0
     %% BL LEG
     if leg_index == 4
         r_II_c_BL = r_II_c_d;
-        constants.r_BB_c_BL = T_I_B\(r_II_c_BL - r_II_B);
-        constants.r_B1_c_BL = constants.r_BB_c_BL - constants.r_BB_1_BL;
+        r_BB_c_BL = T_I_B\(r_II_c_BL - r_II_B);
+        r_B1_c_BL = r_BB_c_BL - constants.r_BB_1_BL;
         
-        Theta1 = atan2(constants.r_B1_c_BL(2),constants.r_B1_c_BL(1))-pi/2;
+        Theta1 = atan2(r_B1_c_BL(2),r_B1_c_BL(1))-pi/2;
         Theta1 = angle(exp(1j*Theta1));
         
         Theta1_2 = Theta1 + pi;
         
-        constants.r_11_c_BL = rotz(Theta1)\constants.r_B1_c_BL;
+        r_11_c_BL = rotz(Theta1)\r_B1_c_BL;
         
-        constants.r_11_c_BL_2 = rotz(Theta1_2)\constants.r_B1_c_BL;
+        r_11_c_BL_2 = rotz(Theta1_2)\r_B1_c_BL;
         
-        r_BL = constants.r_11_c_BL(2)-constants.r_11_2_BL(2);
+        r_BL = r_11_c_BL(2)-constants.r_11_2_BL(2);
         
-        r_BL_2 = constants.r_11_c_BL_2(2)-constants.r_11_2_BL(2);
+        r_BL_2 = r_11_c_BL_2(2)-constants.r_11_2_BL(2);
         
-        s_BL = constants.r_11_c_BL(3)-constants.r_11_2_BL(3);
+        s_BL = r_11_c_BL(3)-constants.r_11_2_BL(3);
         
-        s_BL_2 = constants.r_11_c_BL_2(3)-constants.r_11_2_BL(3);
+        s_BL_2 = r_11_c_BL_2(3)-constants.r_11_2_BL(3);
         
         D_BL = (r_BL^2 + s_BL^2 - L2^2 - L3^2)/(2*L2*L3);
         

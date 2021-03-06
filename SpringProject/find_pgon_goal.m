@@ -14,7 +14,9 @@ elseif lifted_leg == 3
     pgonx = [r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1)];
     pgony = [r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2)];
     boundary_vec = (r_II_c_FR - r_II_c_BL)/norm(r_II_c_FR - r_II_c_BL);
-elseif lifted_leg == 4
+% Use else instead of elseif lifted_leg == 4 so that codegen does not freak
+% out
+else
     pgonx = [r_II_c_FR(1), r_II_c_FL(1), r_II_c_BR(1)];
     pgony = [r_II_c_FR(2), r_II_c_FL(2), r_II_c_BR(2)];
     boundary_vec = (r_II_c_BR - r_II_c_FL)/norm((r_II_c_BR - r_II_c_FL));

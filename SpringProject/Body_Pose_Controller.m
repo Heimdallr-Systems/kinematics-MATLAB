@@ -29,6 +29,65 @@ Theta3_2 = zeros(4,1);
 Theta3_3 = zeros(4,1);
 Theta3_4 = zeros(4,1);
 
+%% Init these so that coder does not throw a hissy fit
+% FIXME: This could actually cause problems. Check with Nick
+Theta1_FR = 0;
+Theta2_FR = 0;
+Theta3_FR = 0;
+
+Theta1_FL = 0;
+Theta2_FL = 0;
+Theta3_FL = 0;
+
+Theta1_BR = 0;
+Theta2_BR = 0;
+Theta3_BR = 0;
+
+Theta1_BL = 0;
+Theta2_BL = 0;
+Theta3_BL = 0;
+
+Theta1_FR_2 = 0;
+Theta2_FR_2 = 0;
+Theta3_FR_2 = 0;
+
+Theta1_FL_2 = 0;
+Theta2_FL_2 = 0;
+Theta3_FL_2 = 0;
+
+Theta1_BR_2 = 0;
+Theta2_BR_2 = 0;
+Theta3_BR_2 = 0;
+
+Theta1_BL_2 = 0;
+Theta2_BL_2 = 0;
+Theta3_BL_2 = 0;
+
+Theta2_FR_3 = 0;
+Theta3_FR_3 = 0;
+
+Theta2_FL_3 = 0;
+Theta3_FL_3 = 0;
+
+Theta2_BR_3 = 0;
+Theta3_BR_3 = 0;
+
+Theta2_BL_3 = 0;
+Theta3_BL_3 = 0;
+
+Theta2_FR_4 = 0;
+Theta3_FR_4 = 0;
+
+Theta2_FL_4 = 0;
+Theta3_FL_4 = 0;
+
+Theta2_BR_4 = 0;
+Theta3_BR_4 = 0;
+
+Theta2_BL_4 = 0;
+Theta3_BL_4 = 0;
+
+%%
 travel_dir = (r_II_B_d - r_II_B_0)./norm((r_II_B_d - r_II_B_0));
 ii = 0;
 while (loop_toggle == 0)

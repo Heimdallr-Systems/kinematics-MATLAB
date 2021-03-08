@@ -90,6 +90,9 @@ if init_toggle
     floor_toggle = legs_valid;
     legs_stepped = 0;
     leg_reset_needed = 0;
+    T_I_B_d_temp = eye(3,3);
+    phi_d_temp = 0;
+    is_turning = 0;
 end
 
 % current
@@ -179,7 +182,7 @@ end
 %% Turn Needed Algorithm
 if (abs(endPhi - startPhi) > pi/10)
     turn_needed = 1;
-elseif is_turning == 0
+else
     turn_needed = 0;
 end
 

@@ -34,8 +34,8 @@ b(18,1) = -pi/3;
 % theta_d =  zeros(1,length(x_d));
 % psi_d =  zeros(1,length(x_d));
 r_II_B_d = [1;0;0.2];
-Euler_d = [pi/2,0,0];
-phi_d = pi/2;
+Euler_d = [0,0,0];
+phi_d = 0;
 theta_d = 0;
 psi_d = 0;
 

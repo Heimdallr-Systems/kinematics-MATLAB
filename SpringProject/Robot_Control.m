@@ -77,20 +77,163 @@ persistent Theta1_d;
 persistent Theta2_d;
 persistent Theta3_d;
 
-if init_toggle
+%% Initialize Persistent Variables
+% TODO: Reduce the total number of persistent vars
+if isempty(waypoint_toggle)
     waypoint_toggle = 0; % intialize toggle for determining direction of travel
+end
+if isempty(turn_toggle)
     turn_toggle = 0; % init toggle for determining direction of turning
+end
+
+if isempty(step_state)
     step_state = 0; % intialize toggle for determining which phase of step leg is in
+end
+if isempty(turn_state)
+    
     turn_state = 0; % init toggle for determining which phase of turn robot is in
+end
+if isempty(reached_centroid)
+    
     reached_centroid = 0; % initialize toggle for determining which state the body is in
+end
+if isempty(reached_rest_centroid)
+    
     reached_rest_centroid = 1; % initialize toggle for determining which state the body is in when returning to a four-leg-defined polygon centroid
+end
+if isempty(step_needed)
+    
     step_needed = 1; % initialize variable for determining which leg needs to be stepped next
+end
+if isempty(calc_manip)
+    
     calc_manip = 1; % initialize toggle for determining if manipulability needs to be recalculated
+end
+if isempty(legs_valid)
+    
     legs_valid = [1,1,1,1];
+end
+if isempty(floor_toggle)
+    
     floor_toggle = legs_valid;
+end
+if isempty(legs_stepped)
+    
     legs_stepped = 0;
+end
+if isempty(leg_reset_needed)
+    
     leg_reset_needed = 0;
 end
+if isempty(leg_index)
+    leg_index = 0;
+end
+if isempty(r_II_c_BL_0)
+    r_II_c_BL_0 = zeros(3,1);
+end
+if isempty(r_II_c_BR_0)
+    r_II_c_BR_0 = zeros(3,1);
+end
+if isempty(r_II_c_FL_0)
+    r_II_c_FL_0 = zeros(3,1);
+end
+if isempty(r_II_c_FR_0)
+    r_II_c_FR_0 = zeros(3,1);
+end
+if isempty(T_I_B_d_temp)
+    T_I_B_d_temp = zeros(3,3);
+end
+
+if isempty(r_II_B_d_temp)
+    r_II_B_d_temp = zeros(3,1);
+end
+
+if isempty(Theta1_d_reset)
+    Theta1_d_reset = 0;
+end
+
+if isempty(Theta2_d_reset)
+    Theta2_d_reset = 0;
+end
+
+if isempty(Theta3_d_reset)
+    Theta3_d_reset = 0;
+end
+
+if isempty(r_II_c_dstep)
+    r_II_c_dstep = zeros(3,1);
+end
+
+if isempty(r_II_c_current)
+    r_II_c_current = zeros(3,1);
+end
+
+if isempty(is_turning)
+    is_turning = 0;
+end
+
+
+if isempty(manip_vec)
+    manip_vec = [0,0,0,0];
+end
+
+% TODO: See if there is a better way to use this var
+if isempty(mu)
+    mu = [0,0,0,0];
+end
+
+% TODO: See if there is a better way to use this var
+if isempty(endPoint)
+    endPoint = zeros(3,1);
+end
+
+if isempty(endPhi)
+    endPhi = 0;
+end
+
+if isempty(startPhi)
+    startPhi = 0;
+end
+
+if isempty(turn_needed)
+    turn_needed = 0;
+end
+
+if isempty(Theta1_d_midpt)
+    Theta1_d_midpt = 0;
+end
+
+if isempty(Theta2_d_midpt)
+    Theta2_d_midpt = 0;
+end
+
+if isempty(Theta3_d_midpt)
+    Theta3_d_midpt = 0;
+end
+
+if isempty(startPoint)
+    startPoint = zeros(3,1);
+end
+
+if isempty(phi_d_temp)
+    phi_d_temp = 0;
+end
+
+if isempty(Theta1_d)
+    Theta1_d = zeros(4,1);
+end
+
+if isempty(Theta2_d)
+    Theta2_d = zeros(4,1);
+end
+
+if isempty(Theta3_d)
+    Theta3_d = zeros(4,1);
+end
+
+%% Initialize non persistent variables to fix issues with not all paths using them
+% TODO: See if we can get rid of some of these
+step_error = 0;
 
 %% Initialize state be the correct size
 state = zeros(36,1);

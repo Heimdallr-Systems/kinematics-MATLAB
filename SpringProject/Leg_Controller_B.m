@@ -87,7 +87,7 @@ switch leg_index
         Theta2 = Theta2_BR_2;
         Theta3 = Theta3_BR_2;
         % If not 1, 2, or 3, it must be 4
-    otherwise
+    case 4
         r_BB_c_BL = r_BB_c;
         r_B1_c_BL = r_BB_c_BL - constants.r_BB_1_BL;
         Theta1_BL = atan2(r_B1_c_BL(2),r_B1_c_BL(1))-pi/2;
@@ -104,6 +104,8 @@ switch leg_index
         Theta1 = Theta1_BL;
         Theta2 = Theta2_BL_2;
         Theta3 = Theta3_BL_2;
+    otherwise 
+        error("leg_index is not set to a valid value")
 end
 
 end

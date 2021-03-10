@@ -381,10 +381,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
                     step_state = 3;
-                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, 1);
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, coder.ignoreConst(1));
                 end
             elseif step_state == 3 % stepping towards goal now
-                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, 1);
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, coder.ignoreConst(1));
                 if r_II_c_FR(3) <= 0
                     step_state = 0;
                     legs_valid(1) = 1;
@@ -411,10 +411,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2 % reached midpoint
                     step_state = 3;
-                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, 2);
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, coder.ignoreConst(2));
                 end
             elseif step_state == 3 % stepping towards goal now
-                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, 2);
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, coder.ignoreConst(2));
                 if r_II_c_FL(3) <= 0
                     step_state = 0;
                     legs_valid(2) = 1;
@@ -442,10 +442,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
                     step_state = 3;
-                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, 3);
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, coder.ignoreConst(3));
                 end
             elseif step_state == 3 % stepping towards goal now
-                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, 3);
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, coder.ignoreConst(3));
                 if r_II_c_BR(3) <= 0
                     legs_valid(3) = 1;
                     step_state = 0;
@@ -473,10 +473,10 @@ if turn_needed == 1
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
                     step_state = 3;
-                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, 4);
+                    [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, coder.ignoreConst(4));
                 end
             elseif step_state == 3 % stepping towards goal now
-                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, 4);
+                [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, coder.ignoreConst(4));
                 if r_II_c_BL(3) <= 0
                     step_state = 0;
                     legs_valid(4) = 1;

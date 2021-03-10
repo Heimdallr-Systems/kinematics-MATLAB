@@ -281,8 +281,16 @@ while loop_toggle == 0
 end     
 
 % if theta1 wraps around into robot
-T1_cond = (Theta1(1) <= -pi/2) || (Theta1(1) >= pi); % FR
-
+if leg_index == 1
+    T1_cond = (Theta1 <= -pi/2) || (Theta1 >= pi); % FR
+elseif leg_index == 2
+    T1_cond = (Theta1 <= -pi) || (Theta1 >= pi/2); %FL
+elseif leg_index == 3
+    T1_cond = (Theta1 <= -pi) || (Theta1 >= pi/2); % BR
+elseif leg_index == 4
+    T1_cond = (Theta1 <= -pi/2) || (Theta1 >= pi); % BL
+end
+     
 if T1_cond
     Theta1 = Theta1_2;
     Theta2 = Theta2_4;

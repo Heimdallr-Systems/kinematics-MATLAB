@@ -88,6 +88,11 @@ max_body_dist = 0.1; % initialize max bound for moving without steps
 
 waypoint_toggle = 0; % intialize toggle for determining direction of travel
 
+is_turning = 0;
+
+T_I_B_d_temp = eye(3,3);
+
+phi_d_temp = 0;
 
 turn_toggle = 0; % init toggle for determining direction of turning
 
@@ -124,6 +129,11 @@ state = zeros(1, 36);
 
 for ii = 1:length(t)
     %% Named Vectors of State Values %%
+    
+    if ii == 148
+       disp('hi') 
+    end
+    
     r_II_B(:,1) = [b(4,ii);b(5,ii);b(6,ii)];
     Theta1(:,1) = [b(7,ii);b(8,ii);b(9,ii);b(10,ii)];
     Theta2(:,1) = [b(11,ii);b(12,ii);b(13,ii);b(14,ii)];

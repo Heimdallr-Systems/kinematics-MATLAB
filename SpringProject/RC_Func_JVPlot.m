@@ -2,7 +2,7 @@ clear
 clc
 close all
 
-h = 0.0001; % time step
+h = 0.01; % time step
 t = 0:h:10; % time vector
 
 %%% Initial Conditions %%%
@@ -34,8 +34,8 @@ b(18,1) = -pi/3;
 % theta_d =  zeros(1,length(x_d));
 % psi_d =  zeros(1,length(x_d));
 r_II_B_d = [1;0;0.2];
-Euler_d = [0,0,0];
-phi_d = 0;
+Euler_d = [pi/2,0,0];
+phi_d = pi/2;
 theta_d = 0;
 psi_d = 0;
 
@@ -50,6 +50,25 @@ b_fric_floor = -2000; % floor coefficient of lateral, viscous friction
 
 % Numerically Integrate for Position of Manipulator
 init_toggle = 1;
+plotPos.x = zeros(1,length(t));
+plotPos.y = zeros(1,length(t));
+plotPos.z = zeros(1,length(t));
+
+plotPos.leg1.A = zeros(1,length(t));
+plotPos.leg1.B = zeros(1,length(t));
+plotPos.leg1.C = zeros(1,length(t));
+
+plotPos.leg2.A = zeros(1,length(t));
+plotPos.leg2.B = zeros(1,length(t));
+plotPos.leg2.C = zeros(1,length(t));
+
+plotPos.leg3.A = zeros(1,length(t));
+plotPos.leg3.B = zeros(1,length(t));
+plotPos.leg3.C = zeros(1,length(t));
+
+plotPos.leg4.A = zeros(1,length(t));
+plotPos.leg4.B = zeros(1,length(t));
+plotPos.leg4.C = zeros(1,length(t));    
 for ii = 1:length(t)
     
     [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle);
@@ -165,30 +184,80 @@ for ii = 1:length(t)
     Ts = 2;
     Theta_plot = [Theta1_plot;Theta2_plot;Theta3_plot];
     
-    if ii == 1
-        writerObj = VideoWriter('Kinematic_SC_Turn_V7','MPEG-4');
-        writerObj.FrameRate = 2;
-        open(writerObj);
-        
-        
-        ax = gca;
-        ax.NextPlot = 'replaceChildren';
-        %Preallocate a 40-element array M to store the movie frames.
-        
-        loops = 1:floor(Ts/h):length(t);
-        M(loops) = struct('cdata',[],'colormap',[]);
-    end
+
     
     T_I_B_plot = rotz(phi_plot)*roty(theta_plot)*rotx(psi_plot);
     r_II_B_a_plot = r_II_B_plot;
     Theta_a_plot = Theta_plot;
     r_I_sys_cm = compute_rcm(Theta_a_plot,r_II_B_a_plot,T_I_B_plot);
-    FK_Solver_Draw(Theta1_plot,Theta2_plot,Theta3_plot,T_I_B_plot,r_II_B_plot,r_I_sys_cm, legs_valid,'top','fixed')
-    M(ii) = getframe(gcf);
-    writeVideo(writerObj,M(ii));
+
+    plotPos.x(ii) = b(4,ii);
+    plotPos.y(ii) = b(5,ii);
+    plotPos.z(ii) = b(6,ii);
+    plotPos.leg1.A(ii) = b(7,ii);
+    plotPos.leg2.A(ii) = b(8,ii);
+    plotPos.leg3.A(ii) = b(9,ii);
+    plotPos.leg4.A(ii) = b(10,ii);
     
-    disp(ii)
+    plotPos.leg1.B(ii) = b(11,ii);
+    plotPos.leg2.B(ii) = b(12,ii);
+    plotPos.leg3.B(ii) = b(13,ii);
+    plotPos.leg4.B(ii) = b(14,ii);
+    
+    plotPos.leg1.C(ii) = b(15,ii);
+    plotPos.leg2.C(ii) = b(16,ii);
+    plotPos.leg3.C(ii) = b(17,ii);
+    plotPos.leg4.C(ii) = b(18,ii);
 end
 
+figure("Name", "Position Plot")
+plot3(plotPos.x, plotPos.y, plotPos.z);
+title("Position Plot")
+
+figure("Name", "Leg Joint Vars")
+subplot(2,2,2)
+plot(t, plotPos.leg1.A)
+hold on
+plot(t, plotPos.leg1.B);
+plot(t, plotPos.leg1.C);
+title("FR Joint Vars");
+xlabel("t")
+ylabel("Angle (rad)")
+legend("Joint 1", "Joint 2", "Joint 3");
+hold off
+
+subplot(2,2,1)
+plot(t, plotPos.leg2.A)
+hold on
+plot(t, plotPos.leg2.B);
+plot(t, plotPos.leg2.C);
+title("FL Joint Vars");
+xlabel("t")
+ylabel("Angle (rad)")
+legend("Joint 1", "Joint 2", "Joint 3");
+hold off
+
+
+subplot(2,2,4)
+plot(t, plotPos.leg3.A)
+hold on
+plot(t, plotPos.leg3.B);
+plot(t, plotPos.leg3.C);
+title("BR Joint Vars");
+xlabel("t")
+ylabel("Angle (rad)")
+legend("Joint 1", "Joint 2", "Joint 3");
+hold off
+
+subplot(2,2,3)
+plot(t, plotPos.leg4.A)
+hold on
+plot(t, plotPos.leg4.B);
+plot(t, plotPos.leg4.C);
+title("BL Joint Vars");
+xlabel("t")
+ylabel("Angle (rad)")
+legend("Joint 1", "Joint 2", "Joint 3");
+hold off
+
 %%
-close(writerObj);

@@ -96,7 +96,17 @@ while (loop_toggle == 0)
             Theta2_FR_3 = -(atan2(s_FR_2,r_FR_2) - atan2(L3*sin(Theta3_FR_Temp_2),L2 + L3*cos(Theta3_FR_Temp_2)));
             Theta2_FR_4 = -(atan2(s_FR_2,r_FR_2) - atan2(L3*sin(Theta3_FR_2_Temp_2),L2 + L3*cos(Theta3_FR_2_Temp_2)));
         end
-        
+    else
+        Theta1_FR = 0;
+        Theta1_FR_2 = 0;
+        Theta2_FR = 0;
+        Theta2_FR_2 = 0;
+        Theta2_FR_3 = 0;
+        Theta2_FR_4 = 0;
+        Theta3_FR = 0;
+        Theta3_FR_2 = 0;
+        Theta3_FR_3 = 0;
+        Theta3_FR_4 = 0;
     end
     %% FL LEG
     if legs_on_gnd(2) == 1
@@ -153,7 +163,17 @@ while (loop_toggle == 0)
             Theta2_FL_2 = atan2(s_FL,r_FL) - atan2(L3*sin(Theta3_FL_2),L2 + L3*cos(Theta3_FL_2));
         end
         
-        
+    else
+        Theta1_FL = 0;
+        Theta1_FL_2 = 0;
+        Theta2_FL = 0;
+        Theta2_FL_2 = 0;
+        Theta2_FL_3 = 0;
+        Theta2_FL_4 = 0;
+        Theta3_FL = 0;
+        Theta3_FL_2 = 0;
+        Theta3_FL_3 = 0;
+        Theta3_FL_4 = 0;
     end
     %% BR LEG
     if legs_on_gnd(3) == 1
@@ -219,7 +239,17 @@ while (loop_toggle == 0)
             Theta2_BR_2 = -(atan2(s_BR,r_BR) - atan2(L3*sin(Theta3_BR_2_Temp),L2 + L3*cos(Theta3_BR_2_Temp)));
         end
         
-        
+    else
+        Theta1_BR = 0;
+        Theta1_BR_2 = 0;
+        Theta2_BR = 0;
+        Theta2_BR_2 = 0;
+        Theta2_BR_3 = 0;
+        Theta2_BR_4 = 0;
+        Theta3_BR = 0;
+        Theta3_BR_2 = 0;
+        Theta3_BR_3 = 0;
+        Theta3_BR_4 = 0;
     end
     %% BL LEG
     if legs_on_gnd(4) == 1
@@ -276,7 +306,17 @@ while (loop_toggle == 0)
             Theta2_BL_2 = atan2(s_BL,r_BL) - atan2(L3*sin(Theta3_BL_2),L2 + L3*cos(Theta3_BL_2));
         end
         
-        
+    else
+        Theta1_BL = 0;
+        Theta1_BL_2 = 0;
+        Theta2_BL = 0;
+        Theta2_BL_2 = 0;
+        Theta2_BL_3 = 0;
+        Theta2_BL_4 = 0;
+        Theta3_BL = 0;
+        Theta3_BL_2 = 0;
+        Theta3_BL_3 = 0;
+        Theta3_BL_4 = 0;
     end
 end
 Theta1(1,1) = Theta1_FR;

@@ -2,21 +2,21 @@ function [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,l
 
 in_pgon = 0;
 
-switch lifted_leg
-    case 1
+if lifted_leg == 1
     pgonx = [r_II_c_FL(1), r_II_c_BR(1), r_II_c_BL(1)];
     pgony = [r_II_c_FL(2), r_II_c_BR(2), r_II_c_BL(2)];
     boundary_vec = (r_II_c_FL - r_II_c_BR)/norm((r_II_c_FL - r_II_c_BR));
-    case 2
+elseif lifted_leg == 2
     pgonx = [r_II_c_FR(1), r_II_c_BR(1), r_II_c_BL(1)];
     pgony = [r_II_c_FR(2), r_II_c_BR(2), r_II_c_BL(2)];
     boundary_vec = (r_II_c_BL - r_II_c_FR)/norm(r_II_c_BL - r_II_c_FR);
-    case 3
+elseif lifted_leg == 3
     pgonx = [r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1)];
     pgony = [r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2)];
     boundary_vec = (r_II_c_FR - r_II_c_BL)/norm(r_II_c_FR - r_II_c_BL);
-    % If it is not 1, 2, or 3, it must be 4. 
-    otherwise
+% Use else instead of elseif lifted_leg == 4 so that codegen does not freak
+% out
+else
     pgonx = [r_II_c_FR(1), r_II_c_FL(1), r_II_c_BR(1)];
     pgony = [r_II_c_FR(2), r_II_c_FL(2), r_II_c_BR(2)];
     boundary_vec = (r_II_c_BR - r_II_c_FL)/norm((r_II_c_BR - r_II_c_FL));

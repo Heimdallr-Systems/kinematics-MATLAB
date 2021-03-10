@@ -8,7 +8,8 @@ constants = RobotConstants();
 L2 = norm(constants.r_22_3_BL);
 L3 = norm(constants.r_33_c_BL);
 
-if leg_index == 1
+switch leg_index
+    case 1
     % Vector from Base to Contact
     r_BB_c_FR = r_BB_c;
     % Vector from Base to Contact minus first joint offset from base.
@@ -48,7 +49,7 @@ if leg_index == 1
     Theta1 = Theta1_FR;
     Theta2 = Theta2_FR_2;
     Theta3 = Theta3_FR_2;
-elseif leg_index == 2
+case 2
     r_BB_c_FL = r_BB_c;
     r_B1_c_FL = r_BB_c_FL - constants.r_BB_1_FL;
     Theta1_FL = atan2(r_B1_c_FL(2),r_B1_c_FL(1))-pi/2;
@@ -65,7 +66,7 @@ elseif leg_index == 2
     Theta1 = Theta1_FL;
     Theta2 = Theta2_FL_2;
     Theta3 = Theta3_FL_2;
-elseif leg_index == 3
+case 3
     r_BB_c_BR = r_BB_c;
     r_B1_c_BR = r_BB_c_BR - constants.r_BB_1_BR;
     Theta1_BR = atan2(r_B1_c_BR(2),r_B1_c_BR(1))+pi/2;
@@ -85,7 +86,8 @@ elseif leg_index == 3
     Theta1 = Theta1_BR;
     Theta2 = Theta2_BR_2;
     Theta3 = Theta3_BR_2;
-elseif leg_index == 4
+    % If not 1, 2, or 3, it must be 4
+otherwise
     r_BB_c_BL = r_BB_c;
     r_B1_c_BL = r_BB_c_BL - constants.r_BB_1_BL;
     Theta1_BL = atan2(r_B1_c_BL(2),r_B1_c_BL(1))-pi/2;

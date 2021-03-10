@@ -33,8 +33,9 @@ while loop_toggle == 0
     end
     loop_toggle = 1;
     %initialize
+    switch leg_index
     %% FR LEG
-    if leg_index == 1
+        case 1
         r_II_c_FR = r_II_c_d;
         r_BB_c_FR = T_I_B\(r_II_c_FR - r_II_B);
         r_B1_c_FR = r_BB_c_FR - constants.r_BB_1_FR;
@@ -93,9 +94,8 @@ while loop_toggle == 0
             Theta2_2 = -(atan2(s_FR,r_FR) - atan2(L3*sin(Theta3_FR_2_Temp),L2 + L3*cos(Theta3_FR_2_Temp)));
         end
         
-    end
     %% FL LEG
-    if leg_index == 2
+    case 2
         r_II_c_FL = r_II_c_d;
         r_BB_c_FL = T_I_B\(r_II_c_FL - r_II_B);
         r_B1_c_FL = r_BB_c_FL - constants.r_BB_1_FL;
@@ -149,9 +149,9 @@ while loop_toggle == 0
             Theta2_2 = atan2(s_FL,r_FL) - atan2(L3*sin(Theta3_2),L2 + L3*cos(Theta3_2));
         end
         
-    end
+   
     %% BR LEG
-    if leg_index == 3
+    case 3
         r_II_c_BR = r_II_c_d;
         r_BB_c_BR = T_I_B\(r_II_c_BR - r_II_B);
         r_B1_c_BR = r_BB_c_BR - constants.r_BB_1_BR;
@@ -213,9 +213,9 @@ while loop_toggle == 0
             Theta2_2 = -(atan2(s_BR,r_BR) - atan2(L3*sin(Theta3_BR_2_Temp),L2 + L3*cos(Theta3_BR_2_Temp)));
         end
         
-    end
+   
     %% BL LEG
-    if leg_index == 4
+    case 4
         r_II_c_BL = r_II_c_d;
         r_BB_c_BL = T_I_B\(r_II_c_BL - r_II_B);
         r_B1_c_BL = r_BB_c_BL - constants.r_BB_1_BL;
@@ -273,22 +273,24 @@ while loop_toggle == 0
             
         end
         
-        
-        
-        
-        
+        otherwise 
+            error("Leg_Index is set to an invalid value")
     end
 end     
 
 % if theta1 wraps around into robot
-if leg_index == 1
-    T1_cond = (Theta1 <= -pi/2) || (Theta1 >= pi); % FR
-elseif leg_index == 2
-    T1_cond = (Theta1 <= -pi) || (Theta1 >= pi/2); %FL
-elseif leg_index == 3
-    T1_cond = (Theta1 <= -pi) || (Theta1 >= pi/2); % BR
-elseif leg_index == 4
-    T1_cond = (Theta1 <= -pi/2) || (Theta1 >= pi); % BL
+switch leg_index
+    case 1
+        T1_cond = (Theta1 <= -pi/2) || (Theta1 >= pi); % FR
+    case 2
+        T1_cond = (Theta1 <= -pi) || (Theta1 >= pi/2); %FL
+    case 3
+        T1_cond = (Theta1 <= -pi) || (Theta1 >= pi/2); % BR
+    case 4
+        T1_cond = (Theta1 <= -pi/2) || (Theta1 >= pi); % BL
+    otherwise
+        error("Leg Index is not a allowed value")
+        
 end
      
 if T1_cond

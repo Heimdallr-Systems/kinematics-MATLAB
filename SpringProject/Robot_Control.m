@@ -77,6 +77,70 @@ persistent Theta1_d;
 persistent Theta2_d;
 persistent Theta3_d;
 
+if isempty(waypoint_toggle)
+    waypoint_toggle=0;
+end
+
+if isempty(turn_toggle)
+    turn_toggle=0;
+end
+
+if isempty(step_state)
+    step_state=0;
+end
+
+if isempty(turn_state)
+    turn_state=0;
+end
+
+if isempty(reached_centroid)
+    reached_centroid=0;
+end
+
+if isempty(reached_rest_centroid)
+    reached_rest_centroid=1;
+end
+
+if isempty(step_needed)
+    step_needed=1;
+end
+
+if isempty(calc_manip)
+    calc_manip=1;
+end
+
+if isempty(legs_valid)
+    legs_valid=[1,1,1,1];
+end
+
+if isempty(floor_toggle)
+    floor_toggle=legs_valid;
+end
+
+if isempty(legs_stepped)
+    legs_stepped=0;
+end
+
+if isempty(leg_reset_needed)
+    leg_reset_needed=0;
+end
+
+if isempty(T_I_B_d_temp)
+    T_I_B_d_temp = eye(3,3);
+end
+
+if isempty(phi_d_temp)
+    phi_d_temp = 0;
+end
+
+if isempty(is_turning)
+    is_turning=0;
+end
+
+% TODO: Figure out how to remove these without breaking body pose controller
+% Removing some vars causes errors in body pose controller
+% Removing some vars causes a singular matrix
+% Removing some vars casues legs to move too far forward
 if init_toggle
     waypoint_toggle = 0; % intialize toggle for determining direction of travel
     turn_toggle = 0; % init toggle for determining direction of turning

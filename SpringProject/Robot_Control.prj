@@ -27,14 +27,14 @@
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.ReservedNameArray />
       <param.EnableDebugging>false</param.EnableDebugging>
-      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
+      <param.ReportPotentialDifferences>true</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.LaunchReport>false</param.LaunchReport>
       <param.ReportInfoVarName />
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
+      <param.VerificationStatus>option.VerificationStatus.FailedInference</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
@@ -235,16 +235,16 @@
       <param.CustomToolchainOptions />
       <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
       <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware&gt;&lt;hardware version="1.0"&gt;&lt;name&gt;NVIDIA Jetson&lt;/name&gt;&lt;customValues/&gt;&lt;/hardware&gt;&lt;/configuredHardware&gt;&lt;/ctdata&gt;</param.target.Data>
-      <param.target.ActiveType>option.target.TargetType.MatlabHost</param.target.ActiveType>
-      <param.target.ActiveTarget />
-      <param.HardwareVendor.Production>Generic</param.HardwareVendor.Production>
-      <param.HardwareType.Production>MATLAB Host Computer</param.HardwareType.Production>
-      <param.HWDeviceType.Production>Generic-&gt;MATLAB Host Computer</param.HWDeviceType.Production>
+      <param.target.ActiveType>option.target.TargetType.Target</param.target.ActiveType>
+      <param.target.ActiveTarget>NVIDIA Jetson</param.target.ActiveTarget>
+      <param.HardwareVendor.Production>ARM Compatible</param.HardwareVendor.Production>
+      <param.HardwareType.Production>ARM 64-bit (LP64)</param.HardwareType.Production>
+      <param.HWDeviceType.Production>ARM Compatible-&gt;ARM 64-bit (LP64)</param.HWDeviceType.Production>
       <var.instance.enabled.Production>true</var.instance.enabled.Production>
       <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
       <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
       <param.HardwareSizeInt.Production>32</param.HardwareSizeInt.Production>
-      <param.HardwareSizeLong.Production>32</param.HardwareSizeLong.Production>
+      <param.HardwareSizeLong.Production>64</param.HardwareSizeLong.Production>
       <param.HardwareSizeLongLong.Production>64</param.HardwareSizeLongLong.Production>
       <param.HardwareSizeFloat.Production>32</param.HardwareSizeFloat.Production>
       <param.HardwareSizeDouble.Production>64</param.HardwareSizeDouble.Production>
@@ -255,17 +255,17 @@
       <param.HardwareEndianness.Production>option.HardwareEndianness.Little</param.HardwareEndianness.Production>
       <param.HardwareArithmeticRightShift.Production>true</param.HardwareArithmeticRightShift.Production>
       <param.HardwareLongLongMode.Production>true</param.HardwareLongLongMode.Production>
-      <param.HardwareAtomicIntegerSize.Production>option.HardwareAtomicIntegerSize.Char</param.HardwareAtomicIntegerSize.Production>
-      <param.HardwareAtomicFloatSize.Production>option.HardwareAtomicFloatSize.None</param.HardwareAtomicFloatSize.Production>
+      <param.HardwareAtomicIntegerSize.Production>option.HardwareAtomicIntegerSize.LongLong</param.HardwareAtomicIntegerSize.Production>
+      <param.HardwareAtomicFloatSize.Production>option.HardwareAtomicFloatSize.Double</param.HardwareAtomicFloatSize.Production>
       <param.HardwareDivisionRounding.Production>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Production>
-      <param.HardwareVendor.Target>Generic</param.HardwareVendor.Target>
-      <param.HardwareType.Target>MATLAB Host Computer</param.HardwareType.Target>
-      <param.HWDeviceType.Target>Generic-&gt;MATLAB Host Computer</param.HWDeviceType.Target>
+      <param.HardwareVendor.Target>ARM Compatible</param.HardwareVendor.Target>
+      <param.HardwareType.Target>ARM 64-bit (LP64)</param.HardwareType.Target>
+      <param.HWDeviceType.Target>ARM Compatible-&gt;ARM 64-bit (LP64)</param.HWDeviceType.Target>
       <var.instance.enabled.Target>false</var.instance.enabled.Target>
       <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
       <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
       <param.HardwareSizeInt.Target>32</param.HardwareSizeInt.Target>
-      <param.HardwareSizeLong.Target>32</param.HardwareSizeLong.Target>
+      <param.HardwareSizeLong.Target>64</param.HardwareSizeLong.Target>
       <param.HardwareSizeLongLong.Target>64</param.HardwareSizeLongLong.Target>
       <param.HardwareSizeFloat.Target>32</param.HardwareSizeFloat.Target>
       <param.HardwareSizeDouble.Target>64</param.HardwareSizeDouble.Target>
@@ -277,14 +277,14 @@
       <param.HardwareArithmeticRightShift.Target>true</param.HardwareArithmeticRightShift.Target>
       <param.HardwareLongLongMode.Target>true</param.HardwareLongLongMode.Target>
       <param.HardwareAtomicIntegerSize.Target>option.HardwareAtomicIntegerSize.Char</param.HardwareAtomicIntegerSize.Target>
-      <param.HardwareAtomicFloatSize.Target>option.HardwareAtomicFloatSize.None</param.HardwareAtomicFloatSize.Target>
+      <param.HardwareAtomicFloatSize.Target>option.HardwareAtomicFloatSize.Double</param.HardwareAtomicFloatSize.Target>
       <param.HardwareDivisionRounding.Target>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Target>
       <var.SuppressHardwareChange>false</var.SuppressHardwareChange>
       <param.CastingMode>option.CastingMode.Standards</param.CastingMode>
       <param.IndentStyle>option.IndentStyle.K&amp;R</param.IndentStyle>
       <param.IndentSize>2</param.IndentSize>
       <param.ColumnLimit>80</param.ColumnLimit>
-      <param.grt.GenCodeOnly>false</param.grt.GenCodeOnly>
+      <param.grt.GenCodeOnly>true</param.grt.GenCodeOnly>
       <param.ConstantFoldingTimeout>1</param.ConstantFoldingTimeout>
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>false</param.EnableRuntimeRecursion>
@@ -382,6 +382,7 @@
         <param.ReservedNameArray />
         <param.RuntimeChecks />
         <param.Verbose />
+        <param.ReportPotentialDifferences />
         <param.GenerateReport />
         <param.LaunchReport />
         <param.ReportInfoVarName />
@@ -404,41 +405,29 @@
         <param.BuildConfiguration />
         <param.CustomToolchainOptions />
         <var.ToolchainSettingsVisible />
-        <param.target.ActiveType />
-        <param.target.ActiveTarget />
-        <param.HardwareVendor.Production />
-        <param.HardwareType.Production />
         <param.HWDeviceType.Production />
         <var.instance.enabled.Production />
         <param.HardwareSizeChar.Production />
         <param.HardwareSizeShort.Production />
         <param.HardwareSizeInt.Production />
-        <param.HardwareSizeLong.Production />
         <param.HardwareSizeLongLong.Production />
         <param.HardwareSizeFloat.Production />
         <param.HardwareSizeDouble.Production />
         <param.HardwareEndianness.Production />
-        <param.HardwareAtomicIntegerSize.Production />
-        <param.HardwareAtomicFloatSize.Production />
-        <param.HardwareVendor.Target />
-        <param.HardwareType.Target />
         <param.HWDeviceType.Target />
         <var.instance.enabled.Target />
         <param.HardwareSizeChar.Target />
         <param.HardwareSizeShort.Target />
         <param.HardwareSizeInt.Target />
-        <param.HardwareSizeLong.Target />
         <param.HardwareSizeLongLong.Target />
         <param.HardwareSizeFloat.Target />
         <param.HardwareSizeDouble.Target />
         <param.HardwareEndianness.Target />
         <param.HardwareAtomicIntegerSize.Target />
-        <param.HardwareAtomicFloatSize.Target />
         <var.SuppressHardwareChange />
         <param.IndentStyle />
         <param.IndentSize />
         <param.ColumnLimit />
-        <param.grt.GenCodeOnly />
         <param.CompileTimeRecursionLimit />
         <param.RunInitializeFcn />
         <param.GenerateExampleMain />
@@ -818,14 +807,14 @@
       </unset>
     </profile>
     <param.objective>option.objective.c</param.objective>
-    <param.WorkflowStep>generateCode</param.WorkflowStep>
+    <param.WorkflowStep>verifyCompatibility</param.WorkflowStep>
     <param.TestSnippets>
       <item>RC_Func_Sample</item>
     </param.TestSnippets>
     <var.DefaultImportExportVariable>codeGenConfig</var.DefaultImportExportVariable>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\Robot_Control_mex.mexw64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\Robot_Control\Robot_Control.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
@@ -847,16 +836,16 @@
     <var.redirectedInputTypeData />
     <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
-    <var.gc.lastOutputRoot>codegen\mex\Robot_Control</var.gc.lastOutputRoot>
-    <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>3539061093</var.gc.preBuildChecksum>
+    <var.gc.lastOutputRoot>codegen\lib\Robot_Control</var.gc.lastOutputRoot>
+    <var.gc.lastOutputType>STATIC_LIBRARY</var.gc.lastOutputType>
+    <var.gc.preBuildChecksum>2052281276</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\Robot_Control</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>4147358318</var.cfi.preBuildChecksum>
+    <var.cfi.preBuildChecksum>1053170385</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>RC_Func_Sample</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Body_Pose_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\centroid_codeGen.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_I.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\find_pgon_goal.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\step_planner_intelligent.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2441735536&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_I.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\find_pgon_goal.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
-    <param.forceMexBuild>false</param.forceMexBuild>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Body_Pose_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\centroid_codeGen.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_I.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\find_pgon_goal.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\step_planner_intelligent.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;431274529&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Body_Pose_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\centroid_codeGen.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_I.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\find_pgon_goal.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\step_planner_intelligent.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <param.forceMexBuild>true</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
     <var.isGpuCoder>false</var.isGpuCoder>
@@ -866,8 +855,8 @@
     <var.ecoderEnabled>true</var.ecoderEnabled>
     <param.mex.outputfile>Robot_Control_mex</param.mex.outputfile>
     <param.grt.outputfile>Robot_Control</param.grt.outputfile>
-    <param.artifact>option.target.artifact.mex</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\Robot_Control_mex.mexw64</param.outputfile>
+    <param.artifact>option.target.artifact.lib</param.artifact>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\Robot_Control\Robot_Control.lib</param.outputfile>
     <param.CppNamespace>Codegen</param.CppNamespace>
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
@@ -883,7 +872,7 @@
     <param.gpu.EnableCUSOLVER>true</param.gpu.EnableCUSOLVER>
     <param.gpu.EnableCUFFT>true</param.gpu.EnableCUFFT>
     <param.gpu.Benchmarking>false</param.gpu.Benchmarking>
-    <param.gpu.SafeBuild>false</param.gpu.SafeBuild>
+    <param.gpu.SafeBuild>true</param.gpu.SafeBuild>
     <param.gpu.ComputeCapability>3.5</param.gpu.ComputeCapability>
     <param.gpu.CustomComputeCapability />
     <param.gpu.CompilerFlags />
@@ -891,9 +880,9 @@
     <var.hasGpu>true</var.hasGpu>
     <var.isDeepLearningForMatlabCoderEnabled>true</var.isDeepLearningForMatlabCoderEnabled>
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
-    <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
+    <var.cfiTargetLibSuppression>true</var.cfiTargetLibSuppression>
+    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
@@ -974,7 +963,6 @@
       <var.redirectedInputTypeData />
       <param.unifiedParamStorage />
       <var.outdatedOnRestore />
-      <param.forceMexBuild />
       <param.NoDefaultJIT />
       <param.configImportActive />
       <var.isGpuCoder />
@@ -983,7 +971,6 @@
       <var.ecoderEnabled />
       <param.mex.outputfile />
       <param.grt.outputfile />
-      <param.artifact />
       <param.CppPackagesToNamespaces />
       <param.CppNamespaceForMathworksCode />
       <param.CppPreserveClasses />
@@ -1006,9 +993,6 @@
       <var.hasGpu />
       <var.isDeepLearningForMatlabCoderEnabled />
       <param.deeplearning.TargetLib />
-      <var.cfiTargetLibSuppression />
-      <var.hasMatlabDeepLearningSupportPackage />
-      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
@@ -1121,7 +1105,7 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Robot_Control_mex.mexw64" optional="false">D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control_mex.mexw64</file>
+      <file location="${PROJECT_ROOT}\codegen\lib\Robot_Control" name="Robot_Control.lib" optional="false">D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\codegen\lib\Robot_Control\Robot_Control.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>

@@ -12,7 +12,8 @@ jobs:
   RC_Func_Sample:
     runs-on: ubuntu-latest
     defaults:
-      run: "SpringProject"
+      run: 
+        working-directory: "SpringProject"
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

@@ -124,7 +124,7 @@ z_d = 0.25*ones(1,length(x_d));
 phi_d = pi/2.*ones(1,length(x_d));
 theta_d =  zeros(1,length(x_d));
 psi_d =  zeros(1,length(x_d));
-state = zeros(1, 36);
+state = zeros(36, 1);
 
 
 for ii = 1:length(t)

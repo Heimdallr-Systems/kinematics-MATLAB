@@ -128,6 +128,7 @@ Kp=30;
 Kp_floor = -5000; % floor spring constant
 Kd_floor = -800; % floor damping coefficient
 b_fric_floor = -2000; % floor coefficient of lateral, viscous friction
+state = zeros(1,36);
 
 % Numerically Integrate for Position of Manipulator
 
@@ -149,7 +150,7 @@ for ii = 1:length(t)
     T_I_B = rotz(b(1,ii))*roty(b(2,ii))*rotx(b(3,ii));
     T_I_B_d = rotz(phi_d(ii))*roty(theta_d(ii))*rotx(psi_d(ii));
     r_II_B_d(:,1) = [x_d(ii);y_d(ii);z_d(ii)];
-    state = b(1:18,ii);
+    state(1:18) = b(1:18,ii);
     
     [r_II_c_FR, r_II_c_FL, r_II_c_BR, r_II_c_BL] = CPos_wrt_I(Theta1,Theta2,Theta3,T_I_B,r_II_B);
     r_II_c = [r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL];

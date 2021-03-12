@@ -182,22 +182,8 @@ Theta3_leg2 = Theta3_0(2);
 Theta3_leg3 = Theta3_0(3);
 Theta3_leg4 = Theta3_0(4);
 
-Theta1_d_temp = [Theta1_leg1, Theta1_leg2, Theta1_leg3, Theta1_leg4];
-Theta2_d_temp = [Theta2_leg1, Theta2_leg2, Theta2_leg3, Theta2_leg4];
-Theta3_d_temp = [Theta3_leg1, Theta3_leg2, Theta3_leg3, Theta3_leg4];
+Theta1_d = [Theta1_leg1, Theta1_leg2, Theta1_leg3, Theta1_leg4];
+Theta2_d = [Theta2_leg1, Theta2_leg2, Theta2_leg3, Theta2_leg4];
+Theta3_d = [Theta3_leg1, Theta3_leg2, Theta3_leg3, Theta3_leg4];
 
-Theta1_d(1) = Theta1_d_temp(1);
-Theta1_d(2) = Theta1_d_temp(2);
-Theta1_d(3) = Theta1_d_temp(3);
-Theta1_d(4) = Theta1_d_temp(4);
-
-Theta2_d(1) = Theta2_d_temp(1);
-Theta2_d(2) = Theta2_d_temp(2);
-Theta2_d(3) = Theta2_d_temp(3);
-Theta2_d(4) = Theta2_d_temp(4);
-
-Theta3_d(1) = Theta3_d_temp(1);
-Theta3_d(2) = Theta3_d_temp(2);
-Theta3_d(3) = Theta3_d_temp(3);
-Theta3_d(4) = Theta3_d_temp(4);
 end

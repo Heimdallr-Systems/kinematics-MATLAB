@@ -23,7 +23,7 @@ function [r_II_c] = step_planner_intelligent(r_II_b_last, r_II_b,r_II_c_start, s
 travel_dir_0=r_II_b-r_II_b_last;
 % convert travel_dir to a unit vector if it is not already.
 
-if travel_dir_0 == [0;0;0]
+if isequal(travel_dir_0, [0;0;0])
     travel_dir_0 = r_II_b-r_II_c_start;
 end
 

@@ -24,6 +24,9 @@
                 <Info Name="Convenience" ReadOnly="READ_ONLY"/>
             </Label>
             <Info DataType="None" Name="Classification" ReadOnly="1" SingleValued="1"/>
+            <Label Location="2b926310-d284-4730-baa7-5257b2abd4c9">
+                <Info Name="Design Test Scripts" ReadOnly="WRITABLE"/>
+            </Label>
         </Category>
     </Categories>
     <Files Location="Root">
@@ -325,7 +328,11 @@
             <Info/>
         </File>
         <File Location="RC_Func_Test.m">
-            <Info/>
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="2b926310-d284-4730-baa7-5257b2abd4c9"/>
+                </Category>
+            </Info>
         </File>
         <File Location="codeGenConfig.mat">
             <Info>
@@ -350,14 +357,14 @@
         <File Location="RC_Func_JVPlot.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="2b926310-d284-4730-baa7-5257b2abd4c9"/>
                 </Category>
             </Info>
         </File>
         <File Location="RC_Func_Sample.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="2b926310-d284-4730-baa7-5257b2abd4c9"/>
                 </Category>
             </Info>
         </File>

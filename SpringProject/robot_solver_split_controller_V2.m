@@ -97,7 +97,7 @@ Kp=30;
 Kp_floor = -5000; % floor spring constant
 Kd_floor = -800; % floor damping coefficient
 b_fric_floor = -2000; % floor coefficient of lateral, viscous friction
-state = zeros(1, 36);
+state = zeros(36, 1);
 
 % Numerically Integrate for Position of Manipulator
 for ii = 1:length(t)

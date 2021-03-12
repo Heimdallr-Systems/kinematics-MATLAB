@@ -29,6 +29,18 @@ Theta3_2 = zeros(4,1);
 Theta3_3 = zeros(4,1);
 Theta3_4 = zeros(4,1);
 
+% Reference for what the elements are for each variable
+% Theta1(:,1) = [Theta1_FR, Theta1_FL, Theta1_BR, Theta1_BL]
+% Theta1_2(:,1) = [Theta1_FR_2, Theta1_FL_2, Theta1_BR_2, Theta1_BL_2]
+% Theta2(:,1) = [Theta2_FR, Theta2_FL, Theta2_BR, Theta2_BL]
+% Theta2_2(:,1) =  [Theta2_FR_2, Theta2_FL_2, Theta2_BR_2, Theta2_BL_2]
+% Theta2_3(:,1) = [Theta2_FR_3, Theta2_FL_3, Theta2_BR_3, Theta2_BL_3]
+% Theta2_4(:,1) = [Theta2_FR_4, Theta2_FL_4, Theta2_BR_4, Theta2_BL_4]
+% Theta3(:,1) = [Theta3_FR, Theta3_FL, Theta3_BR, Theta3_BL]
+% Theta3_2(:,1) =  [Theta3_FR_2, Theta3_FL_2, Theta3_BR_2, Theta3_BL_2]
+% Theta3_3(:,1) = [Theta3_FR_3, Theta3_FL_3, Theta3_BR_3, Theta3_BL_3]
+% Theta3_4(:,1) = [Theta3_FR_4, Theta3_FL_4, Theta3_BR_4, Theta3_BL_4]
+
 travel_dir = (r_II_B_d - r_II_B_0)./norm((r_II_B_d - r_II_B_0));
 ii = 0;
 while (loop_toggle == 0)

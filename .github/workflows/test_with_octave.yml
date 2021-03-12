@@ -32,4 +32,3 @@ jobs:
         
       - name: Test that the function runs.
         run: octave --no-gui octave_test
-          echo test, and deploy your project.

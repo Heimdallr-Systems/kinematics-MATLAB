@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="2813722539" file="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.prj" location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" name="Robot_Control" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="3363947032" file="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.prj" location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" name="Robot_Control" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -35,7 +35,7 @@
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
       <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
-      <param.EnableMexProfiling>false</param.EnableMexProfiling>
+      <param.EnableMexProfiling>true</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
       <param.CustomHeaderCode />
@@ -102,7 +102,6 @@
         <param.DefaultTestFile />
         <param.MergeInstrumentationResults />
         <param.VerificationMode />
-        <param.EnableMexProfiling />
         <var.BuiltWithMexProfiling />
         <param.CustomSourceCode />
         <param.CustomHeaderCode />
@@ -833,7 +832,7 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\Robot_Control</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>2863575963</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>3363947032</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\Robot_Control</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>3292937990</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>RC_Func_Sample</var.lastCfiTestSnippet>
@@ -876,8 +875,8 @@
     <var.isDeepLearningForMatlabCoderEnabled>true</var.isDeepLearningForMatlabCoderEnabled>
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
     <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
+    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
@@ -990,6 +989,8 @@
       <var.isDeepLearningForMatlabCoderEnabled />
       <param.deeplearning.TargetLib />
       <var.cfiTargetLibSuppression />
+      <var.hasMatlabDeepLearningSupportPackage />
+      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />

@@ -24,6 +24,9 @@ jobs:
       - name: Change to Correct SubDirectory
         run: cd SpringProject
         
+      - name: PWD
+        run: pwd
+        
       - name: Creater Dummy Coder Class
         run: printf "classdef coder\nmethods (Static)\nfunction x = ignoreConst(x)\nend\nend\nend" > coder.m 
         

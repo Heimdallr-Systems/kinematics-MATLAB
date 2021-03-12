@@ -337,6 +337,50 @@
         <File Location="Robot_Control.prj">
             <Info/>
         </File>
+        <File Location="Robot_Control_codegen.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="Kinematic_SC_Turn_V7.mp4">
+            <Info/>
+        </File>
+        <File Location="RC_Func_JVPlot.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="RC_Func_Sample.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="centroidTestPlot.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="centroid_codeGen.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="SplitControlV13_Walk.mp4">
+            <Info/>
+        </File>
+        <File Location="SplitControlV12_Walk.mp4">
+            <Info/>
+        </File>
     </Files>
     <ProjectPath Location="Root">
         <Reference Location="1055fe1e-a20c-45a6-9f7f-1b2d3fca28e3">

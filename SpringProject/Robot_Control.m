@@ -1,4 +1,4 @@
-function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_out,floor_toggle_out,legs_valid_out] = Robot_Control(r_II_B_d, Euler_d, gamma_m, init_toggle)
+function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_out,floor_toggle_out,legs_valid_out] = Robot_Control(r_II_B_d, Euler_d, gamma_m, init_toggle) %#codegen
 %Controls Robot's walking algorithm
 %   input: r_II_B_d, Euler_d, gamma_m
 %   output: Theta_d (1-3), phi_d_temp & r_II_b_d_temp (orientation for plotting),
@@ -110,7 +110,7 @@ if isempty(calc_manip)
 end
 
 if isempty(legs_valid)
-    legs_valid=[1,1,1,1];
+    legs_valid=ones(1,4);
 end
 
 if isempty(floor_toggle)
@@ -136,6 +136,88 @@ end
 if isempty(is_turning)
     is_turning=0;
 end
+
+%% Here begins the questionable initialization stuff. SHould be removed if possible
+
+% leg_index=0 will fallthrough and cause function to not do anything
+if isempty(leg_index)
+    leg_index=0;
+end
+
+if isempty(Theta1_d_midpt)
+    Theta1_d_midpt = 0;
+end
+
+if isempty(Theta2_d_midpt)
+    Theta2_d_midpt = 0;
+end
+
+if isempty(Theta3_d_midpt)
+    Theta3_d_midpt = 0;
+end
+
+if isempty(r_II_c_BL_0)
+    r_II_c_BL_0 = zeros(3,1);
+end
+
+if isempty(r_II_c_BR_0)
+    r_II_c_BR_0 = zeros(3,1);
+end
+
+if isempty(r_II_c_FL_0)
+    r_II_c_FL_0 = zeros(3,1);
+end
+
+if isempty(r_II_c_FR_0)
+    r_II_c_FR_0 = zeros(3,1);
+end
+
+if isempty(r_II_B_d_temp)
+    r_II_B_d_temp = zeros(3,1);
+end
+
+if isempty(Theta1_d_reset)
+    Theta1_d_reset=0;
+end
+
+if isempty(Theta2_d_reset)
+    Theta2_d_reset=0;
+end
+
+if isempty(Theta3_d_reset)
+    Theta3_d_reset=0;
+end
+
+if isempty(r_II_c_dstep)
+    r_II_c_dstep = zeros(3,1);
+end
+
+if isempty(r_II_c_current)
+    r_II_c_current = zeros(3,1);
+end
+
+if isempty(Theta1_d)
+    Theta1_d = zeros(4,1);
+end
+
+if isempty(Theta2_d)
+    Theta2_d = zeros(4,1);
+end
+
+if isempty(Theta3_d)
+    Theta3_d = zeros(4,1);
+end
+
+if isempty(mu)
+    mu = zeros(4,1);
+end
+if  isempty(manip_vec)
+    manip_vec = zeros(4,1);
+end
+
+step_error = 0;
+
+
 
 % TODO: Figure out how to remove these without breaking body pose controller
 % Removing some vars causes errors in body pose controller
@@ -201,41 +283,49 @@ goal_inside_pgon = inpolygon(r_II_B(1),r_II_B(2),[r_II_c_FL(1) r_II_c_FR(1) r_II
 %% manipulability calculations
 % find the least manipulable leg, start stepping that leg. then
 % step the next least manipulable leg until the last leg is stepped
+
+%TODO: COnvert to seperate function
+% TODO: Why not just run this every time?
 if (step_state == 0) && (reached_rest_centroid == 1)
-    if calc_manip == 1
+    if (calc_manip == 1)
         [muFR, muFL, muBR, muBL] = manipulability(state);
         mu =  [muFR, muFL, muBR, muBL];
         manip_vec = sort(mu);
         calc_manip = 0;
     end
-    if step_needed == 1
-        leg_index = find(manip_vec(1) == mu);
-        step_needed = 2;
-    elseif step_needed == 2
-        leg_index = find(manip_vec(2) == mu);
-        step_needed = 3;
-    elseif step_needed == 3
-        leg_index = find(manip_vec(3) == mu);
-        step_needed = 4;
-    elseif step_needed == 4
-        leg_index = find(manip_vec(4) == mu);
-        step_needed = 1;
-        calc_manip = 1;
+    
+    switch step_needed 
+        case 1
+            leg_index = find(manip_vec(1) == mu);
+            step_needed = 2;
+        case 2
+            leg_index = find(manip_vec(2) == mu);
+            step_needed = 3;
+        case 3
+            leg_index = find(manip_vec(3) == mu);
+            step_needed = 4;
+        case 4
+            leg_index = find(manip_vec(4) == mu);
+            step_needed = 1;
+            calc_manip = 1;
+        otherwise
+            error("Step_needed is set to an incorrect value")
+
     end
 end
 
 %% waypoint section
-if waypoint_toggle == 0
+if (waypoint_toggle == 0) || (isempty(endPoint))
     startPoint = r_II_B;
     endPoint = r_II_B_d;
     waypoint_toggle = 1;
 elseif waypoint_toggle == 1
-    if endPoint ~= r_II_B_d
+    if ~isequal(endPoint, r_II_B_d)
         waypoint_toggle = 0;
     end
 end
 
-if turn_toggle == 0
+if (turn_toggle == 0) || isempty(endPhi)
     startPhi = phi;
     endPhi = phi_d;
     turn_toggle = 1;
@@ -424,7 +514,7 @@ if turn_needed == 1
     end
     
     %% walking forward section
-elseif turn_needed == 0
+else
     if (norm(r_II_B_d - r_II_B) >= max_body_dist)  || (step_state ~= 0) || (~goal_inside_pgon)
         % determine direction of travel
         % the direction of travel is computed at the very beginning or when
@@ -579,7 +669,7 @@ elseif reached_rest_centroid == 2 % moving towards resting, or inbetween-step bo
 elseif reached_rest_centroid == 1
     waypoint_toggle = 0;
     % rockback before step
-    if ~isempty(find(legs_valid == 0))
+    if ~isempty(find(legs_valid == 0, 1))
         if reached_centroid == 0 % hasn't started moving towards centroid yet
             [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
             reached_centroid = 2;

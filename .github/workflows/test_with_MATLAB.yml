@@ -1,4 +1,4 @@
-name: Run MATLAB Tests on GitHub-Hosted Runner
+name: Check with MATLAB
 on:
   push:
   pull_request:
@@ -6,7 +6,6 @@ on:
   
 jobs:
   mlint:
-    description: Runs mlint on the SpringProject folder
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -22,7 +21,6 @@ jobs:
         with:
           command: cd SpringProject; rpt = mlintrpt; writecell(rpt, 'report.html', 'FileType', 'text')
   RC_Func_Sample:
-    description: Runs the function RC_Func_Sample
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository

@@ -49,5 +49,5 @@ jobs:
       - name: Run RC_Func_Test
         uses: matlab-actions/run-command@v0.2.3
         with:
-          command: cd SprintProject; RC_Func_Sample
+          command: cd SpringProject; RC_Func_Sample
         

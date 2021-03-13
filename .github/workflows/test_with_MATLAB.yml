@@ -22,7 +22,7 @@ jobs:
           command: cd SpringProject; rpt = mlintrpt; writecell(rpt, 'report.html', 'FileType', 'text')
           
       - name: Upload report as artifact
-        uses: actions/upload-artifact@v2.2.2.2
+        uses: actions/upload-artifact@v2.2.2
         with: 
           name: mlint_report.html
           path: SpringProject/report.html
@@ -33,6 +33,13 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2.3.4
+       
+      - name: test
+        run: ls
+        
+      - name: test2
+        run: pwd
+  
        
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v0.2.1

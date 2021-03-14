@@ -16,6 +16,14 @@ function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_ou
 %   Theta2 = [Theta2FR,FL,BR,BL];
 %   Theta3 = [Theta3FR,FL,BR,BL];
 
+assert(all(size(r_II_B_d)==[3, 1]))
+assert(all(size(gamma_m)==[36, 1]))
+assert(all(size(Euler_d)==[1, 3]))
+assert(isa(gamma_m, 'double'))
+assert(isa(r_II_B_d, 'double'))
+assert(isa(Euler_d, 'double'))
+assert(isa(init_toggle, 'logical'))
+
 % Variable Init
 step_dist = 0.12; % leg step distance
 
@@ -78,39 +86,39 @@ persistent Theta2_d;
 persistent Theta3_d;
 
 if isempty(waypoint_toggle)
-    waypoint_toggle=0;
+    waypoint_toggle=false;
 end
 
 if isempty(turn_toggle)
-    turn_toggle=0;
+    turn_toggle=false;
 end
 
 if isempty(step_state)
-    step_state=0;
+    step_state=uint8(0);
 end
 
 if isempty(turn_state)
-    turn_state=0;
+    turn_state=false;
 end
 
 if isempty(reached_centroid)
-    reached_centroid=0;
+    reached_centroid=uint8(0);
 end
 
 if isempty(reached_rest_centroid)
-    reached_rest_centroid=1;
+    reached_rest_centroid = uint8(1);
 end
 
 if isempty(step_needed)
-    step_needed=1;
+    step_needed = uint8(1);
 end
 
 if isempty(calc_manip)
-    calc_manip=1;
+    calc_manip = true;
 end
 
 if isempty(legs_valid)
-    legs_valid=ones(1,4);
+    legs_valid=uint8(ones(1,4));
 end
 
 if isempty(floor_toggle)
@@ -118,11 +126,11 @@ if isempty(floor_toggle)
 end
 
 if isempty(legs_stepped)
-    legs_stepped=0;
+    legs_stepped = uint8(0);
 end
 
 if isempty(leg_reset_needed)
-    leg_reset_needed=0;
+    leg_reset_needed = false;
 end
 
 if isempty(T_I_B_d_temp)
@@ -134,7 +142,7 @@ if isempty(phi_d_temp)
 end
 
 if isempty(is_turning)
-    is_turning=0;
+    is_turning = uint8(0);
 end
 
 %% Here begins the questionable initialization stuff. SHould be removed if possible
@@ -223,22 +231,22 @@ step_error = 0;
 % Removing some vars causes errors in body pose controller
 % Removing some vars causes a singular matrix
 % Removing some vars casues legs to move too far forward
-if init_toggle
-    waypoint_toggle = 0; % intialize toggle for determining direction of travel
-    turn_toggle = 0; % init toggle for determining direction of turning
-    step_state = 0; % intialize toggle for determining which phase of step leg is in
-    turn_state = 0; % init toggle for determining which phase of turn robot is in
-    reached_centroid = 0; % initialize toggle for determining which state the body is in
-    reached_rest_centroid = 1; % initialize toggle for determining which state the body is in when returning to a four-leg-defined polygon centroid
-    step_needed = 1; % initialize variable for determining which leg needs to be stepped next
-    calc_manip = 1; % initialize toggle for determining if manipulability needs to be recalculated
-    legs_valid = [1,1,1,1];
+if init_toggle==true
+    waypoint_toggle = false; % intialize toggle for determining direction of travel
+    turn_toggle = false; % init toggle for determining direction of turning
+    step_state = uint8(0); % intialize toggle for determining which phase of step leg is in
+    turn_state = false; % init toggle for determining which phase of turn robot is in
+    reached_centroid = uint8(0); % initialize toggle for determining which state the body is in
+    reached_rest_centroid = uint8(1); % initialize toggle for determining which state the body is in when returning to a four-leg-defined polygon centroid
+    step_needed = uint8(1); % initialize variable for determining which leg needs to be stepped next
+    calc_manip = true; % initialize toggle for determining if manipulability needs to be recalculated
+    legs_valid = uint8(ones(1,4));
     floor_toggle = legs_valid;
-    legs_stepped = 0;
-    leg_reset_needed = 0;
+    legs_stepped = uint8(0);
+    leg_reset_needed = false;
     T_I_B_d_temp = eye(3,3);
     phi_d_temp = 0;
-    is_turning = 0;
+    is_turning = uint8(0);
 end
 
 %% Initialize state be the correct size
@@ -287,27 +295,27 @@ goal_inside_pgon = inpolygon(r_II_B(1),r_II_B(2),[r_II_c_FL(1) r_II_c_FR(1) r_II
 %TODO: COnvert to seperate function
 % TODO: Why not just run this every time?
 if (step_state == 0) && (reached_rest_centroid == 1)
-    if (calc_manip == 1)
+    if (calc_manip == true)
         [muFR, muFL, muBR, muBL] = manipulability(state);
         mu =  [muFR, muFL, muBR, muBL];
         manip_vec = sort(mu);
-        calc_manip = 0;
+        calc_manip = false;
     end
     
     switch step_needed 
         case 1
             leg_index = find(manip_vec(1) == mu);
-            step_needed = 2;
+            step_needed = uint8(2);
         case 2
             leg_index = find(manip_vec(2) == mu);
-            step_needed = 3;
+            step_needed = uint8(3);
         case 3
             leg_index = find(manip_vec(3) == mu);
-            step_needed = 4;
+            step_needed = uint8(4);
         case 4
             leg_index = find(manip_vec(4) == mu);
-            step_needed = 1;
-            calc_manip = 1;
+            step_needed = uint8(1);
+            calc_manip = true;
         otherwise
             error("Step_needed is set to an incorrect value")
 
@@ -315,24 +323,24 @@ if (step_state == 0) && (reached_rest_centroid == 1)
 end
 
 %% waypoint section
-if (waypoint_toggle == 0) || (isempty(endPoint))
+if (waypoint_toggle == false) || (isempty(endPoint))
     startPoint = r_II_B;
     endPoint = r_II_B_d;
-    waypoint_toggle = 1;
-elseif waypoint_toggle == 1
+    waypoint_toggle = true;
+else
     if ~isequal(endPoint, r_II_B_d)
-        waypoint_toggle = 0;
+        waypoint_toggle = false;
     end
 end
 
-if (turn_toggle == 0) || isempty(endPhi)
+if (turn_toggle == false) || isempty(endPhi)
     startPhi = phi;
     endPhi = phi_d;
-    turn_toggle = 1;
+    turn_toggle = true;
     r_II_B_0 = r_II_B;
-elseif turn_toggle == 1
+else
     if endPhi ~= phi_d
-        turn_toggle = 0;
+        turn_toggle = false;
     end
 end
 
@@ -345,43 +353,43 @@ end
 
 if turn_needed == 1
     if abs(phi_d - phi) < pi/10
-        if (turn_state == 0) && (leg_reset_needed == 0)
-            is_turning = 1;
+        if (turn_state == false) && (leg_reset_needed == false)
+            is_turning = uint8(1);
             phi_d_temp = phi_d;
-            leg_reset_needed = 0;
-            turn_state = 1;
-        elseif turn_state == 1
+            leg_reset_needed = false;
+            turn_state = true;
+        elseif turn_state == true
             phi_error = abs(phi_d - phi);
             if phi_error < 0.05
-                turn_state = 0;
+                turn_state = false;
                 startPhi = phi;
-                leg_reset_needed = 1;   % reset legs
-                is_turning = 2;
+                leg_reset_needed = true;   % reset legs
+                is_turning = uint8(2);
             end
         end
     else
         turn_dir = sign(phi_d - phi);
-        if (turn_state == 0) && (leg_reset_needed == 0)
-            is_turning = 1;
+        if (turn_state == false) && (leg_reset_needed == false)
+            is_turning = uint8(1);
             phi_d_temp = phi + turn_dir*pi/10;
             T_I_B_d_temp = rotz(phi_d_temp)*roty(theta_d)*rotx(psi_d);
-            turn_state = 1 ;
-        elseif turn_state == 1
-            is_turning = 1;
+            turn_state = true ;
+        elseif turn_state == true
+            is_turning = uint8(1);
             phi_error = abs(phi_d_temp - phi);
             if phi_error < 0.05
-                turn_state = 0;
+                turn_state = false;
                 startPhi = phi;
-                leg_reset_needed = 1;   % reset legs
+                leg_reset_needed = true;   % reset legs
             end
         end
     end
     %% Turn Stepping Section
-    if leg_reset_needed == 1
+    if leg_reset_needed == true
         % step to reset legs
         if leg_index == 1
             legs_valid(1) = 0;
-            if reached_centroid == 0
+            if reached_centroid == uint8(0)
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
             end
@@ -389,23 +397,23 @@ if turn_needed == 1
                 Theta1_d_midpt = Theta1_d_midpt_FR;
                 Theta2_d_midpt = Theta2_d_midpt_FR;
                 Theta3_d_midpt = Theta3_d_midpt_FR;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_FR_0 = r_II_c_FR;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 3;
+                    step_state = uint8(3);
                     [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, coder.ignoreConst(1));
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, coder.ignoreConst(1));
                 if r_II_c_FR(3) <= 0
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(1) = 1;
                     leg_index = 0;
                     floor_toggle(1) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                     legs_stepped = legs_stepped + 1;
                 end
             end
@@ -419,23 +427,23 @@ if turn_needed == 1
                 Theta1_d_midpt = Theta1_d_midpt_FL;
                 Theta2_d_midpt = Theta2_d_midpt_FL;
                 Theta3_d_midpt = Theta3_d_midpt_FL;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_FL_0 = r_II_c_FL;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2 % reached midpoint
-                    step_state = 3;
+                    step_state = uint8(3);
                     [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, coder.ignoreConst(2));
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, coder.ignoreConst(2));
                 if r_II_c_FL(3) <= 0
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(2) = 1;
                     leg_index = 0;
                     floor_toggle(2) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                     %if error reached
                     legs_stepped = legs_stepped + 1;
                 end
@@ -450,23 +458,23 @@ if turn_needed == 1
                 Theta1_d_midpt = Theta1_d_midpt_BR;
                 Theta2_d_midpt = Theta2_d_midpt_BR;
                 Theta3_d_midpt = Theta3_d_midpt_BR;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_BR_0 = r_II_c_BR;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 3;
+                    step_state = uint8(3);
                     [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, coder.ignoreConst(3));
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, coder.ignoreConst(3));
                 if r_II_c_BR(3) <= 0
                     legs_valid(3) = 1;
-                    step_state = 0;
+                    step_state = uint8(0);
                     leg_index = 0;
                     floor_toggle(3) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                     %if error reached
                     legs_stepped = legs_stepped + 1;
                 end
@@ -481,33 +489,33 @@ if turn_needed == 1
                 Theta1_d_midpt = Theta1_d_midpt_BL;
                 Theta2_d_midpt = Theta2_d_midpt_BL;
                 Theta3_d_midpt = Theta3_d_midpt_BL;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_BL_0 = r_II_c_BL;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 3;
+                    step_state = uint8(3);
                     [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, coder.ignoreConst(4));
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, coder.ignoreConst(4));
                 if r_II_c_BL(3) <= 0
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(4) = 1;
                     leg_index = 0;
                     floor_toggle(4) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                     %if error reached
                     legs_stepped = legs_stepped + 1;
                 end
             end
         end
         if legs_stepped == 4
-            legs_stepped = 0;
-            leg_reset_needed = 0;
+            legs_stepped = uint8(0);
+            leg_reset_needed = false;
             if is_turning == 2
-                is_turning = 0;
+                is_turning = uint8(0);
                 turn_needed = 0;
             end
         end
@@ -519,13 +527,13 @@ else
         % determine direction of travel
         % the direction of travel is computed at the very beginning or when
         % the desired body position changes
-        if waypoint_toggle == 0
+        if waypoint_toggle == false
             startPoint = r_II_B;
             endPoint = r_II_B_d;
-            waypoint_toggle = 1;
-        elseif waypoint_toggle == 1
+            waypoint_toggle = true;
+        else
             if endPoint ~= r_II_B_d
-                waypoint_toggle = 0;
+                waypoint_toggle = false;
             end
         end
         %% leg stepping algorithm
@@ -540,24 +548,24 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_FR;
                 Theta2_d_midpt = Theta2_d_midpt_FR;
                 Theta3_d_midpt = Theta3_d_midpt_FR;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_FR_0 = r_II_c_FR;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_FR_0, step_dist);
                     r_II_c_current = r_II_c_FR_0;
                 end
             elseif step_state == 2 % stepping towards goal now
                 %                 step_error = norm(r_II_c_FR - r_II_c_dstep);
                 if r_II_c_FR(3) <= 0
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(1) = 1;
                     leg_index = 0;
                     floor_toggle(1) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         elseif leg_index == 2
@@ -570,23 +578,23 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_FL;
                 Theta2_d_midpt = Theta2_d_midpt_FL;
                 Theta3_d_midpt = Theta3_d_midpt_FL;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_FL_0 = r_II_c_FL;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2 % reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_FL_0, step_dist);
                     r_II_c_current = r_II_c_FL_0;
                 end
             elseif step_state == 2 % stepping towards goal now
                 if r_II_c_FL(3) <= 0
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(2) = 1;
                     leg_index = 0;
                     floor_toggle(2) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         elseif leg_index == 3
@@ -599,23 +607,23 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_BR;
                 Theta2_d_midpt = Theta2_d_midpt_BR;
                 Theta3_d_midpt = Theta3_d_midpt_BR;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_BR_0 = r_II_c_BR;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_BR_0, step_dist);
                     r_II_c_current = r_II_c_BR_0;
                 end
             elseif step_state == 2 % stepping towards goal now
                 if r_II_c_BR(3) <= 0
                     legs_valid(3) = 1;
-                    step_state = 0;
+                    step_state = uint8(0);
                     leg_index = 0;
                     floor_toggle(3) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         elseif leg_index == 4
@@ -628,23 +636,23 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_BL;
                 Theta2_d_midpt = Theta2_d_midpt_BL;
                 Theta3_d_midpt = Theta3_d_midpt_BL;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_BL_0 = r_II_c_BL;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_BL_0, step_dist);
                     r_II_c_current = r_II_c_BL_0;
                 end
             elseif step_state == 2 % stepping towards goal now
                 if r_II_c_BL(3) <= 0
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(4) = 1;
                     leg_index = 0;
                     floor_toggle(4) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         end
@@ -659,24 +667,24 @@ if reached_rest_centroid == 0 % needs to move back to resting 4-legged position 
     [x,y] = centroid_codeGen([r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1), r_II_c_BR(1)],[r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2), r_II_c_BR(2)]);
     r_II_B_d_temp = [x;y;r_II_B_d(3)];
     [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,[1,1,1,1]);
-    reached_rest_centroid = 2;
+    reached_rest_centroid = uint8(2);
 elseif reached_rest_centroid == 2 % moving towards resting, or inbetween-step body pose
     body_error = norm(r_II_B - r_II_B_d_temp);
     [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
     if body_error < 0.01
-        reached_rest_centroid = 1;
+        reached_rest_centroid = uint8(1);
     end
 elseif reached_rest_centroid == 1
-    waypoint_toggle = 0;
+    waypoint_toggle = false;
     % rockback before step
     if ~isempty(find(legs_valid == 0, 1))
         if reached_centroid == 0 % hasn't started moving towards centroid yet
             [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
-            reached_centroid = 2;
+            reached_centroid = uint8(2);
         elseif reached_centroid == 2 % moving towards centroid
             body_error = norm(r_II_B - r_II_B_d_temp);
             if body_error < 0.01
-                reached_centroid = 1;
+                reached_centroid = uint8(1);
             end
         elseif reached_centroid == 1 % step
             % step leg
@@ -693,8 +701,8 @@ elseif reached_rest_centroid == 1
                 Theta3_d(leg_index) = Theta3_d_reset;
             end
             if step_error <= 0.03
-                reached_centroid = 0;
-                reached_rest_centroid = 0;
+                reached_centroid = uint8(0);
+                reached_rest_centroid = uint8(0);
             end
         end
     else

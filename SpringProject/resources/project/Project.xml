@@ -324,9 +324,6 @@
                 </Category>
             </Info>
         </File>
-        <File Location="manipulability.prj">
-            <Info/>
-        </File>
         <File Location="RC_Func_Test.m">
             <Info>
                 <Category UUID="FileClassCategory">
@@ -343,13 +340,6 @@
         </File>
         <File Location="Robot_Control.prj">
             <Info/>
-        </File>
-        <File Location="Robot_Control_codegen.m">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
-                </Category>
-            </Info>
         </File>
         <File Location="Kinematic_SC_Turn_V7.mp4">
             <Info/>

@@ -298,22 +298,22 @@ if (step_state == 0) && (reached_rest_centroid == 1)
     if (calc_manip == true)
         [muFR, muFL, muBR, muBL] = manipulability(state);
         mu =  [muFR, muFL, muBR, muBL];
-        manip_vec = sort(mu);
+        [~, manip_vec] = sort(mu);
         calc_manip = false;
     end
     
     switch step_needed 
         case 1
-            leg_index = find(manip_vec(1) == mu);
+            leg_index = manip_vec(1);
             step_needed = uint8(2);
         case 2
-            leg_index = find(manip_vec(2) == mu);
+            leg_index = manip_vec(2);
             step_needed = uint8(3);
         case 3
-            leg_index = find(manip_vec(3) == mu);
+            leg_index = manip_vec(3);
             step_needed = uint8(4);
         case 4
-            leg_index = find(manip_vec(4) == mu);
+            leg_index = manip_vec(4);
             step_needed = uint8(1);
             calc_manip = true;
         otherwise

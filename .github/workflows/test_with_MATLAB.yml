@@ -16,15 +16,30 @@ jobs:
         with:
           release: R2020b
         
-      - name: Run tests and generate artifacts
+      - name: Check code with mlintrpt
         uses: matlab-actions/run-command@v0.2.3
         with:
           command: cd SpringProject; rpt = mlintrpt; writecell(rpt, 'report.html', 'FileType', 'text')
+          
+      - name: Upload report as artifact
+        uses: actions/upload-artifact@v2.2.2
+        with: 
+          name: mlint_report.html
+          path: SpringProject/report.html
+          
+        
   RC_Func_Sample:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2.3.4
+       
+      - name: test
+        run: ls
+        
+      - name: test2
+        run: pwd
+  
        
       - name: Install MATLAB
         uses: matlab-actions/setup-matlab@v0.2.1
@@ -32,7 +47,7 @@ jobs:
           release: R2020b
           
       - name: Run RC_Func_Test
-        uses: matlab-actions/run-command@v.0.2.3
+        uses: matlab-actions/run-command@v0.2.3
         with:
-          command: cd SprintProject; RC_Func_Sample
+          command: cd SpringProject; RC_Func_Sample
         

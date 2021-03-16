@@ -25,7 +25,7 @@ Theta3_4 = 0;
 
 travel_dir = (r_II_c_d-r_II_c_0)/norm((r_II_c_d-r_II_c_0));
 loop_toggle = 0;
-ii = 0;
+ii = uint16(0);
 while loop_toggle == 0
     ii = ii+1;
     if ii == 1000

@@ -1,6 +1,6 @@
 function [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,lifted_leg)
 
-in_pgon = 0;
+in_pgon = false;
 
 switch lifted_leg
     case 1
@@ -25,12 +25,12 @@ end
 
 r_II_B_new = r_II_B;
 dir_to_pgon = (cross([0;0;1],boundary_vec))/norm(r_II_B + cross([0;0;1],boundary_vec));
-ii = 0;
-while (in_pgon == 0) && (ii <= 100)
+ii = uint16(0);
+while (in_pgon == false) && (ii <= 100)
     ii = ii+1;
     if inpolygon(r_II_B_new(1),r_II_B_new(2),pgonx,pgony)
         r_II_B_new = r_II_B_new + dir_to_pgon.*0.035;
-        in_pgon = 1;
+        in_pgon = true;
     else
         r_II_B_new = r_II_B_new + dir_to_pgon.*0.001;
     end

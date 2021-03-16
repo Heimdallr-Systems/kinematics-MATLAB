@@ -15,7 +15,7 @@ constants = RobotConstants();
 L2 = norm(constants.r_22_3_BL);
 L3 = norm(constants.r_33_c_BL);
 
-loop_toggle = 0;
+loop_toggle = false;
 
 %initialize
 Theta1 = zeros(4,1);
@@ -42,14 +42,14 @@ Theta3_4 = zeros(4,1);
 % Theta3_4(:,1) = [Theta3_FR_4, Theta3_FL_4, Theta3_BR_4, Theta3_BL_4]
 
 travel_dir = (r_II_B_d - r_II_B_0)./norm((r_II_B_d - r_II_B_0));
-ii = 0;
-while (loop_toggle == 0)
+ii = uint16(0);
+while (loop_toggle == false)
     ii = ii+1;
     if ii == 1000
         error('Limit Reached');
     end
     %% FR LEG
-    loop_toggle = 1;
+    loop_toggle = true;
     if legs_on_gnd(1) == 1
         r_II_c_FR = r_II_c(:,1);
         r_BB_c_FR = T_I_B\(r_II_c_FR - r_II_B_d);
@@ -75,7 +75,7 @@ while (loop_toggle == 0)
         D_FR_2 = (r_FR_2^2 + s_FR_2^2 - L2^2 - L3^2)/(2*L2*L3);
         
         if D_FR >0.999
-            loop_toggle = 0;
+            loop_toggle = false;
             r_II_B_d = r_II_B_d - travel_dir.*0.001;
 %             r_II_B_d(3) = r_II_B_0(3);
         else
@@ -164,7 +164,7 @@ while (loop_toggle == 0)
         end
         
         if D_FL > 0.999
-            loop_toggle = 0;
+            loop_toggle = false;
             r_II_B_d = r_II_B_d - travel_dir.*0.001;
 %             r_II_B_d(3) = r_II_B_0(3);
         else
@@ -237,7 +237,7 @@ while (loop_toggle == 0)
         end
         
         if D_BR > 0.999
-            loop_toggle = 0;
+            loop_toggle = false;
             r_II_B_d = r_II_B_d - travel_dir.*0.001;
 %             r_II_B_d(3) = r_II_B_0(3);
         else
@@ -307,7 +307,7 @@ while (loop_toggle == 0)
         end
         
         if D_BL > 0.999
-            loop_toggle = 0;
+            loop_toggle = false;
             r_II_B_d = r_II_B_d - travel_dir.*0.001;
 %             r_II_B_d(3) = r_II_B_0(3);
         else
@@ -332,14 +332,14 @@ while (loop_toggle == 0)
     end
 end
 
-T1_cond = zeros(1,4);
+T1_cond = false(1,4);
 % if theta1 wraps around into robot
 T1_cond(1) = (Theta1(1) <= -pi/2) || (Theta1(1) >= pi); % FR
 T1_cond(2) = (Theta1(2) <= -pi) || (Theta1(2) >= pi/2); %FL
 T1_cond(3) = (Theta1(3) <= -pi) || (Theta1(3) >= pi/2); % BR
 T1_cond(4) = (Theta1(4) <= -pi/2) || (Theta1(4) >= pi); % BL
 
-for hh = 1:1:4
+for hh = uint8(1:1:4)
     if T1_cond(hh)
         Theta1(hh,1) = Theta1_2(hh);
         Theta2(hh,1) = Theta2_4(hh);

@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+    ],
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.cpptools",
+            "ms-vscode.makefile-tools",
+            "gimly81.matlab",
+            "gruntfuggly.todo-tree",
+            "redhat.vscode-xml"
+        ]
+    },
+    "launch": {
+            "configurations": [
+                {
+                    "name": "(Windows) Launch",
+                    "type": "cppvsdbg",
+                    "request": "attach",
+                    
+                    // ""
+                    // "program": "D:/Program Files/MATLAB/R2020b/bin/win64/MATLAB.exe",
+                    "processId": "${command:pickProcess}",
+                }
+            ]
+    }
+}

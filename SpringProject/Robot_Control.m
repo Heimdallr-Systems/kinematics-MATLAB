@@ -217,10 +217,10 @@ if isempty(Theta3_d)
 end
 
 if isempty(mu)
-    mu = zeros(4,1);
+    mu = zeros(1,4);
 end
 if  isempty(manip_vec)
-    manip_vec = zeros(4,1);
+    manip_vec = zeros(1,4);
 end
 
 step_error = 0;

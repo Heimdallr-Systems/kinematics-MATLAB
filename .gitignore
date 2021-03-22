@@ -32,3 +32,5 @@ octave-workspace
 
 # Blender backup files
 *.blend1
+SpringProject/.vscode/configurationCache.log
+SpringProject/.vscode/dryrun.log

@@ -498,7 +498,7 @@ if turn_needed == 1
                     floor_toggle(4) = 1;
                     reached_centroid = 0;
                     reached_rest_centroid = 0;
-                    %if error reached
+                    %if  reached
                     legs_stepped = legs_stepped + 1;
                 end
             end

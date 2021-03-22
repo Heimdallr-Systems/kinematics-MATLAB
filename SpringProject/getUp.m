@@ -13,7 +13,7 @@ function [Theta_d, stage_out] = getUp(Theta, stage)
 % IF THE ERROR THRESHOLD FOR MOVING THE LEGS TAKES TOO LONG TO REACH, 
 % MANUALLY CHANGE THE STAGE VALUE WITH A ITERATION COUNT CONDITION IN THE
 % WHILE LOOP.
-
+Theta_d = zeros(12, 1);
 switch stage
     % constants for mid-step resting position
     case 1 % crunch up
@@ -39,8 +39,8 @@ switch stage
         stage_out = 1;
         
         % calc error
-        error = norm(Theta) - norm(Theta_d);
-        if (error < 0.3)
+        error_theta = norm(Theta) - norm(Theta_d);
+        if (error_theta < 0.3)
             stage_out = 2;
             
         end
@@ -61,13 +61,16 @@ switch stage
         Theta_d(12,1) = -1.5095;
         
         
-        error = norm(Theta) - norm(Theta_d);
+        error_theta = norm(Theta) - norm(Theta_d);
         stage_out = 2;
-        if (error < 0.3)
+        if (error_theta < 0.3)
             stage_out = 0;
         end
         
     otherwise
+        if (~coder.target("MATLAB"))
+            fprintf("Bad Index Input");
+        end
         error('Bad Index Input');
         
 end

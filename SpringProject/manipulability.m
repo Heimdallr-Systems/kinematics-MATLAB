@@ -1,4 +1,4 @@
-function [muFR, muFL, muBR, muBL] = manipulability(state)
+function [muFR, muFL, muBR, muBL] = manipulability(state) %#codegen
 
 state(19:36) = zeros(1,18);
 

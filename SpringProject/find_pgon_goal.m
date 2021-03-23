@@ -1,4 +1,4 @@
-function [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,lifted_leg)
+function [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,lifted_leg) %#codegen
 
 in_pgon = false;
 

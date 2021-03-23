@@ -1,4 +1,4 @@
-function [Theta1,Theta2,Theta3] = Leg_Controller_B(r_BB_c, leg_index)
+function [Theta1,Theta2,Theta3] = Leg_Controller_B(r_BB_c, leg_index) %#codegen
 % This function is used to "reset" the legs to some r_BB_c position
 % Works for one leg only!!!
 

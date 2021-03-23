@@ -1,4 +1,4 @@
-function [Theta1, Theta2, Theta3, r_II_B_d] = Body_Pose_Controller(r_II_c, T_I_B, r_II_B_d, r_II_B_0, legs_on_gnd)
+function [Theta1, Theta2, Theta3, r_II_B_d] = Body_Pose_Controller(r_II_c, T_I_B, r_II_B_d, r_II_B_0, legs_on_gnd) %#codegen
 % This function is used to solve for IK solutions of the robot's legs when
 % measurements in terms of the inertial frame are known. Use this function
 % when solving for tilt under the flat plane assumption.

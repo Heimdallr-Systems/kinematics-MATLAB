@@ -1,4 +1,4 @@
-function [Theta1,Theta2,Theta3,r_II_c_d] = Leg_Controller(r_II_c_d,r_II_c_0, T_I_B, r_II_B, leg_index)
+function [Theta1,Theta2,Theta3,r_II_c_d] = Leg_Controller(r_II_c_d,r_II_c_0, T_I_B, r_II_B, leg_index) %#codegen
 % This function operates similar to IK_Solver_Legs_Inertial, but instead is
 % intended to use the current T_I_B and r_II_B with a desired r_BB_c_d.
 % This should allow the leg desired to be moved act independent to the

@@ -1,4 +1,4 @@
-function [r_II_c] = step_planner_intelligent(r_II_b_last, r_II_b,r_II_c_start, step_dist)
+function [r_II_c] = step_planner_intelligent(r_II_b_last, r_II_b,r_II_c_start, step_dist) %#codegen
 % This function returns r_II_c for all 4 joint positions, given a direction
 % of travel, starting location and step distance.
 % Rewritten to take into account the point cloud of the floor for placing

@@ -69,7 +69,7 @@ switch stage
         
     otherwise
         if (~coder.target("MATLAB"))
-            fprintf("Bad Index Input");
+            fprintf("Bad Index Input\n");
         end
         error('Bad Index Input');
         

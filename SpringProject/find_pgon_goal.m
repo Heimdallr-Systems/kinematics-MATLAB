@@ -20,6 +20,9 @@ switch lifted_leg
         pgony = [r_II_c_FR(2), r_II_c_FL(2), r_II_c_BR(2)];
         boundary_vec = (r_II_c_BR - r_II_c_FL);
     otherwise
+        if (~coder.target("MATLAB"))
+            fprintf("Lifted_Leg is not set to a valid value\n");
+        end
         error("Lifted_Leg is not set to a valid value");
 end
 

@@ -29,6 +29,9 @@ ii = uint16(0);
 while loop_toggle == 0
     ii = ii+1;
     if ii == 1000
+        if (~coder.target("MATLAB"))
+            fprintf("Limit Reached");
+        end
         error('Limit Reached');
     end
     loop_toggle = 1;
@@ -274,6 +277,9 @@ while loop_toggle == 0
         end
         
         otherwise 
+            if (~coder.target("MATLAB"))
+                fprintf("Leg_Index is set to an invalid value")
+            end
             error("Leg_Index is set to an invalid value")
     end
 end     
@@ -289,6 +295,9 @@ switch leg_index
     case 4
         T1_cond = (Theta1 <= -pi/2) || (Theta1 >= pi); % BL
     otherwise
+        if (~coder.target("MATLAB"))
+            fprintf("Leg_Index is set to an invalid value")
+        end
         error("Leg Index is not a allowed value")
         
 end

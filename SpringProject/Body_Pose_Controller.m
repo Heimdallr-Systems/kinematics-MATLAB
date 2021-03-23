@@ -46,6 +46,9 @@ ii = uint16(0);
 while (loop_toggle == false)
     ii = ii+1;
     if ii == 1000
+        if (~coder.target("MATLAB"))
+            fprintf("Limit Reached\n");
+        end
         error('Limit Reached');
     end
     %% FR LEG

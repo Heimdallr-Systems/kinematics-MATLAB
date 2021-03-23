@@ -317,6 +317,9 @@ if (step_state == 0) && (reached_rest_centroid == 1)
             step_needed = uint8(1);
             calc_manip = true;
         otherwise
+            if (~coder.target("MATLAB"))
+                fprintf("Step_needed is set to an incorrect value")
+            end
             error("Step_needed is set to an incorrect value")
 
     end

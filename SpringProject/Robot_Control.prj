@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2018b">
-  <configuration build-checksum="1010260698" file="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.prj" location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" name="Robot_Control" preferred-package-location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" preferred-package-type="package.type.zip.flat" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="1891456128" file="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.prj" location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" name="Robot_Control" preferred-package-location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" preferred-package-type="package.type.zip.flat" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -828,7 +828,7 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\Robot_Control</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>1010260698</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>1891456128</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\getUp_mex</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>1358049728</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>RC_Func_Sample; getUp_test</var.lastCfiTestSnippet>

@@ -10,8 +10,7 @@ state(19:36) = zeros(1,18);
 [~,SIG_BR,~] = svd(GeoJc_BR);
 [~,SIG_BL,~] = svd(GeoJc_BL);
 
-sig_size = size(SIG_FR);
-sig_size = sig_size(1);
+sig_size = size(SIG_FR, 1);
 
 sigFR = zeros(6,1);
 sigFL = zeros(6,1);

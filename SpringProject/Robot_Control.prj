@@ -142,7 +142,7 @@
       <param.SearchPaths />
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
       <param.PurelyIntegerCode>false</param.PurelyIntegerCode>
-      <param.SupportNonFinite>true</param.SupportNonFinite>
+      <param.SupportNonFinite>false</param.SupportNonFinite>
       <param.LoopUnrollThreshold>5</param.LoopUnrollThreshold>
       <param.EnableVariableSizing>false</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Disabled</param.DynamicMemoryAllocation>
@@ -329,7 +329,6 @@
         <param.SearchPaths />
         <param.SaturateOnIntegerOverflow />
         <param.PurelyIntegerCode />
-        <param.SupportNonFinite />
         <param.LoopUnrollThreshold />
         <param.DynamicMemoryAllocationThreshold />
         <param.DynamicMemoryAllocationInterface />

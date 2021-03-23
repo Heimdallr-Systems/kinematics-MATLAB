@@ -195,8 +195,8 @@
       <param.CustomSymbolStrEMXArrayFcn>emx$M$N</param.CustomSymbolStrEMXArrayFcn>
       <param.ReservedNameArray />
       <param.RuntimeChecks>true</param.RuntimeChecks>
-      <param.Verbose>false</param.Verbose>
-      <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
+      <param.Verbose>true</param.Verbose>
+      <param.ReportPotentialDifferences>true</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.GenerateCodeMetricsReport>true</param.GenerateCodeMetricsReport>
       <param.GenerateCodeReplacementReport>true</param.GenerateCodeReplacementReport>
@@ -374,8 +374,6 @@
         <param.CustomSymbolStrEMXArray />
         <param.CustomSymbolStrEMXArrayFcn />
         <param.ReservedNameArray />
-        <param.Verbose />
-        <param.ReportPotentialDifferences />
         <param.GenerateReport />
         <param.LaunchReport />
         <param.ReportInfoVarName />

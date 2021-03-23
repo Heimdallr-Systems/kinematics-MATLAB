@@ -36,6 +36,12 @@
             <Label Location="dddee036-3190-4dc4-93a8-66f5466aaf53">
                 <Info Name="CodeGen Sub Function" ReadOnly="WRITABLE"/>
             </Label>
+            <Label Location="f2f3598d-d84d-483f-bc15-c626568dea8c">
+                <Info Name="CodeGen Generated C++" ReadOnly="WRITABLE"/>
+            </Label>
+            <Label Location="6929ec32-1127-4808-a17f-e723b71b4e6b">
+                <Info Name="CodeGen Generated Headers" ReadOnly="WRITABLE"/>
+            </Label>
         </Category>
     </Categories>
     <Files Location="Root">

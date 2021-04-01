@@ -15,7 +15,7 @@ r_II_c = [r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL];
 
 Theta_0 = [Theta1_0;Theta2_0;Theta3_0];
 rcm_0 = compute_rcm(Theta_0, r_II_B_0, T_I_B_0)
-FK_Solver_Draw(Theta1_0,Theta2_0,Theta3_0,T_I_B_0,r_II_B_0,rcm_0)
+FK_Solver_Draw_CM(Theta1_0,Theta2_0,Theta3_0,T_I_B_0,r_II_B_0,rcm_0)
 
 rcm_d = [0;0];
 [Theta1, Theta2, Theta3] = CM_Controller(Theta_0,rcm_0,rcm_d,r_II_B_0,T_I_B_0,[1,1,1,1]);
@@ -30,4 +30,4 @@ legs_on_gnd = [1;1;1;1];
 Theta = [Theta1;Theta2;Theta3];
 rcm_1 = compute_rcm(Theta, r_II_B, T_I_B)
 figure
-FK_Solver_Draw(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm_1)
+FK_Solver_Draw_CM(Theta1,Theta2,Theta3,T_I_B,r_II_B,rcm_1)

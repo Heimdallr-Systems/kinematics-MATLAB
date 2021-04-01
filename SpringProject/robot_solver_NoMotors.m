@@ -331,7 +331,7 @@ M(loops) = struct('cdata',[],'colormap',[]);
 for ii=1:floor(Ts/h):length(t)
     T_I_B = rotz(phi(ii))*roty(theta(ii))*rotx(psi(ii));
     FK_Solver_Draw(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii))
-%     FK_Solver_Draw(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii),1,rcm(:,ii))
+%     FK_Solver_Draw_CM(Theta1(:,ii),Theta2(:,ii),Theta3(:,ii),T_I_B,r_II_B(:,ii),1,rcm(:,ii))
     M(ii) = getframe(gcf);
     writeVideo(writerObj,M(ii));
 end

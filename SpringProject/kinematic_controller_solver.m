@@ -511,7 +511,7 @@ for ii = 1:length(t)
     r_II_B_a_plot = r_II_B_plot;
     Theta_a_plot = Theta_plot;
     r_I_sys_cm = compute_rcm(Theta_a_plot,r_II_B_a_plot,T_I_B_plot);
-    FK_Solver_Draw(Theta1_plot,Theta2_plot,Theta3_plot,T_I_B_plot,r_II_B_plot,r_I_sys_cm, legs_valid,'top','fixed')
+    FK_Solver_Draw_CM(Theta1_plot,Theta2_plot,Theta3_plot,T_I_B_plot,r_II_B_plot,r_I_sys_cm, legs_valid,'top','fixed')
     M(ii) = getframe(gcf);
     writeVideo(writerObj,M(ii));
     disp(ii)

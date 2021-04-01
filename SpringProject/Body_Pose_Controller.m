@@ -10,10 +10,10 @@ function [Theta1, Theta1_2, Theta2, Theta2_2, Theta2_3, Theta2_4, Theta3, Theta3
 % solutions for theta3 of each leg
 
 % Constants, known offsets
-constants = RobotConstants();
+RobotConstants;
 % known lengths of last two links
-L2 = norm(constants.r_22_3_BL);
-L3 = norm(constants.r_33_c_BL);
+L2 = norm(r_22_3_BL);
+L3 = norm(r_33_c_BL);
 
 loop_toggle = 0;
 
@@ -41,7 +41,7 @@ while (loop_toggle == 0)
     if legs_on_gnd(1) == 1
         r_II_c_FR = r_II_c(:,1);
         r_BB_c_FR = T_I_B\(r_II_c_FR - r_II_B_d);
-        r_B1_c_FR = r_BB_c_FR - constants.r_BB_1_FR;
+        r_B1_c_FR = r_BB_c_FR - r_BB_1_FR;
         
         Theta1_FR = atan2(r_B1_c_FR(2),r_B1_c_FR(1))+pi/2;
         Theta1_FR = angle(exp(1j*Theta1_FR));
@@ -51,7 +51,7 @@ while (loop_toggle == 0)
         r_1prime1_c_FR = rotz(pi)\(rotz(Theta1_FR)\r_B1_c_FR);
         r_1prime1_c_FR_2 = rotz(pi)\(rotz(Theta1_FR_2)\r_B1_c_FR);
         
-        r_1prime1_2_FR = rotz(pi)\constants.r_11_2_FR;
+        r_1prime1_2_FR = rotz(pi)\r_11_2_FR;
         
         r_FR = r_1prime1_c_FR(2)-r_1prime1_2_FR(2);
         r_FR_2 = r_1prime1_c_FR_2(2)-r_1prime1_2_FR(2);
@@ -115,7 +115,7 @@ while (loop_toggle == 0)
     if legs_on_gnd(2) == 1
         r_II_c_FL = r_II_c(:,2);
         r_BB_c_FL = T_I_B\(r_II_c_FL - r_II_B_d);
-        r_B1_c_FL = r_BB_c_FL - constants.r_BB_1_FL;
+        r_B1_c_FL = r_BB_c_FL - r_BB_1_FL;
         
         Theta1_FL = atan2(r_B1_c_FL(2),r_B1_c_FL(1))-pi/2;
         Theta1_FL = angle(exp(1j*Theta1_FL));
@@ -126,13 +126,13 @@ while (loop_toggle == 0)
         
         r_11_c_FL_2 = rotz(Theta1_FL_2)\r_B1_c_FL;
         
-        r_FL = r_11_c_FL(2)-constants.r_11_2_FL(2);
+        r_FL = r_11_c_FL(2)-r_11_2_FL(2);
         
-        r_FL_2 = r_11_c_FL_2(2)-constants.r_11_2_FL(2);
+        r_FL_2 = r_11_c_FL_2(2)-r_11_2_FL(2);
         
-        s_FL = r_11_c_FL(3)-constants.r_11_2_FL(3);
+        s_FL = r_11_c_FL(3)-r_11_2_FL(3);
         
-        s_FL_2 = r_11_c_FL_2(3)-constants.r_11_2_FL(3);
+        s_FL_2 = r_11_c_FL_2(3)-r_11_2_FL(3);
         
         D_FL = (r_FL^2 + s_FL^2 - L2^2 - L3^2)/(2*L2*L3);
         
@@ -181,7 +181,7 @@ while (loop_toggle == 0)
     if legs_on_gnd(3) == 1
         r_II_c_BR = r_II_c(:,3);
         r_BB_c_BR = T_I_B\(r_II_c_BR - r_II_B_d);
-        r_B1_c_BR = r_BB_c_BR - constants.r_BB_1_BR;
+        r_B1_c_BR = r_BB_c_BR - r_BB_1_BR;
         
         Theta1_BR = atan2(r_B1_c_BR(2),r_B1_c_BR(1))+pi/2;
         Theta1_BR = angle(exp(1j*Theta1_BR));
@@ -192,7 +192,7 @@ while (loop_toggle == 0)
         
         r_1prime1_c_BR_2  = rotz(pi)\(rotz(Theta1_BR_2)\r_B1_c_BR);
         
-        r_1prime1_2_BR = rotz(pi)\constants.r_11_2_BR;
+        r_1prime1_2_BR = rotz(pi)\r_11_2_BR;
         
         r_BR = r_1prime1_c_BR(2)-r_1prime1_2_BR(2);
         
@@ -255,7 +255,7 @@ while (loop_toggle == 0)
     if legs_on_gnd(4) == 1
         r_II_c_BL = r_II_c(:,4);
         r_BB_c_BL = T_I_B\(r_II_c_BL - r_II_B_d);
-        r_B1_c_BL = r_BB_c_BL - constants.r_BB_1_BL;
+        r_B1_c_BL = r_BB_c_BL - r_BB_1_BL;
         
         Theta1_BL = atan2(r_B1_c_BL(2),r_B1_c_BL(1))-pi/2;
         Theta1_BL = angle(exp(1j*Theta1_BL));
@@ -266,13 +266,13 @@ while (loop_toggle == 0)
         
         r_11_c_BL_2 = rotz(Theta1_BL_2)\r_B1_c_BL;
         
-        r_BL = r_11_c_BL(2)-constants.r_11_2_BL(2);
+        r_BL = r_11_c_BL(2)-r_11_2_BL(2);
         
-        r_BL_2 = r_11_c_BL_2(2)-constants.r_11_2_BL(2);
+        r_BL_2 = r_11_c_BL_2(2)-r_11_2_BL(2);
         
-        s_BL = r_11_c_BL(3)-constants.r_11_2_BL(3);
+        s_BL = r_11_c_BL(3)-r_11_2_BL(3);
         
-        s_BL_2 = r_11_c_BL_2(3)-constants.r_11_2_BL(3);
+        s_BL_2 = r_11_c_BL_2(3)-r_11_2_BL(3);
         
         D_BL = (r_BL^2 + s_BL^2 - L2^2 - L3^2)/(2*L2*L3);
         

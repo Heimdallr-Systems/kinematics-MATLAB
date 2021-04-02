@@ -3,7 +3,7 @@ clc
 close all
 
 h = 0.0001; % time step
-t = 0:h:10; % time vector
+t = 0:h:5; % time vector
 
 %%% Initial Conditions %%%
 b=zeros(36,length(t)); % state matrix
@@ -34,8 +34,8 @@ b(18,1) = -pi/3;
 % theta_d =  zeros(1,length(x_d));
 % psi_d =  zeros(1,length(x_d));
 r_II_B_d = [1;0;0.2];
-Euler_d = [0,0,0];
-phi_d = 0;
+Euler_d = [pi/2,0,0];
+phi_d = pi/2;
 theta_d = 0;
 psi_d = 0;
 
@@ -52,7 +52,7 @@ b_fric_floor = -2000; % floor coefficient of lateral, viscous friction
 init_toggle = 1;
 for ii = 1:length(t)
     
-    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle);
+    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle, [0,0,0,0]);
     init_toggle = 0;
     %%%DYNAMIC%%%
     % %% Control Law and Force Computation
@@ -188,6 +188,9 @@ for ii = 1:length(t)
     writeVideo(writerObj,M(ii));
     
     disp(ii)
+    if ii == 125
+       disp('hi'); 
+    end
 end
 
 %%

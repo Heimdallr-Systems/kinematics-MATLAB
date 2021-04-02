@@ -51,8 +51,37 @@ r_II_B = [r_II_B_x;r_II_B_y;r_II_B_z];
 r_BB_cam = [r_BB_cam_x;r_BB_cam_y;r_BB_cam_z];
 T_I_B = rotz(phi)*roty(theta)*rotx(psi);
 
+disp('Vector Position from Inertial to Cam frame:')
 r_II_cam = r_II_B + T_I_B*r_BB_cam
+disp('');
+disp('Rotation Matrix from Cam frame to Body frame:')
 T_B_cam = rotz(alpha)*roty(beta)*rotx(0)
+disp('');
+disp('Rotation Matrix from Cam frame to Inertial frame:')
+T_I_cam = simplify(T_I_B*T_B_cam)
+disp('');
+disp('Rotation Matrix from Body frame to Inertial frame with T_I_cam & T_B_cam known:')
+
+%%
+clc
+
+T_B_cam = rotz(alpha)*roty(beta);
+T_cam_B = simplify(inv(T_B_cam))
+
+%%
+clc
+
+syms r_BB_1_x r_BB_1_y r_BB_1_z
+syms r_11_2_x r_11_2_y r_11_2_z
+syms r_22_cam_x r_22_cam_y r_22_cam_z
+syms alpha beta
+
+r_BB_1 = [r_BB_1_x r_BB_1_y r_BB_1_z].';
+r_11_2 = [r_11_2_x r_11_2_y r_11_2_z].';
+r_22_cam = [r_22_cam_x r_22_cam_y r_22_cam_z].';
+
+r_BB_cam = simplify(r_BB_1 + rotz(alpha)*r_11_2 + roty(beta)*r_22_cam)
+
 
 
 %%

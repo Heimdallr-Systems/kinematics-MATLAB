@@ -1,4 +1,4 @@
-function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_out,floor_toggle_out,legs_valid_out] = Robot_Control(r_II_B_d, Euler_d, gamma_m, init_toggle) %#codegen
+function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_out,floor_toggle_out,legs_valid_out] = Robot_Control(r_II_B_d, Euler_d, gamma_m, init_toggle, legs_on_gnd) %#codegen
 %Controls Robot's walking algorithm
 %   input: r_II_B_d, Euler_d, gamma_m
 %   output: Theta_d (1-3), phi_d_temp & r_II_b_d_temp (orientation for plotting),
@@ -39,6 +39,23 @@ Theta3_d_midpt_BR = 3*pi/4;
 Theta1_d_midpt_BL = pi/4;
 Theta2_d_midpt_BL = pi/4;
 Theta3_d_midpt_BL = -3*pi/4;
+
+% constants for hard stops
+% FR
+% Theta1_FR_Max = ;
+% Theta1_FR_Min = ;
+% 
+% % FL
+% Theta1_FL_Max = ;
+% Theta1_FL_Min = ;
+% 
+% % BR
+% Theta1_BR_Max = ;
+% Theta1_BR_Min = ;
+% 
+% % BL
+% Theta1_BL_Max = ;
+% Theta1_BL_Min = ;
 
 max_body_dist = 0.1; % initialize max bound for moving without steps
 
@@ -256,16 +273,16 @@ T_I_B = rotz(phi)*roty(theta)*rotx(psi);
 state(1:18) = gamma_m(1:18);
 % Constants for "resetting" legs
 % FR
-r_BB_c_reset_FR = [.25;-.25;-r_II_B(3)];
+r_BB_c_reset_FR = [.25;-.25;-0.2];
 
 % FL
-r_BB_c_reset_FL = [.25;.25;-r_II_B(3)];
+r_BB_c_reset_FL = [.25;.25;-0.2];
 
 % BR
-r_BB_c_reset_BR = [-.25;-.25;-r_II_B(3)];
+r_BB_c_reset_BR = [-.25;-.25;-0.2];
 
 % BL
-r_BB_c_reset_BL = [-.25;.25;-r_II_B(3)];
+r_BB_c_reset_BL = [-.25;.25;-0.2];
 
 % desired
 phi_d = Euler_d(1);
@@ -337,10 +354,8 @@ elseif turn_toggle == 1
 end
 
 %% Turn Needed Algorithm
-if (abs(endPhi - startPhi) > pi/10)
+if (abs(endPhi - startPhi) > pi/15)
     turn_needed = 1;
-else
-    turn_needed = 0;
 end
 
 if turn_needed == 1
@@ -399,7 +414,8 @@ if turn_needed == 1
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FR, coder.ignoreConst(1));
-                if r_II_c_FR(3) <= 0
+                step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
+                if (r_II_c_FR(3) <= 0) || (legs_on_gnd(1) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = 0;
                     legs_valid(1) = 1;
                     leg_index = 0;
@@ -429,7 +445,8 @@ if turn_needed == 1
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_FL, coder.ignoreConst(2));
-                if r_II_c_FL(3) <= 0
+                step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
+                if (r_II_c_FL(3) <= 0)  || (legs_on_gnd(2) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = 0;
                     legs_valid(2) = 1;
                     leg_index = 0;
@@ -460,7 +477,8 @@ if turn_needed == 1
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, coder.ignoreConst(3));
-                if r_II_c_BR(3) <= 0
+                step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
+                if (r_II_c_BR(3) <= 0)  || (legs_on_gnd(3) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     legs_valid(3) = 1;
                     step_state = 0;
                     leg_index = 0;
@@ -491,7 +509,8 @@ if turn_needed == 1
                 end
             elseif step_state == 3 % stepping towards goal now
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BL, coder.ignoreConst(4));
-                if r_II_c_BL(3) <= 0
+                step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
+                if (r_II_c_BL(3) <= 0) || (legs_on_gnd(4) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = 0;
                     legs_valid(4) = 1;
                     leg_index = 0;
@@ -550,8 +569,8 @@ else
                     r_II_c_current = r_II_c_FR_0;
                 end
             elseif step_state == 2 % stepping towards goal now
-                %                 step_error = norm(r_II_c_FR - r_II_c_dstep);
-                if r_II_c_FR(3) <= 0
+                step_error = norm(r_II_c_dstep - r_II_c_FR);
+                if (r_II_c_FR(3) <= 0)  || (legs_on_gnd(1) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = 0;
                     legs_valid(1) = 1;
                     leg_index = 0;
@@ -580,7 +599,8 @@ else
                     r_II_c_current = r_II_c_FL_0;
                 end
             elseif step_state == 2 % stepping towards goal now
-                if r_II_c_FL(3) <= 0
+                step_error = norm(r_II_c_dstep - r_II_c_FL);
+                if (r_II_c_FL(3) <= 0)  || (legs_on_gnd(2) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = 0;
                     legs_valid(2) = 1;
                     leg_index = 0;
@@ -609,7 +629,8 @@ else
                     r_II_c_current = r_II_c_BR_0;
                 end
             elseif step_state == 2 % stepping towards goal now
-                if r_II_c_BR(3) <= 0
+                step_error = norm(r_II_c_dstep - r_II_c_BR);
+                if (r_II_c_BR(3) <= 0)  || (legs_on_gnd(3) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     legs_valid(3) = 1;
                     step_state = 0;
                     leg_index = 0;
@@ -638,7 +659,8 @@ else
                     r_II_c_current = r_II_c_BL_0;
                 end
             elseif step_state == 2 % stepping towards goal now
-                if r_II_c_BL(3) <= 0
+                 step_error = norm(r_II_c_dstep - r_II_c_BL);
+                if (r_II_c_BL(3) <= 0)  || (legs_on_gnd(4) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = 0;
                     legs_valid(4) = 1;
                     leg_index = 0;
@@ -692,10 +714,10 @@ elseif reached_rest_centroid == 1
                 Theta2_d(leg_index) = Theta2_d_reset;
                 Theta3_d(leg_index) = Theta3_d_reset;
             end
-            if step_error <= 0.03
-                reached_centroid = 0;
-                reached_rest_centroid = 0;
-            end
+%             if step_error <= 0.03
+%                 reached_centroid = 0;
+%                 reached_rest_centroid = 0;
+%             end
         end
     else
         r_II_B_d_temp = [r_II_B(1),r_II_B(2),r_II_B_d(3)].';

@@ -31,7 +31,7 @@ travel_dir=travel_dir_0/norm(travel_dir_0);
 
 
 r_II_c = r_II_c_start+travel_dir.*step_dist;
-r_II_c(3) = -0.001;
+r_II_c(3) = r_II_c(3)-0.005;
 
 
 % r_BB_c_target = r_II_c(:,leg_index)-r_II_b;

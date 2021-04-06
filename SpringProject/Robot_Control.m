@@ -19,6 +19,9 @@ function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_ou
 % Variable Init
 step_dist = 0.12; % leg step distance
 
+%%%CHANGE IF NEEDED%%%
+manual_step_breakout = 0;
+
 % constants for mid-step resting position
 % FR
 Theta1_d_midpt_FR = pi/4;
@@ -57,7 +60,7 @@ Theta3_d_midpt_BL = -3*pi/4;
 % Theta1_BL_Max = ;
 % Theta1_BL_Min = ;
 
-max_body_dist = 0.1; % initialize max bound for moving without steps
+max_body_dist = 0.06; % initialize max bound for moving without steps
 
 % persistent vars
 persistent waypoint_toggle; % intialize toggle for determining direction of travel
@@ -273,16 +276,16 @@ T_I_B = rotz(phi)*roty(theta)*rotx(psi);
 state(1:18) = gamma_m(1:18);
 % Constants for "resetting" legs
 % FR
-r_BB_c_reset_FR = [.25;-.25;-0.2];
+r_BB_c_reset_FR = [.25;-.25;-r_II_B_d(3)];
 
 % FL
-r_BB_c_reset_FL = [.25;.25;-0.2];
+r_BB_c_reset_FL = [.25;.25;-r_II_B_d(3)];
 
 % BR
-r_BB_c_reset_BR = [-.25;-.25;-0.2];
+r_BB_c_reset_BR = [-.25;-.25;-r_II_B_d(3)];
 
 % BL
-r_BB_c_reset_BL = [-.25;.25;-0.2];
+r_BB_c_reset_BL = [-.25;.25;-r_II_B_d(3)];
 
 % desired
 phi_d = Euler_d(1);
@@ -378,7 +381,7 @@ if turn_needed == 1
         turn_dir = sign(phi_d - phi);
         if (turn_state == 0) && (leg_reset_needed == 0)
             is_turning = 1;
-            phi_d_temp = phi + turn_dir*pi/10;
+            phi_d_temp = phi + turn_dir*pi/15;
             T_I_B_d_temp = rotz(phi_d_temp)*roty(theta_d)*rotx(psi_d);
             turn_state = 1 ;
         elseif turn_state == 1

@@ -33,9 +33,9 @@ b(18,1) = -pi/3;
 % phi_d = pi/2.*ones(1,length(x_d));
 % theta_d =  zeros(1,length(x_d));
 % psi_d =  zeros(1,length(x_d));
-r_II_B_d = [1;0;0.2];
-Euler_d = [pi/2,0,0];
-phi_d = pi/2;
+r_II_B_d = [1;0;0.23];
+Euler_d = [0,0,0];
+phi_d = 0;
 theta_d = 0;
 psi_d = 0;
 
@@ -166,7 +166,7 @@ for ii = 1:length(t)
     Theta_plot = [Theta1_plot;Theta2_plot;Theta3_plot];
     
     if ii == 1
-        writerObj = VideoWriter('Kinematic_SC_Turn_V7','MPEG-4');
+        writerObj = VideoWriter('SoftHarstop_V2','MPEG-4');
         writerObj.FrameRate = 2;
         open(writerObj);
         

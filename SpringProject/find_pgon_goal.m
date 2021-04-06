@@ -29,7 +29,7 @@ ii = 0;
 while (in_pgon == 0) && (ii <= 100)
     ii = ii+1;
     if inpolygon(r_II_B_new(1),r_II_B_new(2),pgonx,pgony)
-        r_II_B_new = r_II_B_new + dir_to_pgon.*0.035;
+        r_II_B_new = r_II_B_new + dir_to_pgon.*0.02;
         in_pgon = 1;
     else
         r_II_B_new = r_II_B_new + dir_to_pgon.*0.001;

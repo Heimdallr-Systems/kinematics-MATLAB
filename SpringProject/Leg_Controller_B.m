@@ -104,7 +104,10 @@ switch leg_index
         Theta1 = Theta1_BL;
         Theta2 = Theta2_BL_2;
         Theta3 = Theta3_BL_2;
-    otherwise 
+    otherwise
+        if (~coder.target("MATLAB"))
+            fprintf("leg_index is not set to a valid value")
+        end
         error("leg_index is not set to a valid value")
 end
 

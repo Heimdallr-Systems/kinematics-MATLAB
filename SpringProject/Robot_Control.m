@@ -19,10 +19,13 @@ function [Theta1_d_out,Theta2_d_out,Theta3_d_out,phi_d_temp_out,r_II_B_d_temp_ou
 assert(all(size(r_II_B_d)==[3, 1]))
 assert(all(size(gamma_m)==[36, 1]))
 assert(all(size(Euler_d)==[1, 3]))
+assert(all(size(legs_on_gnd)==[1,4]))
 assert(isa(gamma_m, 'double'))
 assert(isa(r_II_B_d, 'double'))
 assert(isa(Euler_d, 'double'))
 assert(isa(init_toggle, 'logical'))
+assert(isa(legs_on_gnd, 'logical'))
+
 
 % Variable Init
 step_dist = 0.12; % leg step distance
@@ -217,7 +220,7 @@ if isempty(Theta3_d_reset)
 end
 
 if isempty(r_II_c_dstep)
-    r_II_c_dstep = zeros(3,1);
+    r_II_c_dstep = [0;0;0];
 end
 
 if isempty(r_II_c_current)

@@ -71,7 +71,7 @@ plotPos.leg4.B = zeros(1,length(t));
 plotPos.leg4.C = zeros(1,length(t));    
 for ii = 1:length(t)
     
-    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle);
+    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle, [false false false false]);
     init_toggle = false;
     %%%DYNAMIC%%%
     % %% Control Law and Force Computation

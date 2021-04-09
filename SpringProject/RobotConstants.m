@@ -1,24 +1,24 @@
 function constants = RobotConstants() %#codegen
 constants.r_BB_1_FR = [125.78; -125.78; 25.4]./1000;
-constants.r_11_2_FR = [0; -54; 0]./1000;
+constants.r_11_2_FR = [0; -39; 0]./1000;
 constants.r_22_3_FR = [ 0; -150; 0]./1000;
 constants.r_33_c_FR = [0; -204; 0]./1000;
 
 % Relative FL Leg Positions
 constants.r_BB_1_FL = [ 125.78; 125.78; 25.4]./1000;
-constants.r_11_2_FL = [0; 54; 0]./1000;
+constants.r_11_2_FL = [0; 39; 0]./1000;
 constants.r_22_3_FL = [ 0; 150; 0]./1000;
 constants.r_33_c_FL = [0; 204; 0]./1000;
 
 % Relative BR Leg Positions
 constants.r_BB_1_BR = [-125.78; -125.78; 25.4]./1000;
-constants.r_11_2_BR = [0; -54; 0]./1000;
+constants.r_11_2_BR = [0; -39; 0]./1000;
 constants.r_22_3_BR = [ 0; -150; 0]./1000;
 constants.r_33_c_BR = [0; -204; 0]./1000;
 
 % Relative BL Leg Positions
 constants.r_BB_1_BL = [ -125.78; 125.78; 25.4]./1000;
-constants.r_11_2_BL = [0; 54; 0]./1000;
+constants.r_11_2_BL = [0; 39; 0]./1000;
 constants.r_22_3_BL = [ 0; 150; 0]./1000;
 constants.r_33_c_BL = [0; 204; 0]./1000;
 

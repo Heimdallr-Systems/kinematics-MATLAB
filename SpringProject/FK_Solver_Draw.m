@@ -193,6 +193,23 @@ else
     
 end
 
+if (Theta1(1) > pi/2) || (Theta1(1) < 0) 
+    patch('Faces', FRLink1_f, 'Vertices', FRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0 0 1]);
+end
+
+if (Theta1(2) > 0) || (Theta1(2) < -pi/2) 
+    patch('Faces', FLLink1_f, 'Vertices', FLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0 0 1]);
+end
+
+if (Theta1(3) > 0) || (Theta1(3) < -pi/2) 
+    patch('Faces', BRLink1_f, 'Vertices', BRLink1_v', 'EdgeColor', 'None', 'FaceColor', [0 0 1]);
+end
+
+if (Theta1(4) > pi/2) || (Theta1(4) < 0) 
+    patch('Faces', BLLink1_f, 'Vertices', BLLink1_v', 'EdgeColor', 'None', 'FaceColor', [0 0 1]);
+end
+
+
 % draw support points
 if length(index) >= 3
     scatter3(points(1,:),points(2,:),points(3,:),'rx')

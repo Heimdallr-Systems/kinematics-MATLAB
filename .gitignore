@@ -34,3 +34,4 @@ octave-workspace
 *.blend1
 SpringProject/.vscode/configurationCache.log
 SpringProject/.vscode/dryrun.log
+*.mp4

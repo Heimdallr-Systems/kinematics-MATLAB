@@ -1,4 +1,4 @@
-function [Theta_d, stage_out] = getUp(Theta, stage)
+function [Theta_d, stage] = getUp(Theta, stage) %#codegen
 % This function "resets" the robot if it has fallen or a kinematic solution
 % is unavailable. The legs all crunch up at once, then the robot lifts
 % straight up.
@@ -13,6 +13,13 @@ function [Theta_d, stage_out] = getUp(Theta, stage)
 % IF THE ERROR THRESHOLD FOR MOVING THE LEGS TAKES TOO LONG TO REACH, 
 % MANUALLY CHANGE THE STAGE VALUE WITH A ITERATION COUNT CONDITION IN THE
 % WHILE LOOP.
+
+assert(all(size(Theta)==[12, 1]))
+assert(all(size(stage)==[1, 1]))
+assert(isa(Theta, 'double'))
+assert(isa(stage, 'uint8'))
+
+
 Theta_d = zeros(12, 1);
 switch stage
     % constants for mid-step resting position
@@ -36,12 +43,12 @@ switch stage
         Theta_d(4,1) = pi/4;
         Theta_d(8,1) = pi/4;
         Theta_d(12,1) = -3*pi/4;
-        stage_out = 1;
+        stage = uint8(1);
         
         % calc error
         error_theta = norm(Theta) - norm(Theta_d);
         if (error_theta < 0.3)
-            stage_out = 2;
+            stage = uint8(2);
             
         end
     case 2 % rise up
@@ -62,14 +69,14 @@ switch stage
         
         
         error_theta = norm(Theta) - norm(Theta_d);
-        stage_out = 2;
+        stage = uint8(2);
         if (error_theta < 0.3)
-            stage_out = 0;
+            stage = uint8(0);
         end
         
     otherwise
         if (~coder.target("MATLAB"))
-            fprintf("Bad Index Input");
+            fprintf("Bad Index Input\n");
         end
         error('Bad Index Input');
         

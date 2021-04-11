@@ -1,4 +1,4 @@
-function [rc_FR, rc_FL, rc_BR, rc_BL] = CPos_wrt_I(Theta1,Theta2,Theta3,TB,rBfromI)
+function [rc_FR, rc_FL, rc_BR, rc_BL] = CPos_wrt_I(Theta1,Theta2,Theta3,TB,rBfromI) %#codegen
 % This function gives the positions of the contact points of the robot with
 % respect to the inertial frame.
 % jnt_var = [FR_vars,FL_vars,BR_vars,BL_vars]

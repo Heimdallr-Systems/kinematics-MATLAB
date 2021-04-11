@@ -1,4 +1,4 @@
-function [muFR, muFL, muBR, muBL] = manipulability(state)
+function [muFR, muFL, muBR, muBL] = manipulability(state) %#codegen
 
 state(19:36) = zeros(1,18);
 
@@ -10,8 +10,7 @@ state(19:36) = zeros(1,18);
 [~,SIG_BR,~] = svd(GeoJc_BR);
 [~,SIG_BL,~] = svd(GeoJc_BL);
 
-sig_size = size(SIG_FR);
-sig_size = sig_size(1);
+sig_size = uint16(size(SIG_FR, 1));
 
 sigFR = zeros(6,1);
 sigFL = zeros(6,1);

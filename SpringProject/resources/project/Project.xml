@@ -25,7 +25,22 @@
             </Label>
             <Info DataType="None" Name="Classification" ReadOnly="1" SingleValued="1"/>
             <Label Location="2b926310-d284-4730-baa7-5257b2abd4c9">
-                <Info Name="Design Test Scripts" ReadOnly="WRITABLE"/>
+                <Info Name="CodeGen Test Script" ReadOnly="WRITABLE"/>
+            </Label>
+            <Label Location="f829d0ff-e441-44eb-b441-d05029cf2312">
+                <Info Name="CodeGen Config File" ReadOnly="WRITABLE"/>
+            </Label>
+            <Label Location="9cccffd4-80eb-4471-b926-ce7da333f8c4">
+                <Info Name="CodeGen Main Function" ReadOnly="WRITABLE"/>
+            </Label>
+            <Label Location="dddee036-3190-4dc4-93a8-66f5466aaf53">
+                <Info Name="CodeGen Sub Function" ReadOnly="WRITABLE"/>
+            </Label>
+            <Label Location="f2f3598d-d84d-483f-bc15-c626568dea8c">
+                <Info Name="CodeGen Generated C++" ReadOnly="WRITABLE"/>
+            </Label>
+            <Label Location="6929ec32-1127-4808-a17f-e723b71b4e6b">
+                <Info Name="CodeGen Generated Headers" ReadOnly="WRITABLE"/>
             </Label>
         </Category>
     </Categories>
@@ -33,14 +48,14 @@
         <File Location="Body_Pose_Controller.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
         <File Location="rotz.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -50,7 +65,7 @@
         <File Location="rotx.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -90,7 +105,7 @@
         <File Location="find_pgon_goal.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -181,7 +196,7 @@
         <File Location="roty.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -197,7 +212,7 @@
         <File Location="contactJacobians.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -210,7 +225,7 @@
         <File Location="recursiveKin.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -229,21 +244,21 @@
         <File Location="CPos_wrt_I.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
         <File Location="skew.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
         <File Location="Leg_Controller.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -253,7 +268,7 @@
         <File Location="step_planner_intelligent.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -269,7 +284,7 @@
         <File Location="manipulability.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -285,7 +300,7 @@
         <File Location="RobotConstants.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -313,19 +328,16 @@
         <File Location="Leg_Controller_B.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
         <File Location="Robot_Control.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="9cccffd4-80eb-4471-b926-ce7da333f8c4"/>
                 </Category>
             </Info>
-        </File>
-        <File Location="manipulability.prj">
-            <Info/>
         </File>
         <File Location="RC_Func_Test.m">
             <Info>
@@ -337,19 +349,12 @@
         <File Location="codeGenConfig.mat">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="f829d0ff-e441-44eb-b441-d05029cf2312"/>
                 </Category>
             </Info>
         </File>
         <File Location="Robot_Control.prj">
             <Info/>
-        </File>
-        <File Location="Robot_Control_codegen.m">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
-                </Category>
-            </Info>
         </File>
         <File Location="Kinematic_SC_Turn_V7.mp4">
             <Info/>
@@ -369,16 +374,12 @@
             </Info>
         </File>
         <File Location="centroidTestPlot.m">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
-                </Category>
-            </Info>
+            <Info/>
         </File>
         <File Location="centroid_codeGen.m">
             <Info>
                 <Category UUID="FileClassCategory">
-                    <Label UUID="design"/>
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
                 </Category>
             </Info>
         </File>
@@ -387,6 +388,20 @@
         </File>
         <File Location="SplitControlV12_Walk.mp4">
             <Info/>
+        </File>
+        <File Location="getUp.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="9cccffd4-80eb-4471-b926-ce7da333f8c4"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="getUp_test.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="2b926310-d284-4730-baa7-5257b2abd4c9"/>
+                </Category>
+            </Info>
         </File>
     </Files>
     <ProjectPath Location="Root">

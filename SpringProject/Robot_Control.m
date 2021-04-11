@@ -220,7 +220,7 @@ if isempty(Theta3_d_reset)
 end
 
 if isempty(r_II_c_dstep)
-    r_II_c_dstep = [0;0;0];
+    r_II_c_dstep = zeros(3,1);
 end
 
 if isempty(r_II_c_current)

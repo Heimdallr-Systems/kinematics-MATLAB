@@ -1,4 +1,4 @@
-function [GeoJc_FR,GeoJc_FL,GeoJc_BR,GeoJc_BL] = contactJacobians(state)
+function [GeoJc_FR,GeoJc_FL,GeoJc_BR,GeoJc_BL] = contactJacobians(state) %#codegen
 dotgamma = state(19:36);
 
 constants = RobotConstants();

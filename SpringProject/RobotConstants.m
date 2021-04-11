@@ -1,4 +1,4 @@
-function constants = RobotConstants()
+function constants = RobotConstants() %#codegen
 constants.r_BB_1_FR = [125.78; -125.78; 25.4]./1000;
 constants.r_11_2_FR = [0; -54; 0]./1000;
 constants.r_22_3_FR = [ 0; -150; 0]./1000;

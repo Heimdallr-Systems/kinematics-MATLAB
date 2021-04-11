@@ -1,4 +1,4 @@
-function A = rotz(t)
+function A = rotz(t) %#codegen
 % Rotation matrix around z in radians
 A = [cos(t) -sin(t) 0 
          sin(t) cos(t) 0 

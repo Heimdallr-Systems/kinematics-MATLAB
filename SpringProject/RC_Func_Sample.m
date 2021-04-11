@@ -50,11 +50,11 @@ Kd_floor = -800; % floor damping coefficient
 b_fric_floor = -2000; % floor coefficient of lateral, viscous friction
 
 % Numerically Integrate for Position of Manipulator
-init_toggle = 1;
+init_toggle = true;
 for ii = 1:length(t)
     
-    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle, [0 0 0 0]);
-    init_toggle = 0;
+    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle, [false, false false false]);
+    init_toggle = false;
     
     %%% Solve for Current State in order to Plot %%%
     phi = b(1,ii);

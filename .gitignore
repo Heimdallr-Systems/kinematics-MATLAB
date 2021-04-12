@@ -18,8 +18,7 @@ helpsearch*/
 slprj/
 sccprj/
 
-# Matlab code generation folders
-codegen/
+
 
 # Simulink autosave extension
 *.autosave
@@ -32,6 +31,12 @@ octave-workspace
 
 # Blender backup files
 *.blend1
-SpringProject/.vscode/configurationCache.log
-SpringProject/.vscode/dryrun.log
+# SpringProject/.vscode/configurationCache.log
+# SpringProject/.vscode/dryrun.log
 *.mp4
+
+codegen/
+# # Matlab code generation folders
+# SpringProject/codegen/mex/*
+# SpringProject/codegen/lib/*
+# !SpringProject/codegen/lib/Robot_Control

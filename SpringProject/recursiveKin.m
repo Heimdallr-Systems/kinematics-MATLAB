@@ -1,4 +1,4 @@
-function [ITN, NNwI, dotIIrN, JN, dotJN] = recursiveKin(dotgamma,ITn, nTN, nnrN, IN_hat, IN_tilde, Jn, dotJn)
+function [ITN, NNwI, dotIIrN, JN, dotJN] = recursiveKin(dotgamma,ITn, nTN, nnrN, IN_hat, IN_tilde, Jn, dotJn) %#codegen
 % This function is to be used for recursive calculations of analytical
 % expressions to be used for manipulator kinematics
 % By Nicholas Rossi

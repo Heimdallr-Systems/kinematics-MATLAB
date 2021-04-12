@@ -1,4 +1,4 @@
-function [Cx, Cy, A] = centroid_codeGen(x, y)
+function [Cx, Cy, A] = centroid_codeGen(x, y) %#codegen
 %centroid_codeGen Calculate Centroid of a Polygon
 % Unlike the centroid() function, this is compatible
 % with MATLAB Coder

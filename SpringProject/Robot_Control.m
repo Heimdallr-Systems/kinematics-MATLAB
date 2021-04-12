@@ -579,24 +579,24 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_FR;
                 Theta2_d_midpt = Theta2_d_midpt_FR;
                 Theta3_d_midpt = Theta3_d_midpt_FR;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_FR_0 = r_II_c_FR;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_FR_0, step_dist);
                     r_II_c_current = r_II_c_FR_0;
                 end
             elseif step_state == 2 % stepping towards goal now
                 step_error = norm(r_II_c_dstep - r_II_c_FR);
                 if (r_II_c_FR(3) <= 0)  || (legs_on_gnd(1) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(1) = 1;
-                    leg_index = 0;
+                    leg_index = uint8(0);
                     floor_toggle(1) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         elseif leg_index == 2
@@ -609,24 +609,24 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_FL;
                 Theta2_d_midpt = Theta2_d_midpt_FL;
                 Theta3_d_midpt = Theta3_d_midpt_FL;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_FL_0 = r_II_c_FL;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2 % reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_FL_0, step_dist);
                     r_II_c_current = r_II_c_FL_0;
                 end
             elseif step_state == 2 % stepping towards goal now
                 step_error = norm(r_II_c_dstep - r_II_c_FL);
                 if (r_II_c_FL(3) <= 0)  || (legs_on_gnd(2) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(2) = 1;
-                    leg_index = 0;
+                    leg_index = uint8(0);
                     floor_toggle(2) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         elseif leg_index == 3
@@ -639,12 +639,12 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_BR;
                 Theta2_d_midpt = Theta2_d_midpt_BR;
                 Theta3_d_midpt = Theta3_d_midpt_BR;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_BR_0 = r_II_c_BR;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_BR_0, step_dist);
                     r_II_c_current = r_II_c_BR_0;
                 end
@@ -652,11 +652,11 @@ else
                 step_error = norm(r_II_c_dstep - r_II_c_BR);
                 if (r_II_c_BR(3) <= 0)  || (legs_on_gnd(3) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     legs_valid(3) = 1;
-                    step_state = 0;
-                    leg_index = 0;
+                    step_state = uint8(0);
+                    leg_index = uint8(0);
                     floor_toggle(3) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         elseif leg_index == 4
@@ -669,24 +669,24 @@ else
                 Theta1_d_midpt = Theta1_d_midpt_BL;
                 Theta2_d_midpt = Theta2_d_midpt_BL;
                 Theta3_d_midpt = Theta3_d_midpt_BL;
-                step_state = 1;
+                step_state = uint8(1);
                 r_II_c_BL_0 = r_II_c_BL;
             elseif step_state == 1 % moving towards midpoint
                 step_error = norm([Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)] - [Theta1_d_midpt,Theta2_d_midpt,Theta3_d_midpt]);
                 if step_error < 0.2% reached midpoint
-                    step_state = 2;
+                    step_state = uint8(2);
                     r_II_c_dstep = step_planner_intelligent(startPoint, endPoint, r_II_c_BL_0, step_dist);
                     r_II_c_current = r_II_c_BL_0;
                 end
             elseif step_state == 2 % stepping towards goal now
                  step_error = norm(r_II_c_dstep - r_II_c_BL);
                 if (r_II_c_BL(3) <= 0)  || (legs_on_gnd(4) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
-                    step_state = 0;
+                    step_state = uint8(0);
                     legs_valid(4) = 1;
-                    leg_index = 0;
+                    leg_index = uint8(0);
                     floor_toggle(4) = 1;
-                    reached_centroid = 0;
-                    reached_rest_centroid = 0;
+                    reached_centroid = uint8(0);
+                    reached_rest_centroid = uint8(0);
                 end
             end
         end
@@ -700,25 +700,25 @@ end
 if reached_rest_centroid == 0 % needs to move back to resting 4-legged position to find new leg to move
     [x,y] = centroid_codeGen([r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1), r_II_c_BR(1)],[r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2), r_II_c_BR(2)]);
     r_II_B_d_temp = [x;y;r_II_B_d(3)];
-    [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,[1,1,1,1]);
-    reached_rest_centroid = 2;
+    [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,uint8([1,1,1,1]));
+    reached_rest_centroid = uint8(2);
 elseif reached_rest_centroid == 2 % moving towards resting, or inbetween-step body pose
     body_error = norm(r_II_B - r_II_B_d_temp);
     [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
     if body_error < 0.01
-        reached_rest_centroid = 1;
+        reached_rest_centroid = uint8(1);
     end
 elseif reached_rest_centroid == 1
-    waypoint_toggle = 0;
+    waypoint_toggle = false;
     % rockback before step
-    if ~isempty(find(legs_valid == 0, 1))
+     if ~all(legs_valid)
         if reached_centroid == 0 % hasn't started moving towards centroid yet
             [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,floor_toggle);
-            reached_centroid = 2;
+            reached_centroid = uint8(2);
         elseif reached_centroid == 2 % moving towards centroid
             body_error = norm(r_II_B - r_II_B_d_temp);
             if body_error < 0.01
-                reached_centroid = 1;
+                reached_centroid = uint8(1);
             end
         elseif reached_centroid == 1 % step
             % step leg
@@ -735,8 +735,8 @@ elseif reached_rest_centroid == 1
                 Theta3_d(leg_index) = Theta3_d_reset;
             end
 %             if step_error <= 0.03
-%                 reached_centroid = 0;
-%                 reached_rest_centroid = 0;
+%                 reached_centroid = uint8(0);
+%                 reached_rest_centroid = uint8(0);
 %             end
         end
     else

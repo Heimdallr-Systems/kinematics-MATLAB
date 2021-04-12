@@ -1,4 +1,4 @@
-function [Theta1,Theta2,Theta3] = Leg_Controller_B(r_BB_c, leg_index)
+function [Theta1,Theta2,Theta3] = Leg_Controller_B(r_BB_c, leg_index) %#codegen
 % This function is used to "reset" the legs to some r_BB_c position
 % Works for one leg only!!!
 
@@ -86,7 +86,6 @@ switch leg_index
         Theta1 = Theta1_BR;
         Theta2 = Theta2_BR_2;
         Theta3 = Theta3_BR_2;
-        % If not 1, 2, or 3, it must be 4
     case 4
         r_BB_c_BL = r_BB_c;
         r_B1_c_BL = r_BB_c_BL - constants.r_BB_1_BL;
@@ -104,7 +103,10 @@ switch leg_index
         Theta1 = Theta1_BL;
         Theta2 = Theta2_BL_2;
         Theta3 = Theta3_BL_2;
-    otherwise 
+    otherwise
+        if (~coder.target("MATLAB"))
+            fprintf("leg_index is not set to a valid value")
+        end
         error("leg_index is not set to a valid value")
 end
 

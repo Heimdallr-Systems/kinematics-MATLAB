@@ -98,3 +98,37 @@ while stage ~= 0
     [Theta, stage] = getUp(Theta, stage);
     FK_Solver_Draw(Theta(1:4),Theta(5:8),Theta(9:12),T_I_B,r_II_B);
 end
+
+%%
+clear
+clc
+close all
+T_I_B = eye(3);
+r_II_B = [0;0;0.3];
+
+% first joint angles
+% FR
+Theta_d(1,1) = pi/4;
+Theta_d(5,1) = pi/4;
+Theta_d(9,1) = pi/4;
+
+% FL
+Theta_d(2,1) = pi/4;
+Theta_d(6,1) = pi/4;
+Theta_d(10,1) = pi/4;
+
+% BR
+Theta_d(3,1) = pi/4;
+Theta_d(7,1) = pi/4;
+Theta_d(11,1) = pi/4;
+
+% BL
+Theta_d(4,1) = pi/4;
+Theta_d(8,1) = pi/4;
+Theta_d(12,1) = pi/4;
+
+Theta1(:,1) = [Theta_d(1);Theta_d(2);Theta_d(3);Theta_d(4)];
+Theta2(:,1) = [Theta_d(5);Theta_d(6);Theta_d(7);Theta_d(8)];
+Theta3(:,1) = [Theta_d(9);Theta_d(10);Theta_d(11);Theta_d(12)];
+
+FK_Solver_Draw(Theta1, Theta2, Theta3, T_I_B, r_II_B);

@@ -34,8 +34,8 @@ b(18,1) = -pi/3;
 % theta_d =  zeros(1,length(x_d));
 % psi_d =  zeros(1,length(x_d));
 r_II_B_d = [1;0;0.23];
-Euler_d = [pi/2,0,0];
-phi_d = pi/2;
+Euler_d = [0,0,0];
+phi_d = 0;
 theta_d = 0;
 psi_d = 0;
 
@@ -54,6 +54,8 @@ for ii = 1:length(t)
     
     [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle, [false, false, false, false]);
     init_toggle = false;
+    
+    
     %%%DYNAMIC%%%
     % %% Control Law and Force Computation
     %     Theta_d = [Theta1_d;Theta2_d;Theta3_d];
@@ -120,6 +122,54 @@ for ii = 1:length(t)
     Theta1 = [b(7,ii);b(8,ii);b(9,ii);b(10,ii)];
     Theta2 = [b(11,ii);b(12,ii);b(13,ii);b(14,ii)];
     Theta3 = [b(15,ii);b(16,ii);b(17,ii);b(18,ii)];
+    
+     %%% DEAD RECKONING %%%
+    Theta = [Theta1;Theta2;Theta3];
+    [r_BB_c_FR_dead, r_BB_c_FL_dead, r_BB_c_BR_dead, r_BB_c_BL_dead] = CPos_wrt_B(Theta1,Theta2,Theta3);
+    r_BB_c_dead = [r_BB_c_FR_dead, r_BB_c_FL_dead, r_BB_c_BR_dead, r_BB_c_BL_dead];
+    
+    if ii == 1 % must start robot in no-tilt orientation
+        [r_II_c_FR_dead, r_II_c_FL_dead, r_II_c_BR_dead, r_II_c_BL_dead] = CPos_wrt_I(Theta1,Theta2,Theta3,T_I_B,r_II_B);
+        r_II_c_dead = [r_II_c_FR_dead,r_II_c_FR_dead,r_II_c_FR_dead,r_II_c_FR_dead];
+        prev_legs_valid = legs_valid;
+    end
+    if isequal([1,1,1,1],legs_valid) && isequal([1,1,1,1], prev_legs_valid)
+        [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
+    end
+    if isequal([0,1,1,1],legs_valid) || isequal([0,1,1,1], prev_legs_valid)
+        if isequal([0,1,1,1],legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
+        elseif isequal([0,1,1,1], prev_legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
+        end
+        r_II_c_FR_dead = r_II_B_dead + T_I_B_dead*r_BB_c_FR_dead;
+    end
+    if isequal([1,0,1,1],legs_valid) || isequal([1,0,1,1], prev_legs_valid) %falling edge (or rising) detection to finalize calculations
+        if isequal([1,0,1,1],legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
+        elseif isequal([1,0,1,1], prev_legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
+        r_II_c_FL_dead = r_II_B_dead + T_I_B_dead*r_BB_c_FL_dead;
+        end
+    end
+    if isequal([1,1,0,1],legs_valid) || isequal([1,1,0,1], prev_legs_valid)
+        if isequal([1,1,0,1],legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
+        elseif isequal([1,1,0,1], prev_legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
+        end
+        r_II_c_BR_dead = r_II_B_dead + T_I_B_dead*r_BB_c_BR_dead;
+    end
+    if isequal([1,1,1,0],legs_valid) || isequal([1,1,1,0], prev_legs_valid)
+        if isequal([1,1,1,0],legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
+        elseif isequal([1,1,1,0], prev_legs_valid)
+            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
+        end
+        r_II_c_BL_dead = r_II_B_dead + T_I_B_dead*r_BB_c_BL_dead;
+    end
+    r_II_c_dead = [r_II_c_FR_dead,r_II_c_FL_dead,r_II_c_BR_dead,r_II_c_BL_dead];
+    prev_legs_valid = legs_valid;
     
     %%%KINEMATIC%%%
     b(1,ii+1) = phi_d_temp;

@@ -26,6 +26,7 @@ assert(isa(Euler_d, 'double'))
 assert(isa(init_toggle, 'logical'))
 assert(isa(legs_on_gnd, 'logical'))
 
+
 % Variable Init
 step_dist = 0.12; % leg step distance
 

@@ -34,9 +34,9 @@ b(18,1) = -pi/3;
 % phi_d = pi/2.*ones(1,length(x_d));
 % theta_d =  zeros(1,length(x_d));
 % psi_d =  zeros(1,length(x_d));
-r_II_B_d = [1;0;0.2];
-Euler_d = [pi/2,0,0];
-phi_d = pi/2;
+r_II_B_d = [1;0;0.23];
+Euler_d = [0,0,0];
+phi_d = 0;
 theta_d = 0;
 psi_d = 0;
 
@@ -53,7 +53,7 @@ b_fric_floor = -2000; % floor coefficient of lateral, viscous friction
 init_toggle = true;
 for ii = 1:length(t)
     
-    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle, [false, false false false]);
+    [Theta1_d,Theta2_d,Theta3_d,phi_d_temp,r_II_B_d_temp,floor_toggle,legs_valid] = Robot_Control(r_II_B_d, Euler_d, b(:,ii), init_toggle, [false, false, false, false]);
     init_toggle = false;
     
     %%% Solve for Current State in order to Plot %%%
@@ -65,16 +65,44 @@ for ii = 1:length(t)
     Theta1 = [b(7,ii);b(8,ii);b(9,ii);b(10,ii)];
     Theta2 = [b(11,ii);b(12,ii);b(13,ii);b(14,ii)];
     Theta3 = [b(15,ii);b(16,ii);b(17,ii);b(18,ii)];
+    Theta = [Theta1;Theta2;Theta3];
     
+    if ii == 1
+        prev_legs_valid = [true,true,true,true];
+        firstCall = true;
+        r_II_c_dead = zeros(3,4);
+        r_II_B_dead = [0;0;0.25];
+        T_I_B_dead = eye(3);
+        [r_II_B_dead,T_I_B_dead,prev_legs_valid,r_II_c_dead] = CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstCall,legs_valid,prev_legs_valid,r_II_c_dead);
+    else
+        firstCall = false;
+        [r_II_B_dead,T_I_B_dead,prev_legs_valid,r_II_c_dead] = CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstCall,legs_valid,prev_legs_valid,r_II_c_dead);
+    end
+    
+    disp('Compare Body Pos:')
+    disp('True')
+    disp(r_II_B)
+    disp('Dead')
+    disp(r_II_B_dead)
+    disp('Compare Body Ori:')
+    disp('True')
+    disp(T_I_B)
+    disp('Dead')
+    disp(T_I_B_dead)
     %%%KINEMATIC%%%
     b(1,ii+1) = phi_d_temp;
     b(2,ii+1) = theta_d;
     b(3,ii+1) = psi_d;
     
+    %     if r_II_B_d_temp == r_II_B_d_temp_reachable
     b(4,ii+1) = r_II_B_d_temp(1);
     b(5,ii+1) = r_II_B_d_temp(2);
     b(6,ii+1) = r_II_B_d_temp(3);
-
+    %     else
+    %         b(4,ii+1) = r_II_B_d_temp_reachable(1);
+    %         b(5,ii+1) = r_II_B_d_temp_reachable(2);
+    %         b(6,ii+1) = r_II_B_d_temp_reachable(3);
+    %     end
     b(7,ii+1) = Theta1_d(1);
     b(8,ii+1) = Theta1_d(2);
     b(9,ii+1) = Theta1_d(3);
@@ -86,6 +114,6 @@ for ii = 1:length(t)
     b(15,ii+1) = Theta3_d(1);
     b(16,ii+1) = Theta3_d(2);
     b(17,ii+1) = Theta3_d(3);
-    b(18,ii+1) = Theta3_d(4); 
+    b(18,ii+1) = Theta3_d(4);   
     disp(ii)
 end

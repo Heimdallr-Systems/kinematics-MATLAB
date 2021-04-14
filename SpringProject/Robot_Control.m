@@ -141,7 +141,7 @@ if isempty(calc_manip)
 end
 
 if isempty(legs_valid)
-    legs_valid=uint8(ones(1,4));
+    legs_valid=true(1,4);
 end
 
 if isempty(floor_toggle)
@@ -263,7 +263,7 @@ if init_toggle==true
     reached_rest_centroid = uint8(1); % initialize toggle for determining which state the body is in when returning to a four-leg-defined polygon centroid
     step_needed = uint8(1); % initialize variable for determining which leg needs to be stepped next
     calc_manip = true; % initialize toggle for determining if manipulability needs to be recalculated
-    legs_valid = uint8(ones(1,4));
+    legs_valid = true(1,4);
     floor_toggle = legs_valid;
     legs_stepped = uint8(0);
     leg_reset_needed = false;
@@ -416,7 +416,7 @@ if turn_needed == 1
     if leg_reset_needed == true
         % step to reset legs
         if leg_index == 1
-            legs_valid(1) = 0;
+            legs_valid(1) = false;
             if reached_centroid == uint8(0)
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -438,7 +438,7 @@ if turn_needed == 1
                 step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
                 if (r_II_c_FR(3) <= 0) || (legs_on_gnd(1) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = uint8(0);
-                    legs_valid(1) = 1;
+                    legs_valid(1) = true;
                     leg_index = uint8(0);
                     floor_toggle(1) = 1;
                     reached_centroid = uint8(0);
@@ -447,7 +447,7 @@ if turn_needed == 1
                 end
             end
         elseif leg_index == 2
-            legs_valid(2) = 0;
+            legs_valid(2) = false;
             if reached_centroid == 0
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -469,7 +469,7 @@ if turn_needed == 1
                 step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
                 if (r_II_c_FL(3) <= 0)  || (legs_on_gnd(2) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = uint8(0);
-                    legs_valid(2) = 1;
+                    legs_valid(2) = true;
                     leg_index = uint8(0);
                     floor_toggle(2) = 1;
                     reached_centroid = uint8(0);
@@ -479,7 +479,7 @@ if turn_needed == 1
                 end
             end
         elseif leg_index == 3
-            legs_valid(3) = 0;
+            legs_valid(3) = false;
             if reached_centroid == 0
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -500,7 +500,7 @@ if turn_needed == 1
                 [Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] = Leg_Controller_B(r_BB_c_reset_BR, coder.ignoreConst(uint8(3)));
                 step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
                 if (r_II_c_BR(3) <= 0)  || (legs_on_gnd(3) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
-                    legs_valid(3) = 1;
+                    legs_valid(3) = true;
                     step_state = uint8(0);
                     leg_index = uint8(0);
                     floor_toggle(3) = 1;
@@ -511,7 +511,7 @@ if turn_needed == 1
                 end
             end
         elseif leg_index == 4
-            legs_valid(4) = 0;
+            legs_valid(4) = false;
             if reached_centroid == 0
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -533,7 +533,7 @@ if turn_needed == 1
                 step_error = norm([Theta1_d_reset,Theta2_d_reset,Theta3_d_reset] - [Theta1(leg_index),Theta2(leg_index),Theta3(leg_index)]);
                 if (r_II_c_BL(3) <= 0) || (legs_on_gnd(4) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = uint8(0);
-                    legs_valid(4) = 1;
+                    legs_valid(4) = true;
                     leg_index = uint8(0);
                     floor_toggle(4) = 1;
                     reached_centroid = uint8(0);
@@ -571,7 +571,7 @@ else
         %% leg stepping algorithm
         % FR leg needs to step
         if leg_index == 1
-            legs_valid(1) = 0;
+            legs_valid(1) = false;
             if reached_centroid == 0
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -593,7 +593,7 @@ else
                 step_error = norm(r_II_c_dstep - r_II_c_FR);
                 if (r_II_c_FR(3) <= 0)  || (legs_on_gnd(1) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = uint8(0);
-                    legs_valid(1) = 1;
+                    legs_valid(1) = true;
                     leg_index = uint8(0);
                     floor_toggle(1) = 1;
                     reached_centroid = uint8(0);
@@ -601,7 +601,7 @@ else
                 end
             end
         elseif leg_index == 2
-            legs_valid(2) = 0;
+            legs_valid(2) = false;
             if reached_centroid == 0
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -623,7 +623,7 @@ else
                 step_error = norm(r_II_c_dstep - r_II_c_FL);
                 if (r_II_c_FL(3) <= 0)  || (legs_on_gnd(2) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = uint8(0);
-                    legs_valid(2) = 1;
+                    legs_valid(2) = true;
                     leg_index = uint8(0);
                     floor_toggle(2) = 1;
                     reached_centroid = uint8(0);
@@ -631,7 +631,7 @@ else
                 end
             end
         elseif leg_index == 3
-            legs_valid(3) = 0;
+            legs_valid(3) = false;
             if reached_centroid == 0
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -652,7 +652,7 @@ else
             elseif step_state == 2 % stepping towards goal now
                 step_error = norm(r_II_c_dstep - r_II_c_BR);
                 if (r_II_c_BR(3) <= 0)  || (legs_on_gnd(3) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
-                    legs_valid(3) = 1;
+                    legs_valid(3) = true;
                     step_state = uint8(0);
                     leg_index = uint8(0);
                     floor_toggle(3) = 1;
@@ -661,7 +661,7 @@ else
                 end
             end
         elseif leg_index == 4
-            legs_valid(4) = 0;
+            legs_valid(4) = false;
             if reached_centroid == 0
                 [x,y] = find_pgon_goal(r_II_c_FR,r_II_c_FL,r_II_c_BR,r_II_c_BL,r_II_B,leg_index);
                 r_II_B_d_temp = [x;y;r_II_B_d(3)];
@@ -683,7 +683,7 @@ else
                  step_error = norm(r_II_c_dstep - r_II_c_BL);
                 if (r_II_c_BL(3) <= 0)  || (legs_on_gnd(4) == 1) || (manual_step_breakout == 1) || (step_error < 0.005)
                     step_state = uint8(0);
-                    legs_valid(4) = 1;
+                    legs_valid(4) = true;
                     leg_index = uint8(0);
                     floor_toggle(4) = 1;
                     reached_centroid = uint8(0);
@@ -701,7 +701,7 @@ end
 if reached_rest_centroid == 0 % needs to move back to resting 4-legged position to find new leg to move
     [x,y] = centroid_codeGen([r_II_c_FR(1), r_II_c_FL(1), r_II_c_BL(1), r_II_c_BR(1)],[r_II_c_FR(2), r_II_c_FL(2), r_II_c_BL(2), r_II_c_BR(2)]);
     r_II_B_d_temp = [x;y;r_II_B_d(3)];
-    [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,uint8([1,1,1,1]));
+    [Theta1_d,Theta2_d,Theta3_d,r_II_B_d_temp] = Body_Pose_Controller(r_II_c, T_I_B_d_temp,r_II_B_d_temp,r_II_B,[true,true,true,true]);
     reached_rest_centroid = uint8(2);
 elseif reached_rest_centroid == 2 % moving towards resting, or inbetween-step body pose
     body_error = norm(r_II_B - r_II_B_d_temp);

@@ -16,6 +16,7 @@ function [T_I_B,r_II_B] = IK_Solver_BodyRot_BodyPos(r_BB_c, r_II_c, legs_on_gnd)
 % legs touching the ground may be a different combination. So 1-4 is used
 % to be the most general.
 
+
 legs = find(legs_on_gnd == 1);
 
 

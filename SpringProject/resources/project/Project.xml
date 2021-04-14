@@ -143,13 +143,21 @@
             <Info/>
         </File>
         <File Location="CPos_wrt_B.m">
-            <Info/>
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
+                </Category>
+            </Info>
         </File>
         <File Location="SplitControlV7_WalkPlz.mp4">
             <Info/>
         </File>
         <File Location="IK_Solver_BodyRot_BodyPos.m">
-            <Info/>
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="dddee036-3190-4dc4-93a8-66f5466aaf53"/>
+                </Category>
+            </Info>
         </File>
         <File Location="SplitControlV9_WalkPlz.mp4">
             <Info/>
@@ -400,6 +408,13 @@
             <Info>
                 <Category UUID="FileClassCategory">
                     <Label UUID="2b926310-d284-4730-baa7-5257b2abd4c9"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="CallTheDead.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="9cccffd4-80eb-4471-b926-ce7da333f8c4"/>
                 </Category>
             </Info>
         </File>

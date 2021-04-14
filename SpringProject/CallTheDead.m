@@ -1,4 +1,19 @@
 function [r_II_B_dead,T_I_B_dead,prev_legs_valid,r_II_c_dead] = CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstCall,legs_valid,prev_legs_valid,r_II_c_dead)
+  assert(all(size(Theta) == [12, 1]))
+  assert(all(size(r_II_B_dead)==[3, 1]))
+  assert(all(size(T_I_B_dead)==[3, 3]))
+  assert(all(size(firstCall)==[1, 1]))
+  assert(all(size(legs_valid)==[1,4]))
+  assert(all(size(prev_legs_valid)==[1,4]))
+  assert(all(size(r_II_c_dead)==[3,4]))
+  assert(isa(Theta, 'double'))
+  assert(isa(r_II_B_dead, 'double'))
+  assert(isa(T_I_B_dead, 'double'))
+  assert(isa(firstCall, 'logical'))
+  assert(isa(legs_valid, 'logical'))
+  assert(isa(prev_legs_valid, 'logical'))
+  assert(isa(r_II_c_dead, 'double'))
+
   %%% DEAD RECKONING %%%
     %Theta = [Theta1;Theta2;Theta3];
     %r_II_c_dead = [r_II_c_FR_dead, r_II_c_FL_dead, r_II_c_BR_dead, r_II_c_BL_dead]

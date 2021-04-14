@@ -125,14 +125,14 @@ for ii = 1:length(t)
     Theta = [Theta1;Theta2;Theta3];
     
     if ii == 1
-        prev_legs_valid = [1,1,1,1];
-        firstCall = 1;
+        prev_legs_valid = [true,true,true,true];
+        firstCall = true;
         r_II_c_dead = zeros(3,4);
         r_II_B_dead = [0;0;0.25];
         T_I_B_dead = eye(3);
         [r_II_B_dead,T_I_B_dead,prev_legs_valid,r_II_c_dead] = CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstCall,legs_valid,prev_legs_valid,r_II_c_dead);
     else
-        firstCall = 0;
+        firstCall = false;
         [r_II_B_dead,T_I_B_dead,prev_legs_valid,r_II_c_dead] = CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstCall,legs_valid,prev_legs_valid,r_II_c_dead);
     end
     

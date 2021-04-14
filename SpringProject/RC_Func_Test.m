@@ -122,55 +122,30 @@ for ii = 1:length(t)
     Theta1 = [b(7,ii);b(8,ii);b(9,ii);b(10,ii)];
     Theta2 = [b(11,ii);b(12,ii);b(13,ii);b(14,ii)];
     Theta3 = [b(15,ii);b(16,ii);b(17,ii);b(18,ii)];
-    
-     %%% DEAD RECKONING %%%
     Theta = [Theta1;Theta2;Theta3];
-    [r_BB_c_FR_dead, r_BB_c_FL_dead, r_BB_c_BR_dead, r_BB_c_BL_dead] = CPos_wrt_B(Theta1,Theta2,Theta3);
-    r_BB_c_dead = [r_BB_c_FR_dead, r_BB_c_FL_dead, r_BB_c_BR_dead, r_BB_c_BL_dead];
     
-    if ii == 1 % must start robot in no-tilt orientation
-        [r_II_c_FR_dead, r_II_c_FL_dead, r_II_c_BR_dead, r_II_c_BL_dead] = CPos_wrt_I(Theta1,Theta2,Theta3,T_I_B,r_II_B);
-        r_II_c_dead = [r_II_c_FR_dead,r_II_c_FR_dead,r_II_c_FR_dead,r_II_c_FR_dead];
-        prev_legs_valid = legs_valid;
+    if ii == 1
+        prev_legs_valid = [1,1,1,1];
+        firstCall = 1;
+        r_II_c_dead = zeros(3,4);
+        r_II_B_dead = [0;0;0.25];
+        T_I_B_dead = eye(3);
+        [r_II_B_dead,T_I_B_dead,prev_legs_valid,r_II_c_dead] = CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstCall,legs_valid,prev_legs_valid,r_II_c_dead);
+    else
+        firstCall = 0;
+        [r_II_B_dead,T_I_B_dead,prev_legs_valid,r_II_c_dead] = CallTheDead(Theta,r_II_B_dead,T_I_B_dead,firstCall,legs_valid,prev_legs_valid,r_II_c_dead);
     end
-    if isequal([1,1,1,1],legs_valid) && isequal([1,1,1,1], prev_legs_valid)
-        [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
-    end
-    if isequal([0,1,1,1],legs_valid) || isequal([0,1,1,1], prev_legs_valid)
-        if isequal([0,1,1,1],legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
-        elseif isequal([0,1,1,1], prev_legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
-        end
-        r_II_c_FR_dead = r_II_B_dead + T_I_B_dead*r_BB_c_FR_dead;
-    end
-    if isequal([1,0,1,1],legs_valid) || isequal([1,0,1,1], prev_legs_valid) %falling edge (or rising) detection to finalize calculations
-        if isequal([1,0,1,1],legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
-        elseif isequal([1,0,1,1], prev_legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
-        r_II_c_FL_dead = r_II_B_dead + T_I_B_dead*r_BB_c_FL_dead;
-        end
-    end
-    if isequal([1,1,0,1],legs_valid) || isequal([1,1,0,1], prev_legs_valid)
-        if isequal([1,1,0,1],legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
-        elseif isequal([1,1,0,1], prev_legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
-        end
-        r_II_c_BR_dead = r_II_B_dead + T_I_B_dead*r_BB_c_BR_dead;
-    end
-    if isequal([1,1,1,0],legs_valid) || isequal([1,1,1,0], prev_legs_valid)
-        if isequal([1,1,1,0],legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, legs_valid);
-        elseif isequal([1,1,1,0], prev_legs_valid)
-            [T_I_B_dead,r_II_B_dead] = IK_Solver_BodyRot_BodyPos(r_BB_c_dead, r_II_c_dead, prev_legs_valid);
-        end
-        r_II_c_BL_dead = r_II_B_dead + T_I_B_dead*r_BB_c_BL_dead;
-    end
-    r_II_c_dead = [r_II_c_FR_dead,r_II_c_FL_dead,r_II_c_BR_dead,r_II_c_BL_dead];
-    prev_legs_valid = legs_valid;
     
+    disp('Compare Body Pos:')
+    disp('True')
+    disp(r_II_B)
+    disp('Dead')
+    disp(r_II_B_dead)
+    disp('Compare Body Ori:')
+    disp('True')
+    disp(T_I_B)
+    disp('Dead')
+    disp(T_I_B_dead)
     %%%KINEMATIC%%%
     b(1,ii+1) = phi_d_temp;
     b(2,ii+1) = theta_d;
@@ -237,10 +212,10 @@ for ii = 1:length(t)
     M(ii) = getframe(gcf);
     writeVideo(writerObj,M(ii));
     
-    disp(ii)
-    if ii == 125
-       disp('hi'); 
-    end
+%     disp(ii)
+%     if ii == 125
+%        disp('hi'); 
+%     end
 end
 
 %%

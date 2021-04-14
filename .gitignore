@@ -1,3 +1,6 @@
+*.zip
+
+
 # Windows default autosave extension
 *.asv
 
@@ -35,8 +38,8 @@ octave-workspace
 # SpringProject/.vscode/dryrun.log
 *.mp4
 
-codegen/
-# # Matlab code generation folders
-# SpringProject/codegen/mex/*
-# SpringProject/codegen/lib/*
-# !SpringProject/codegen/lib/Robot_Control
+# codegen/
+# Matlab code generation folders
+SpringProject/codegen/mex/*
+SpringProject/codegen/lib/*
+!SpringProject/codegen/lib/Robot_Control

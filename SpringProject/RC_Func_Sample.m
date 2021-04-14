@@ -89,6 +89,8 @@ for ii = 1:length(t)
     disp(T_I_B)
     disp('Dead')
     disp(T_I_B_dead)
+        assert(all(r_II_B-r_II_B_dead < 1e10), "Dead Reckoning Error r_II_B")
+    assert(all(all((T_I_B - T_I_B_dead) < 1e10)), "Dead Reckoning Error T_I_B");
     %%%KINEMATIC%%%
     b(1,ii+1) = phi_d_temp;
     b(2,ii+1) = theta_d;

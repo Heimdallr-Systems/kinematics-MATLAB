@@ -17,20 +17,23 @@ function [T_I_B,r_II_B] = IK_Solver_BodyRot_BodyPos(r_BB_c, r_II_c, legs_on_gnd)
 % to be the most general.
 
 
-legs = find(legs_on_gnd == 1);
+numTrue = uint8(sum(legs_on_gnd==1));
+
+legs = findTrue4Elem(legs_on_gnd);
+
 
 
 r_BB_c_leg1 = r_BB_c(:,legs(1));
 r_BB_c_leg2 = r_BB_c(:,legs(2));
 r_BB_c_leg3 = r_BB_c(:,legs(3));
-if length(legs) == 4
+if numTrue == 4
     r_BB_c_leg4 = r_BB_c(:,legs(4));
 end
 
 r_II_c_leg1 = r_II_c(:,legs(1));
 r_II_c_leg2 = r_II_c(:,legs(2));
 r_II_c_leg3 = r_II_c(:,legs(3));
-if length(legs) == 4
+if numTrue == 4
     r_II_c_leg4 = r_II_c(:,legs(4));
 end
 

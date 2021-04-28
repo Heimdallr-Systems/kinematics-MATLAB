@@ -1,0 +1,309 @@
+<robot name="heimdallr_robot">
+    <link name="Body">
+        <visual>
+            <geometry>
+                <mesh filename="Body.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="2.79792523" />
+            <inertia ixx="0.29835602" ixy="0.06984937" ixz="0.09521583" iyx="0.06984937" iyy="0.26531241" iyz="0.12839220" izx="0.09521583" izy="0.12839220" izz="0.17622411" />
+        </inertial>
+        <collision>
+            <geometry>
+                <mesh filename="Body_c.STL" />
+            </geometry>
+        </collision>
+
+    </link>
+    <!-- TODO: Add the camera-->
+    <!-- <link name="Camera_Pan" />
+    <link name="Camera_Tilt" /> -->
+    <link name="Leg_Front_Right_1">
+        <visual>
+            <geometry>
+                <mesh filename="Link_1_FR.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.09802490" />
+            <inertia ixx="0.00038585" ixy="0.00007383" ixz="-0.00009449" iyx="0.00007383" iyy="0.00030963" iyz="-0.00015510" izx="-0.00009449" izy="-0.00015510" izz="0.00018650" />
+        </inertial>
+        <collision>
+            <geometry>
+                <mesh filename="Link_1_FR_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Front_Right_2">
+        <visual>
+            <geometry>
+                <mesh filename="Link_2_FR.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.52010" />
+            <inertia ixx="0.01566" ixy="0.00345" ixz="0.00579" iyx="0.00345" iyy="0.01514" iyz="0.00576" izx="0.00579" izy="0.00576" izz="0.00758" />
+        </inertial>
+                <collision>
+            <geometry>
+                <mesh filename="Link_2_FR_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Front_Right_3">
+        <visual>
+            <geometry>
+                <mesh filename="Link_3_FR.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.52" />
+            <inertia ixx="0.02" ixy="0.00" ixz="0.01" iyx="0.00" iyy="0.02" iyz="0.01" izx="0.01" izy="0.01" izz="0.01" />
+        </inertial>
+                        <collision>
+            <geometry>
+                <mesh filename="Link_3_FR_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Front_Left_1">
+        <visual>
+            <geometry>
+                <mesh filename="Link_1_FL.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.09802502" />
+            <inertia ixx="0.00038585" ixy="0.00007383" ixz="-0.00009449" iyx="0.00007383" iyy="0.00030963" iyz="-0.00015510" izx="-0.00009449" izy="-0.00015510" izz="0.00018650" />
+        </inertial>
+        <collision>
+            <geometry>
+                <mesh filename="Link_1_FL_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Front_Left_2">
+        <visual>
+            <geometry>
+                <mesh filename="Link_2_FL.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.52" />
+            <inertia ixx="0.02" ixy="0.00" ixz="0.01" iyx="0.00" iyy="0.02" iyz="0.01" izx="0.01" izy="0.01" izz="0.01" />
+        </inertial>
+                <collision>
+            <geometry>
+                <mesh filename="Link_2_FL_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Front_Left_3">
+        <visual>
+            <geometry>
+                <mesh filename="Link_3_FL.stl" />
+            </geometry>
+        </visual>
+                        <collision>
+            <geometry>
+                <mesh filename="Link_3_FL_c.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.43504880" />
+            <inertia ixx="0.01799730" ixy="0.00279989" ixz="0.00573957" iyx="0.00279989" iyy="0.01758485" iyz="0.00618424" izx="0.00573957" izy="0.00618424" izz="0.00576604" />
+        </inertial>
+
+    </link>
+    <link name="Leg_Back_Right_1">
+        <visual>
+            <geometry>
+                <mesh filename="Link_1_BR.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.09802478" />
+            <inertia ixx="0.00038585" ixy="0.00007383" ixz="-0.00009449" iyx="0.00007383" iyy="0.00030963" iyz="-0.00015510" izx="-0.00009449" izy="-0.00015510" izz="0.00018650" />
+        </inertial>
+        <collision>
+            <geometry>
+                <mesh filename="Link_1_BR_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="Leg_Back_Right_2">
+        <visual>
+            <geometry>
+                <mesh filename="Link_2_BR.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.52010" />
+            <inertia ixx="0.02697" ixy="0.00663" ixz="0.00873" iyx="0.00663" iyy="0.02240" iyz="0.01175" izx="0.00873" izy="0.01175" izz="0.01453" />
+        </inertial>
+                <collision>
+            <geometry>
+                <mesh filename="Link_2_BR_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Back_Right_3">
+        <visual>
+            <geometry>
+                <mesh filename="Link_3_BR.stl" />
+            </geometry>
+            
+        </visual>
+                        <collision>
+            <geometry>
+                <mesh filename="Link_3_BR_c.STL" />
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="0.43504880" />
+            <inertia ixx="0.01799730" ixy="0.00279989" ixz="0.00573957" iyx="0.00279989" iyy="0.01758485" iyz="0.00618424" izx="0.00573957" izy="0.00618424" izz="0.00576604" />
+        </inertial>
+    </link>
+    <link name="Leg_Back_Left_1">
+        <visual>
+            <geometry>
+                <mesh filename="Link_1_BL.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.09802490" />
+            <inertia ixx="0.00038585" ixy="0.00007383" ixz="-0.00009449" iyx="0.00007383" iyy="0.00030963" iyz="-0.00015510" izx="-0.00009449" izy="-0.00015510" izz="0.00018650" />
+        </inertial>
+        <collision>
+            <geometry>
+                <mesh filename="Link_1_BL_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Back_Left_2">
+        <visual>
+            <geometry>
+                <mesh filename="Link_2_BL.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.52009733" />
+            <inertia ixx="0.02697320" ixy="0.00662781" ixz="0.00872638" iyx="0.00662781" iyy="0.02240273" iyz="0.01175482" izx="0.00872638" izy="0.01175482" izz="0.01453143" />
+        </inertial>
+                <collision>
+            <geometry>
+                <mesh filename="Link_2_BL_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Leg_Back_Left_3">
+        <visual>
+            <geometry>
+                <mesh filename="Link_3_BL.stl" />
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.43504880" />
+            <inertia ixx="0.01799730" ixy="0.00279989" ixz="0.00573957" iyx="0.00279989" iyy="0.01758485" iyz="0.00618424" izx="0.00573957" izy="0.00618424" izz="0.00576604" />
+        </inertial>
+        <collision>
+            <geometry>
+                <mesh filename="Link_3_BL_c.STL" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="Joint_Front_Right_1" type="revolute">
+        <parent link="Body" />
+        <child link="Leg_Front_Right_1" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0.12578 -0.12578 0.0254" rpy="0 0 0.785" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <joint name="Joint_Front_Right_2" type="revolute">
+        <parent link="Leg_Front_Right_1" />
+        <child link="Leg_Front_Right_2" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 -0.054 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <joint name="Joint_Front_Right_3" type="revolute">
+        <parent link="Leg_Front_Right_2" />
+        <child link="Leg_Front_Right_3" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 -0.150 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+
+
+    <joint name="Joint_Front_Left_1" type="revolute">
+        <parent link="Body" />
+        <child link="Leg_Front_Left_1" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0.12578 0.12578 0.0254" rpy="0 0 -0.785" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <joint name="Joint_Front_Left_2" type="revolute">
+        <parent link="Leg_Front_Left_1" />
+        <child link="Leg_Front_Left_2" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 0.054 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <joint name="Joint_Front_Left_3" type="revolute">
+        <parent link="Leg_Front_Left_2" />
+        <child link="Leg_Front_Left_3" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 0.150 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+
+    <joint name="Joint_Back_Right_1" type="revolute">
+        <parent link="Body" />
+        <child link="Leg_Back_Right_1" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="-0.12578 -0.12578 0.0254" rpy="0 0 -0.785" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <joint name="Joint_Back_Right_2" type="revolute">
+        <parent link="Leg_Back_Right_1" />
+        <child link="Leg_Back_Right_2" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 -0.054 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <joint name="Joint_Back_Right_3" type="revolute">
+        <parent link="Leg_Back_Right_2" />
+        <child link="Leg_Back_Right_3" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 -.150 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+
+
+    <joint name="Joint_Back_Left_1" type="revolute">
+        <parent link="Body" />
+        <child link="Leg_Back_Left_1" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="-0.12578 0.12578 0.0254" rpy="0 0 0.785" />
+        <axis xyz="0 0 1" />
+    </joint>
+    <joint name="Joint_Back_Left_2" type="revolute">
+        <parent link="Leg_Back_Left_1" />
+        <child link="Leg_Back_Left_2" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 0.054 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+    <joint name="Joint_Back_Left_3" type="revolute">
+        <parent link="Leg_Back_Left_2" />
+        <child link="Leg_Back_Left_3" />
+        <limit lower="0" upper="4.71" effort="1" velocity="1" />
+        <origin xyz="0 0.150 0" />
+        <axis xyz="1 0 0" />
+    </joint>
+
+
+</robot>

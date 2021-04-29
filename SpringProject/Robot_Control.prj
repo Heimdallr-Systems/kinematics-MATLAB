@@ -1,19 +1,19 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2021a">
   <configuration build-checksum="3826667202" file="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.prj" location="D:\Desktop\Capstone\kinematics-MATLAB\SpringProject" name="Robot_Control" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
-      <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
+      <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
       <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
       <param.SpecifiedBuildFolder />
       <param.SearchPaths />
-      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
-      <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
-      <param.IntegrityChecks>true</param.IntegrityChecks>
+      <param.ResponsivenessChecks />
+      <param.ExtrinsicCalls />
+      <param.IntegrityChecks />
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
       <param.EnableAutoParallelization>false</param.EnableAutoParallelization>
-      <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
+      <param.GlobalDataSyncMethod />
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Disabled</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
@@ -21,15 +21,15 @@
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
       <param.PreserveArrayDimensions>false</param.PreserveArrayDimensions>
-      <param.EliminateSingleDimensions>false</param.EliminateSingleDimensions>
+      <param.EliminateSingleDimensions />
       <param.StackUsageMax>200000</param.StackUsageMax>
       <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
       <param.GenerateComments>true</param.GenerateComments>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
       <param.CodeFormattingTool>option.CodeFormattingTool.Auto</param.CodeFormattingTool>
       <param.ReservedNameArray />
-      <param.CppStyleConst>false</param.CppStyleConst>
-      <param.EnableDebugging>false</param.EnableDebugging>
+      <param.CppStyleConst />
+      <param.EnableDebugging />
       <param.Verbosity>option.Verbosity.Info</param.Verbosity>
       <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
@@ -37,10 +37,10 @@
       <param.ReportInfoVarName />
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
-      <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
+      <param.VerificationMode />
       <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
-      <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
+      <var.BuiltWithMexProfiling />
       <param.CustomSourceCode />
       <param.CustomHeaderCode />
       <param.CustomInitializer />
@@ -49,12 +49,12 @@
       <param.CustomSource />
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
-      <param.mex.GenCodeOnly>false</param.mex.GenCodeOnly>
+      <param.mex.GenCodeOnly />
       <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>false</param.EnableRuntimeRecursion>
       <param.PreserveVariableNames>option.PreserveVariableNames.None</param.PreserveVariableNames>
-      <param.EchoExpressions>true</param.EchoExpressions>
+      <param.EchoExpressions />
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
       <param.InlineStackLimit>1000000</param.InlineStackLimit>
@@ -65,15 +65,15 @@
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
-      <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
+      <param.ConstantInputs />
       <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
       <param.EnableAutoParallelizationReporting>true</param.EnableAutoParallelizationReporting>
       <param.EnableJIT>false</param.EnableJIT>
-      <param.EnableJITSilentBailOut>false</param.EnableJITSilentBailOut>
-      <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
-      <param.EnableGitSupport>false</param.EnableGitSupport>
-      <param.EnableAutoCommit>false</param.EnableAutoCommit>
-      <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
+      <param.EnableJITSilentBailOut />
+      <param.CheckForIssuesJIT />
+      <param.EnableGitSupport />
+      <param.EnableAutoCommit />
+      <param.RepositoryStyle />
       <unset>
         <param.BuiltInstrumentedMex />
         <param.RanInstrumentedMex />
@@ -162,7 +162,7 @@
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
       <param.PreserveArrayDimensions>false</param.PreserveArrayDimensions>
-      <param.EliminateSingleDimensions>false</param.EliminateSingleDimensions>
+      <param.EliminateSingleDimensions />
       <param.StackUsageMax>200000</param.StackUsageMax>
       <param.MultiInstanceCode>false</param.MultiInstanceCode>
       <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
@@ -226,7 +226,7 @@
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.RanPilSilVerification>false</param.RanPilSilVerification>
-      <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
+      <param.VerificationMode />
       <param.VerificationStatus>option.VerificationStatus.Inactive</param.VerificationStatus>
       <param.CustomSourceCode />
       <param.CustomHeaderCode />
@@ -249,7 +249,7 @@
       <param.target.ActiveTarget>NVIDIA Jetson</param.target.ActiveTarget>
       <param.HardwareVendor.Production>ARM Compatible</param.HardwareVendor.Production>
       <param.HardwareType.Production>ARM 64-bit (LP64)</param.HardwareType.Production>
-      <param.HWDeviceType.Production>ARM Compatible-&gt;ARM 64-bit (LP64)</param.HWDeviceType.Production>
+      <param.HWDeviceType.Production />
       <var.instance.enabled.Production>true</var.instance.enabled.Production>
       <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
       <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
@@ -270,7 +270,7 @@
       <param.HardwareDivisionRounding.Production>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Production>
       <param.HardwareVendor.Target>ARM Compatible</param.HardwareVendor.Target>
       <param.HardwareType.Target>ARM 64-bit (LP64)</param.HardwareType.Target>
-      <param.HWDeviceType.Target>ARM Compatible-&gt;ARM 64-bit (LP64)</param.HWDeviceType.Target>
+      <param.HWDeviceType.Target />
       <var.instance.enabled.Target>false</var.instance.enabled.Target>
       <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
       <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
@@ -289,7 +289,7 @@
       <param.HardwareAtomicIntegerSize.Target>option.HardwareAtomicIntegerSize.LongLong</param.HardwareAtomicIntegerSize.Target>
       <param.HardwareAtomicFloatSize.Target>option.HardwareAtomicFloatSize.Double</param.HardwareAtomicFloatSize.Target>
       <param.HardwareDivisionRounding.Target>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Target>
-      <var.SuppressHardwareChange>false</var.SuppressHardwareChange>
+      <var.SuppressHardwareChange />
       <param.CastingMode>option.CastingMode.Standards</param.CastingMode>
       <param.IndentStyle>option.IndentStyle.K&amp;R</param.IndentStyle>
       <param.IndentSize>2</param.IndentSize>
@@ -326,17 +326,17 @@
       <param.GenerateDefaultInSwitch>true</param.GenerateDefaultInSwitch>
       <param.EnableTraceability>true</param.EnableTraceability>
       <param.UseECoderFeatures>true</param.UseECoderFeatures>
-      <param.EnableGitSupport>false</param.EnableGitSupport>
-      <param.EnableAutoCommit>false</param.EnableAutoCommit>
-      <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
-      <param.psCustomPrjState>false</param.psCustomPrjState>
+      <param.EnableGitSupport />
+      <param.EnableAutoCommit />
+      <param.RepositoryStyle />
+      <param.psCustomPrjState />
       <param.psCustomProjectFile />
-      <param.psCheckConfValue>option.psCheckConfValue.onWarnCheckConfDlg</param.psCheckConfValue>
-      <param.psUniqueOutPutState>true</param.psUniqueOutPutState>
-      <param.psOpenResultsState>true</param.psOpenResultsState>
-      <param.psProductModeValue>option.psProductModeValue.codeProver</param.psProductModeValue>
-      <param.psQuickConfValue>option.psQuickConfValue.proj</param.psQuickConfValue>
-      <param.psOutputFolder>results_$codegenName$</param.psOutputFolder>
+      <param.psCheckConfValue />
+      <param.psUniqueOutPutState />
+      <param.psOpenResultsState />
+      <param.psProductModeValue />
+      <param.psQuickConfValue />
+      <param.psOutputFolder />
       <unset>
         <param.WorkingFolder />
         <param.SpecifiedWorkingFolder />
@@ -822,10 +822,10 @@
       <item>RC_Func_Sample</item>
     </param.TestSnippets>
     <var.DefaultImportExportVariable>codeGenConfig</var.DefaultImportExportVariable>
-    <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
+    <param.ExternalFcnMajority />
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
     <param.outputfile>${PROJECT_ROOT}\codegen\lib\Robot_Control\Robot_Control.lib</param.outputfile>
-    <param.version>R2012a</param.version>
+    <param.version />
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
     <var.HasNeuralNetworkToolbox>false</var.HasNeuralNetworkToolbox>
@@ -833,11 +833,11 @@
     <param.grt.mainhtml />
     <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
     <param.AutoInferDefaultFile />
-    <param.AutoInferUseVariableSize>false</param.AutoInferUseVariableSize>
-    <param.AutoInferUseUnboundedSize>false</param.AutoInferUseUnboundedSize>
-    <param.AutoInferVariableSizeThreshold>1024</param.AutoInferVariableSizeThreshold>
-    <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
-    <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
+    <param.AutoInferUseVariableSize />
+    <param.AutoInferUseUnboundedSize />
+    <param.AutoInferVariableSizeThreshold />
+    <param.AutoInferUnboundedSizeThreshold />
+    <param.EnableFixedPointStep />
     <param.EnableScreener>true</param.EnableScreener>
     <param.AnnotationChecksum>3113406607</param.AnnotationChecksum>
     <var.LegacyTarget />
@@ -852,16 +852,16 @@
     <var.cfi.lastOutputRoot>codegen\mex\CallTheDead_mex</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>3911759784</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>RC_Func_Sample; getUp_test</var.lastCfiTestSnippet>
-    <var.outdatedOnRestore>false</var.outdatedOnRestore>
+    <var.outdatedOnRestore />
     <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Body_Pose_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CallTheDead.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\centroid_codeGen.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_I.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\find_pgon_goal.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\findTrue4Elem.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\getUp.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\IK_Solver_BodyRot_BodyPos.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\step_planner_intelligent.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2916684744&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Body_Pose_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CallTheDead.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\centroid_codeGen.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\contactJacobians.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\CPos_wrt_I.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\find_pgon_goal.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\findTrue4Elem.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\getUp.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\IK_Solver_BodyRot_BodyPos.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Leg_Controller_B.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\manipulability.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\recursiveKin.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\Robot_Control.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RobotConstants.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotx.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\roty.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\rotz.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\skew.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\step_planner_intelligent.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
-    <param.NoDefaultJIT>false</param.NoDefaultJIT>
+    <param.NoDefaultJIT />
     <param.configImportActive>false</param.configImportActive>
     <var.isGpuCoder>false</var.isGpuCoder>
     <var.notGpuCoder>true</var.notGpuCoder>
     <var.boundToGui>true</var.boundToGui>
-    <var.isConfigDialog>false</var.isConfigDialog>
+    <var.isConfigDialog />
     <var.ecoderEnabled>true</var.ecoderEnabled>
     <param.mex.outputfile>CallTheDead_mex</param.mex.outputfile>
     <param.grt.outputfile>Robot_Control</param.grt.outputfile>
@@ -872,15 +872,15 @@
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
     <param.CppPreserveClasses>true</param.CppPreserveClasses>
     <param.gpu.Enabled>false</param.gpu.Enabled>
-    <param.gpu.SelectCudaDevice>-1</param.gpu.SelectCudaDevice>
+    <param.gpu.SelectCudaDevice />
     <param.gpu.ComputeCapability>3.5</param.gpu.ComputeCapability>
     <param.gpu.CustomComputeCapability />
     <param.gpu.MallocMode>discrete</param.gpu.MallocMode>
-    <param.gpu.MallocThreshold>200</param.gpu.MallocThreshold>
-    <param.gpu.StackLimitPerThread>1024</param.gpu.StackLimitPerThread>
-    <param.gpu.MaximumBlocksPerKernel>0</param.gpu.MaximumBlocksPerKernel>
+    <param.gpu.MallocThreshold />
+    <param.gpu.StackLimitPerThread />
+    <param.gpu.MaximumBlocksPerKernel />
     <param.gpu.Benchmarking>false</param.gpu.Benchmarking>
-    <param.gpu.SafeBuild>false</param.gpu.SafeBuild>
+    <param.gpu.SafeBuild />
     <param.gpu.KernelNamePrefix />
     <param.gpu.CompilerFlags />
     <param.gpu.EnableCUBLAS>true</param.gpu.EnableCUBLAS>
@@ -892,17 +892,17 @@
     <param.deeplearning.EnableDeepLearning>false</param.deeplearning.EnableDeepLearning>
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
     <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
-    <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
+    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
+    <param.tensorrt.DataType />
     <param.tensorrt.DataPath />
-    <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
-    <param.cudnn.AutoTuning>true</param.cudnn.AutoTuning>
-    <param.cudnn.DataType>option.cudnn.datatype.fp32</param.cudnn.DataType>
+    <param.tensorrt.NumCalibrationBatches />
+    <param.cudnn.AutoTuning />
+    <param.cudnn.DataType />
     <param.cudnn.CalibrationResultFile />
-    <param.arm-compute.ArmComputeVersion>option.arm-compute.version.20_02_1</param.arm-compute.ArmComputeVersion>
-    <param.arm-compute.ArmArchitecture>option.arm-compute.architecture.unspecified</param.arm-compute.ArmArchitecture>
-    <param.arm-compute.DataType>option.arm-compute.datatype.fp32</param.arm-compute.DataType>
+    <param.arm-compute.ArmComputeVersion />
+    <param.arm-compute.ArmArchitecture />
+    <param.arm-compute.DataType />
     <param.arm-compute.CalibrationResultFile />
     <param.TargetLang>option.TargetLang.CPP</param.TargetLang>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
@@ -910,7 +910,7 @@
     <param.UsePreconditions>true</param.UsePreconditions>
     <param.FeatureFlags />
     <param.FixedPointMode>option.FixedPointMode.None</param.FixedPointMode>
-    <param.AutoScaleLoopIndexVariables>false</param.AutoScaleLoopIndexVariables>
+    <param.AutoScaleLoopIndexVariables />
     <param.ComputedFixedPointData>
       <ComputedEntities>
         <Function file="$(PROJECTDIR)\Robot_Control.m" name="Robot_Control" specialization="Robot_Control" specializationId="-1" uniqueId="Robot_Control">
@@ -8548,7 +8548,7 @@
     <param.EnableCodeEfficiencyChecks>false</param.EnableCodeEfficiencyChecks>
     <param.DefaultFixedPointSignedness>option.DefaultFixedPointSignedness.Automatic</param.DefaultFixedPointSignedness>
     <param.FixedPointTypeProposalMode>option.FixedPointTypeProposalMode.ProposeFractionLengths</param.FixedPointTypeProposalMode>
-    <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
+    <param.EnableFixedPointStep />
     <var.lastFixedPointAction>option.fixedPointAction.sim</var.lastFixedPointAction>
     <var.lastSimContext>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;SimulationContext&gt;&lt;testFiles&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RC_Func_Sample.m&lt;/file&gt;&lt;file&gt;D:\Desktop\Capstone\kinematics-MATLAB\SpringProject\RC_Func_Test.m&lt;/file&gt;&lt;/testFiles&gt;&lt;synthetic&gt;false&lt;/synthetic&gt;&lt;/SimulationContext&gt;</var.lastSimContext>
     <var.lastVerifyContext />
@@ -8557,7 +8557,7 @@
     <var.snapshotChecksum>1724282440</var.snapshotChecksum>
     <param.fpLastConvertChecksum />
     <var.functionBlockSid />
-    <param.fptSignedness>false</param.fptSignedness>
+    <param.fptSignedness />
     <var.FixedPointAnalysisMode>option.FixedPointAnalysisMode.Sim</var.FixedPointAnalysisMode>
     <param.FixedPointUseDesignRanges>false</param.FixedPointUseDesignRanges>
     <unset>
@@ -8617,6 +8617,8 @@
       <param.deeplearning.EnableDeepLearning />
       <param.deeplearning.TargetLib />
       <var.cfiTargetLibSuppression />
+      <var.hasMatlabDeepLearningSupportPackage />
+      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
